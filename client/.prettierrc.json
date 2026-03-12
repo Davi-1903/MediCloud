@@ -1,0 +1,10 @@
+{
+    "tabWidth": 4,
+    "singleQuote": true,
+    "jsxSingleQuote": true,
+    "singleAttributePerLine": true,
+    "arrowParens": "avoid",
+    "printWidth": 120,
+    "tailwindStylesheet": "./src/globals.css",
+    "plugins": ["prettier-plugin-tailwindcss"]
+}
