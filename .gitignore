@@ -23,3 +23,12 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Arquivos python
+__pycache__
+
+# Ambiente virtual
+env
+.env
+venv
+.venv
