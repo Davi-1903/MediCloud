@@ -1,55 +1,31 @@
-from database import Base
-from sqlalchemy import String, ForeignKey
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlmodel import SQLModel, Field
 
-class User(Base):
-    __tablename__ = "users"
+class User(SQLModel, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    email: str = Field(unique=True, index=True)
+    senha: str
+    
+    nome: str 
+    telefone: str
+    estado: str
+    cidade: str
+    cep: str = Field(max_length=9)
+    rua: str
+    bairro: str
+    numero: int
 
-    id: Mapped[int] = mapped_column(primary_key=True)
-    tipo: Mapped[str] = mapped_column(String(50), nullable=False)
-    nome: Mapped[str] = mapped_column(String(150), nullable=False)
-    email: Mapped[str] = mapped_column(String(100), unique=True, nullable=False)
-    senha: Mapped[str] = mapped_column(String(255), nullable=False)
-    telefone: Mapped[str] = mapped_column(String(15))
-    rua: Mapped[str] = mapped_column(String(150))
-    bairro: Mapped[str] = mapped_column(String(150))
-    numero: Mapped[int] = mapped_column()
-    cidade: Mapped[str] = mapped_column(String(150))
-    cep: Mapped[str] = mapped_column(String(8))
+    tipo: str
+    
+class Administrador(SQLModel, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    user_id: int = Field(foreign_key='user.id')
 
-    __mapper_args__ = {
-        "polymorphic_identity": "user",
-        "polymorphic_on": tipo
-    }
-
-
-class Medico(User):
-    __tablename__ = "medicos"
-
-    id: Mapped[int] = mapped_column(ForeignKey("users.id"), primary_key=True)
-    crm: Mapped[str] = mapped_column(String(20), nullable=False)
-    especialidade: Mapped[str] = mapped_column(String(100))
-
-    __mapper_args__ = {
-        "polymorphic_identity": "medico"
-    }
-
-
-class Paciente(User):
-    __tablename__ = "pacientes"
-
-    id: Mapped[int] = mapped_column(ForeignKey("users.id"), primary_key=True)
-
-    __mapper_args__ = {
-        "polymorphic_identity": "paciente"
-    }
-
-
-class Administrador(User):
-    __tablename__ = "administradores"
-
-    id: Mapped[int] = mapped_column(ForeignKey("users.id"), primary_key=True)
-
-    __mapper_args__ = {
-        "polymorphic_identity": "admin"
-    }
+class Medico(SQLModel, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    user_id: int = Field(foreign_key='user.id')
+    crm: str 
+    especialidade: str
+    
+class Paciente(SQLModel, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    user_id: int = Field(foreign_key='user.id')

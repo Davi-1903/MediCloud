@@ -1,9 +1,12 @@
+from database import init_database
 from fastapi import FastAPI
 # gambiarra
-from database import init_database
-import models.users
+from models.users import User
+from contextlib import asynccontextmanager
 
-app = FastAPI()
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    init_database()
+    yield
 
-# gambiarra
-init_database()
+app = FastAPI(lifespan=lifespan)

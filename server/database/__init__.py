@@ -1,13 +1,12 @@
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, DeclarativeBase
+from sqlmodel import SQLModel, create_engine, Session
 
 DATABASE_URI = 'sqlite:///database/medicloud.db'
-
-engine = create_engine(DATABASE_URI)
-session = sessionmaker(bind=engine)
-
-class Base(DeclarativeBase):
-    pass
+args = {'check_same_thread': False}
+engine = create_engine(DATABASE_URI, connect_args=args)
 
 def init_database():
-    Base.metadata.create_all(engine)
+    SQLModel.metadata.create_all(engine)
+
+def get_session():
+    with Session(engine) as session:
+        yield session
