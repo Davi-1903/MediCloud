@@ -1,11 +1,3 @@
-// export default function Home() {
-//     return (
-//         <>
-//             <h1>MediCloud</h1>
-//         </>
-//     );
-// }
-
 import { useState } from "react";
 
 export default function Register() {
