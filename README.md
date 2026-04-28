@@ -25,7 +25,15 @@ Para a clínica, o sistema oferece **gestão de agendas, prontuários eletrônic
 | Tarefa     |        Data        |
 | ---------- | :----------------: |
 | Requisitos | `24/03` - `24/04`  |
-| Modelagem  | `30/03` - `30/04 ` |
+| Modelagem  | `30/03` - `30/04`  |
 | Figma      | `30/04` - `30/06`  |
 | Backend    | `30/04` - `30/08`  |
 | Frontend   | `30/04` - `30/08`  |
+
+## 📄 Documentos
+
+- [MediCloud](docs/MediCloud.md)
+
+## ⚖️ Licença
+
+- [LICENSE](LICENSE)
