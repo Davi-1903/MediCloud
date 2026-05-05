@@ -7,6 +7,7 @@ from jwt import encode
 from datetime import datetime, timedelta
 from pwdlib import PasswordHash
 
+
 router = APIRouter(prefix='/auth', tags=['auth'])
 
 SessionDep = Annotated[Session, Depends(get_session)]
@@ -14,6 +15,7 @@ SessionDep = Annotated[Session, Depends(get_session)]
 SECRET_KEY = 'CHAVE-SECRETA'
 ALGORITHM = 'HS256'
 TOKEN_EXPIRE_MINUTES = 30
+
 
 # token para autenticação
 def create_access_token(data: dict):
@@ -24,30 +26,55 @@ def create_access_token(data: dict):
 
     return token
 
+
 # gerar hash
 passwordHash = PasswordHash.recommended()
 
 def get_password_hash(senha: str):
     return passwordHash.hash(senha)
 
+
 def verify_password(senha: str, senha_hash: str):
     return passwordHash.verify(senha, senha_hash)
+
 
 class UserCreate(SQLModel):
     nome: str
     email: str
     senha: str
 
+
 class Token(SQLModel):
     token: str
     token_type: str
+
+
+@router.post('/login', response_model=Token, status_code=200)
+def login(session: SessionDep, user: UserCreate):
+    print(user)
+    user_db = session.exec(select(User).where(User.email == user.email)).first()
+    if not user_db:
+        raise HTTPException(
+            status_code=400,
+            detail='Usuário não encontrado'
+        )
+    if not verify_password(user.senha, user_db.senha):
+        raise HTTPException(
+            status_code=400,
+            detail='Senha inválida'
+        )
+    
+    return {
+        'token': create_access_token({'sub': user.email}),
+        'token_type': 'bearer'
+    }
+
 
 @router.post('/register', response_model=Token, status_code=201)
 def register(session: SessionDep, user: UserCreate):
     existing_user = session.exec(
         select(User).where(User.email == user.email)
     ).first()
-
 
     if not existing_user:
         senha_hash = get_password_hash(user.senha)
@@ -61,7 +88,7 @@ def register(session: SessionDep, user: UserCreate):
         session.commit()
         session.refresh(new_user)
         
-        new_paciente = Paciente(user_id=new_user.id)
+        new_paciente = Paciente(user_id=new_user.id) # type: ignore
         
         session.add(new_paciente)
         session.commit()

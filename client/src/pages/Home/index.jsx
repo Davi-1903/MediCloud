@@ -7,6 +7,9 @@ export default function Home() {
             <Link to='/register'>
                 <button>Cadastrar</button>
             </Link>
+            <Link to='/login'>
+                <button>Login</button>
+            </Link>
         </>
     );
 }

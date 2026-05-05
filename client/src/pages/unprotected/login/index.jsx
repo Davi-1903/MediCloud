@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function Register() {
+export default function Login() {
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
@@ -8,7 +8,7 @@ export default function Register() {
     async function handleSubmit(e) {
         e.preventDefault();
 
-        const response = await fetch('http://localhost:8000/auth/register', {
+        const response = await fetch('http://localhost:8000/auth/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
