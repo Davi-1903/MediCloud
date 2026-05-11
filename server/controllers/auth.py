@@ -44,14 +44,18 @@ class UserCreate(SQLModel):
     senha: str
 
 
+class UserLogin(SQLModel):
+    email: str
+    senha: str
+
+
 class Token(SQLModel):
     token: str
     token_type: str
 
 
 @router.post('/login', response_model=Token, status_code=200)
-def login(session: SessionDep, user: UserCreate):
-    print(user)
+def login(session: SessionDep, user: UserLogin):
     user_db = session.exec(select(User).where(User.email == user.email)).first()
     if not user_db:
         raise HTTPException(

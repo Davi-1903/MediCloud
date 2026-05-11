@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
 export default function Login() {
-    const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
 
@@ -14,9 +13,8 @@ export default function Login() {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                nome: nome,
-                email: email,
-                senha: senha,
+                email,
+                senha,
             }),
         });
 
@@ -27,13 +25,6 @@ export default function Login() {
     return (
         <>
             <form onSubmit={handleSubmit}>
-                <label htmlFor='nome'>Nome:</label>
-                <input
-                    type='text'
-                    name='nome'
-                    id='nome'
-                    onChange={e => setNome(e.target.value)}
-                />
                 <label htmlFor='email'>Email:</label>
                 <input
                     type='email'
