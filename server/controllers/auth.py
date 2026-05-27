@@ -57,15 +57,10 @@ class Token(SQLModel):
 @router.post('/login', response_model=Token, status_code=200)
 def login(session: SessionDep, user: UserLogin):
     user_db = session.exec(select(User).where(User.email == user.email)).first()
-    if not user_db:
+    if not user_db or not verify_password(user.senha, user_db.senha):
         raise HTTPException(
             status_code=400,
-            detail='Usuário não encontrado'
-        )
-    if not verify_password(user.senha, user_db.senha):
-        raise HTTPException(
-            status_code=400,
-            detail='Senha inválida'
+            detail='Usuário ou senha incorretas'
         )
     
     return {
