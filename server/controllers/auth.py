@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
-from sqlmodel import Session, select, SQLModel
+from pydantic import BaseModel
+from sqlmodel import Session, select
 from database import get_session
 from models.users import User, Paciente
 from typing import Annotated
@@ -38,18 +39,18 @@ def verify_password(senha: str, senha_hash: str):
     return passwordHash.verify(senha, senha_hash)
 
 
-class UserCreate(SQLModel):
+class UserCreate(BaseModel):
     nome: str
     email: str
     senha: str
 
 
-class UserLogin(SQLModel):
+class UserLogin(BaseModel):
     email: str
     senha: str
 
 
-class Token(SQLModel):
+class Token(BaseModel):
     token: str
     token_type: str
 
@@ -100,3 +101,4 @@ def register(session: SessionDep, user: UserCreate):
         status_code=400,
         detail='Email já existe'
     )
+

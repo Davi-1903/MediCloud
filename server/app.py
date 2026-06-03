@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 # gambiarra
 from models.users import User
 from contextlib import asynccontextmanager
-from controllers.auth import router
+from controllers import auth, user
 
 
 
@@ -23,4 +23,5 @@ app.add_middleware(
     allow_headers=['*'],
 )
 
-app.include_router(router)
+app.include_router(auth.router)
+app.include_router(user.router)
