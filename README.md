@@ -11,6 +11,47 @@ Para a clínica, o sistema oferece **gestão de agendas, prontuários eletrônic
 | ReactJS     |
 | TailwindCSS |
 
+## ▶️ Como executar
+
+1. **Clone e acesse o repositório**
+
+    ```bash
+    git clone https://github.com/Davi-1903/MediCloud.git
+    cd MediCloud
+    ```
+
+2. **Instale todas as dependências**
+
+    ```bash
+    # Frontend
+    npm install
+
+    # Backend
+    pip install -r requirements.txt
+    ```
+
+3. **Crie um arquivo `.env` na raiz do projeto e adicione as variáveis de ambiente**
+
+    ```env
+    # =================< Autenticação >=================
+    SECRET_KEY=<CHAVE-SECRETA>
+    ALGORITHM=HS256
+    TOKEN_EXPIRE_MINUTES=30
+
+    # ================< Banco de Dados >================
+    DATABASE_URI=<URL-PARA-O-BANCO-DE-DADOS>
+    ```
+
+4. **Inicie ambos os servidores**
+
+    ```bash
+    # Frontend
+    npm run dev
+
+    # Backend
+    uvicorn app:app --reload
+    ```
+
 ## 🙃 Equipe
 
 | Nome             |

@@ -7,6 +7,8 @@ from database import get_session
 from models.users import User
 from typing import Annotated
 from jwt import decode, ExpiredSignatureError, InvalidTokenError
+from utils import get_env
+
 
 token_schema = OAuth2PasswordBearer(tokenUrl="token")
 
@@ -14,13 +16,10 @@ router = APIRouter(prefix="/user", tags=['user'])
 
 SessionDep = Annotated[Session, Depends(get_session)]
 
-SECRET_KEY = 'CHAVE-SECRETA'
-ALGORITHM = 'HS256'
-TOKEN_EXPIRE_MINUTES = 30
 
 def decode_access_token(token: str) -> int:
     try:
-        payload = decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        payload = decode(token, get_env('SECRET_KEY'), algorithms=[get_env('ALGORITHM')])
     
     except ExpiredSignatureError:
         raise HTTPException(status_code=401, detail='Token espirado')

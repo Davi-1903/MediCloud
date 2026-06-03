@@ -7,23 +7,20 @@ from typing import Annotated
 from jwt import encode
 from datetime import datetime, timedelta
 from pwdlib import PasswordHash
+from utils import get_env
 
 
 router = APIRouter(prefix='/auth', tags=['auth'])
 
 SessionDep = Annotated[Session, Depends(get_session)]
 
-SECRET_KEY = 'CHAVE-SECRETA'
-ALGORITHM = 'HS256'
-TOKEN_EXPIRE_MINUTES = 30
-
 
 # token para autenticação
 def create_access_token(data: dict):
     data = data
-    expire = datetime.now() + timedelta(minutes=TOKEN_EXPIRE_MINUTES)
+    expire = datetime.now() + timedelta(minutes=int(get_env('TOKEN_EXPIRE_MINUTES', '30')))
     data.update({'exp': expire})
-    token = encode(data, SECRET_KEY, algorithm=ALGORITHM)
+    token = encode(data, get_env('SECRET_KEY'), algorithm=get_env('ALGORITHM'))
 
     return token
 

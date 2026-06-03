@@ -1,8 +1,9 @@
 from sqlmodel import SQLModel, create_engine, Session
+from utils import get_env
 
-DATABASE_URI = 'sqlite:///database/medicloud.db'
+
 args = {'check_same_thread': False}
-engine = create_engine(DATABASE_URI, connect_args=args)
+engine = create_engine(get_env('DATABASE_URI'), connect_args=args)
 
 def init_database():
     SQLModel.metadata.create_all(engine)
