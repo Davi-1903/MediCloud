@@ -1,13 +1,21 @@
-from sqlmodel import SQLModel, create_engine, Session
+from typing import Any, Generator
+from sqlalchemy import create_engine
+from sqlalchemy.orm import DeclarativeBase, sessionmaker, Session
 from utils import get_env
 
 
-args = {'check_same_thread': False}
-engine = create_engine(get_env('DATABASE_URI'), connect_args=args)
+engine = create_engine(get_env('DATABASE_URI'), connect_args={'check_same_thread': False})
+SessionLocal = sessionmaker(bind=engine)
+
+
+class Base(DeclarativeBase):
+    pass
+
 
 def init_database():
-    SQLModel.metadata.create_all(engine)
+    Base.metadata.create_all(engine)
 
-def get_session():
-    with Session(engine) as session:
+
+def get_session() -> Generator[Session, Any, None]:
+    with SessionLocal(bind=engine) as session:
         yield session

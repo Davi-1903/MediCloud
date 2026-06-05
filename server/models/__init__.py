@@ -1,3 +1,4 @@
-from . import users
+from . import user, administrator, doctor, patient
 
-__all__ = ['users']
+
+__all__ = ['user', 'administrator', 'doctor', 'patient']
