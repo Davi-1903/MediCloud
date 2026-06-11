@@ -24,38 +24,38 @@ Os clientes têm dificuldade em encontrar profissionais de qualidade próximos d
 
 ### **Usuário**
 
-- **RF01:** O sistema deve permitir o cadastro de usuário/paciente.  
-- **RF02:** O usuário/paciente poderá realizar login.  
-- **RF03:** O usuário poderá realizar logout.  
-- **RF04:** O sistema deve permitir que o usuário troque de senha.  
-- **RF05:** O usuário poderá ter acesso aos horários disponíveis dos médicos.  
-- **RF06:** O sistema deve permitir que o paciente agende consultas presenciais de forma online.  
-- **RF07:** O sistema deve permitir que o paciente agende consultas virtuais.  
-- **RF08:** O paciente deve poder confirmar a consulta com até 1 dia de antecedência  
-- **RF09:** O paciente deve poder cancelar consultas agendadas com até 1 dia de antecedência.  
-- **RF10:** O paciente deve poder visualizar seu histórico de consultas.
+* **RF01:** O sistema deve permitir o cadastro de usuário/paciente.
+* **RF02:** O usuário/paciente poderá realizar login.
+* **RF03:** O usuário poderá realizar logout.
+* **RF04:** O usuário poderá ter acesso aos horários disponíveis dos médicos.
+* **RF05:** O sistema deve permitir que o paciente agende consultas presenciais de forma online.
+* **RF06:** O sistema deve permitir que o paciente agende consultas virtuais.
+* **RF07:** O paciente deve poder confirmar a consulta com até 1 dia de antecedência.
+* **RF08:** O paciente deve poder cancelar consultas agendadas com até 1 dia de antecedência.
+* **RF09:** O paciente deve poder visualizar seu histórico de consultas.
 
 ### **Médico**
 
-- **RF11:** O médico poderá realizar login.  
-- **RF12:** O sistema permitirá que o médico realize logout.  
-- **RF13:** O sistema deve permitir que o médico cadastre horários disponíveis para consultas.  
-- **RF14:** O médico poderá confirmar a consulta com até 1 dia de antecedência.  
-- **RF15:** O médico poderá cancelar consultas agendadas com até 1 dia de antecedência.  
-- **RF16:** O médico deve poder cadastrar informações no prontuário do paciente.  
-- **RF17:** O sistema deve permitir ao médico anexar arquivos (exames, receitas, etc.).
+* **RF10:** O médico poderá realizar login.
+* **RF11:** O sistema permitirá que o médico realize logout.
+* **RF12:** O sistema deve permitir que o médico cadastre horários disponíveis para consultas.
+* **RF13:** O médico poderá confirmar a consulta com até 1 dia de antecedência.
+* **RF14:** O médico poderá cancelar consultas agendadas com até 1 dia de antecedência.
+* **RF15:** O médico deve poder cadastrar informações no prontuário do paciente.
+* **RF16:** O sistema deve permitir ao médico anexar arquivos (exames, receitas, etc.).
 
 ### **Notificações**
 
-- **RF18:** O sistema deve enviar notificações sobre consultas agendadas.  
-- **RF19:** O sistema deve informar alterações ou cancelamentos de consultas.
+* **RF17:** O sistema deve enviar notificações sobre consultas agendadas.
+* **RF18:** O sistema deve informar alterações ou cancelamentos de consultas.
 
 ### **Administrador**
 
-- **RF20:** O administrador poderá fazer login.  
-- **RF21:** O administrador poderá cadastrar os médicos.
-- **RF22:** O administrador poderá editar os médicos.
-- **RF23:** O administrador poderá excluir os médicos.
+* **RF19:** O administrador poderá fazer login.
+* **RF20:** O administrador poderá cadastrar os médicos.
+* **RF21:** O administrador poderá editar os médicos.
+* **RF22:** O administrador poderá excluir os médicos.
+
 
 ## **Requisitos Não Funcionais**
 
