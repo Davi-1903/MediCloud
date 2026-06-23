@@ -27,7 +27,7 @@ export default function Login() {
     return (
         <div className='h-svh bg-[url(../../../../public/assets/images/background-register.png)] bg-cover bg-center bg-no-repeat'>
             <Header />
-            <main className='relative h-full'>
+            <main className='h-full'>
                 <form
                     onSubmit={handleSubmit}
                     className='absolute top-1/2 left-3/4 flex w-full max-w-lg -translate-1/2 flex-col gap-4 rounded-2xl bg-white p-12 shadow-2xl'
@@ -37,30 +37,45 @@ export default function Login() {
                         alt='Logo'
                         className='mx-auto h-40 w-7/10 object-cover'
                     />
-                    <label htmlFor='email'>Email:</label>
-                    <input
-                        type='email'
-                        name='email'
-                        id='email'
-                        placeholder='exemplo@gmail.com'
-                        className='h-12 w-full rounded-lg border border-[#D43953] bg-[#FFF5F6] px-4 outline-none'
-                        onChange={e => setEmail(e.target.value)}
-                    />
-                    <label htmlFor='senha'>Senha:</label>
-                    <input
-                        type='text'
-                        name='senha'
-                        id='senha'
-                        placeholder='Digite sua senha'
-                        className='h-12 w-full rounded-lg border border-[#D43953] bg-[#FFF5F6] px-4 outline-none'
-                        onChange={e => setEmail(e.target.value)}
-                    />
+                    <h2 className='text-center text-xl font-semibold'>Bem-vindo de volta</h2>
+                    <span className='text-center text-gray-500'>Faça login para acessar sua conta</span>
+                    <div>
+                        <label htmlFor='email' className='mb-1 block font-medium text-[#D43953]'>Email:</label>
+                        <input
+                            type='email'
+                            name='email'
+                            id='email'
+                            placeholder='exemplo@gmail.com'
+                            className='h-12 w-full rounded-lg border border-[#D43953] bg-[#FFF5F6] px-4 outline-none'
+                            onChange={e => setEmail(e.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor='senha' className='mb-1 block font-medium text-[#D43953]'>Senha:</label>
+                        <input
+                            type='text'
+                            name='senha'
+                            id='senha'
+                            placeholder='Digite sua senha'
+                            className='h-12 w-full rounded-lg border border-[#D43953] bg-[#FFF5F6] px-4 outline-none'
+                            onChange={e => setSenha(e.target.value)}
+                        />
+                    </div>
                     <button
                         type='submit'
                         className='h-12 cursor-pointer rounded-lg bg-[#D43953] text-xl font-semibold text-white'
                     >
                         Enviar
                     </button>
+                    <p className='text-center text-lg text-[#d43953]'>
+                        Não tem conta?{' '}
+                        <a
+                            href='login'
+                            className='font-medium'
+                        >
+                            Cadasdre-se
+                        </a>
+                    </p>
                 </form>
             </main>
         </div>

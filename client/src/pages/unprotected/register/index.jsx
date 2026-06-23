@@ -25,7 +25,7 @@ export default function Register() {
     return (
         <div className='h-svh bg-[url(../../../../public/assets/images/background-register.png)] bg-cover bg-center bg-no-repeat'>
             <Header />
-            <main className='relative h-full'>
+            <main className='h-full'>
                 <form
                     onSubmit={handleSubmit}
                     className='absolute top-1/2 left-3/4 flex w-full max-w-lg -translate-1/2 flex-col gap-4 rounded-2xl bg-white p-12 shadow-2xl'
