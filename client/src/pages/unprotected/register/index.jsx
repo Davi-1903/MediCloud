@@ -39,7 +39,7 @@ export default function Register() {
                     <span className='text-center text-gray-500'>Preencha os dados abaixo para criar a sua conta</span>
                     <div>
                         <label
-                            className='mb-1 block font-medium text-[#D43953]'
+                            className='mb-1 block font-medium text-color2'
                             htmlFor='nome'
                         >
                             Nome completo
@@ -49,13 +49,14 @@ export default function Register() {
                             name='nome'
                             id='nome'
                             placeholder='Digite seu nome completo'
-                            className='h-12 w-full rounded-lg border border-[#D43953] bg-[#FFF5F6] px-4 outline-none'
+                            className='h-12 w-full rounded-lg border border-color2 bg-color3 px-4 outline-none'
                             onChange={e => setName(e.target.value)}
+                            required
                         />
                     </div>
                     <div>
                         <label
-                            className='mb-1 block font-medium text-[#D43953]'
+                            className='mb-1 block font-medium text-color2'
                             htmlFor='email'
                         >
                             Email
@@ -65,13 +66,14 @@ export default function Register() {
                             name='email'
                             id='email'
                             placeholder='exemplo@gmail.com'
-                            className='h-12 w-full rounded-lg border border-[#D43953] bg-[#FFF5F6] px-4 outline-none'
+                            className='h-12 w-full rounded-lg border border-color2 bg-color3 px-4 outline-none'
                             onChange={e => setEmail(e.target.value)}
+                            required
                         />
                     </div>
                     <div>
                         <label
-                            className='mb-1 block font-medium text-[#D43953]'
+                            className='mb-1 block font-medium text-color2'
                             htmlFor='senha'
                         >
                             Senha
@@ -81,13 +83,14 @@ export default function Register() {
                             name='senha'
                             id='senha'
                             placeholder='Sua senha secreta...'
-                            className='h-12 w-full rounded-lg border border-[#D43953] bg-[#FFF5F6] px-4 outline-none'
+                            className='h-12 w-full rounded-lg border border-color2 bg-color3 px-4 outline-none'
                             onChange={e => setPassword(e.target.value)}
+                            required
                         />
                     </div>
                     <button
                         type='submit'
-                        className='h-12 cursor-pointer rounded-lg bg-[#D43953] text-xl font-semibold text-white'
+                        className='h-12 cursor-pointer rounded-lg bg-color2 text-xl font-semibold text-white'
                     >
                         Cadastrar
                     </button>

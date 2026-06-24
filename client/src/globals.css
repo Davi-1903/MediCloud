@@ -1,5 +1,17 @@
 @import 'tailwindcss';
 
+:root {
+    --color1: #c80b2a;
+    --color2: #d43953;
+    --color3: #fff5f6;
+}
+
+@theme inline {
+    --color-color1: var(--color1);
+    --color-color2: var(--color2);
+    --color-color3: var(--color3);
+}
+
 @layer base {
     * {
         box-sizing: border-box;

@@ -40,40 +40,52 @@ export default function Login() {
                     <h2 className='text-center text-xl font-semibold'>Bem-vindo de volta</h2>
                     <span className='text-center text-gray-500'>Faça login para acessar sua conta</span>
                     <div>
-                        <label htmlFor='email' className='mb-1 block font-medium text-[#D43953]'>Email:</label>
+                        <label
+                            htmlFor='email'
+                            className='mb-1 block font-medium text-color2'
+                        >
+                            Email:
+                        </label>
                         <input
                             type='email'
                             name='email'
                             id='email'
                             placeholder='exemplo@gmail.com'
-                            className='h-12 w-full rounded-lg border border-[#D43953] bg-[#FFF5F6] px-4 outline-none'
+                            className='h-12 w-full rounded-lg border border-color2 bg-color3 px-4 outline-none'
                             onChange={e => setEmail(e.target.value)}
+                            required
                         />
                     </div>
                     <div>
-                        <label htmlFor='senha' className='mb-1 block font-medium text-[#D43953]'>Senha:</label>
+                        <label
+                            htmlFor='senha'
+                            className='mb-1 block font-medium text-color2'
+                        >
+                            Senha:
+                        </label>
                         <input
-                            type='text'
+                            type='password'
                             name='senha'
                             id='senha'
                             placeholder='Digite sua senha'
-                            className='h-12 w-full rounded-lg border border-[#D43953] bg-[#FFF5F6] px-4 outline-none'
+                            className='h-12 w-full rounded-lg border border-color2 bg-color3 px-4 outline-none'
                             onChange={e => setSenha(e.target.value)}
+                            required
                         />
                     </div>
                     <button
                         type='submit'
-                        className='h-12 cursor-pointer rounded-lg bg-[#D43953] text-xl font-semibold text-white'
+                        className='h-12 cursor-pointer rounded-lg bg-color2 text-xl font-semibold text-white'
                     >
                         Enviar
                     </button>
-                    <p className='text-center text-lg text-[#d43953]'>
+                    <p className='text-center text-lg text-color2'>
                         Não tem conta?{' '}
                         <a
-                            href='login'
+                            href='register'
                             className='font-medium'
                         >
-                            Cadasdre-se
+                            Cadastre-se
                         </a>
                     </p>
                 </form>
