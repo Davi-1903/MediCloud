@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import Logo from '../../../../public/assets/images/medicloud-logo.png';
 import Header from '../../../components/Header';
+import { useAuthenticated } from '../../../context/authContext';
 
 export default function Register() {
+    const { login } = useAuthenticated();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -19,7 +21,7 @@ export default function Register() {
         });
 
         const data = await response.json();
-        console.log(data);
+        login(data.token, data.token_refresh);
     }
 
     return (

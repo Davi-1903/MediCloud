@@ -7,23 +7,14 @@ from sqlalchemy.exc import IntegrityError
 from models.patient import Patient
 from models.user import User
 from typing import Annotated
-from jwt import encode
-from datetime import datetime, timedelta
 from pwdlib import PasswordHash
 from schemas.patient import PatientCreate
-from utils import get_env
+from utils import get_env, create_access_token, create_refresh_token, decode_refresh_token
 
 
 router = APIRouter(prefix='/auth', tags=['auth'])
 SessionDep = Annotated[Session, Depends(get_session)]
 ph = PasswordHash.recommended()
-
-
-def create_access_token(data: dict) -> str:
-    payload = data.copy()
-    expire = datetime.now() + timedelta(minutes=int(get_env('TOKEN_EXPIRE_MINUTES', '30')))
-    payload.update({'exp': expire})
-    return encode(payload, get_env('SECRET_KEY'), algorithm=get_env('ALGORITHM'))
 
 
 class UserLogin(BaseModel):
@@ -35,6 +26,9 @@ class Token(BaseModel):
     token: str
     token_type: str
 
+class RefreshToken(BaseModel):
+    refresh_token: str
+
 
 @router.post('/login', response_model=Token, status_code=200)
 def login(session: SessionDep, user_input: UserLogin):
@@ -44,6 +38,7 @@ def login(session: SessionDep, user_input: UserLogin):
     
     return {
         'token': create_access_token({'sub': user_input.email}),
+        'token_refresh': create_refresh_token({'sub': user_input.email}),
         'token_type': 'bearer'
     }
 
@@ -61,9 +56,18 @@ def register(session: SessionDep, user_input: PatientCreate):
 
         return {
             'token': create_access_token({'sub': user_input.email}),
+            'token_refresh': create_refresh_token({'sub': user_input.email}),
             'token_type': 'bearer'
         }
     
     except IntegrityError:
         session.rollback()
         raise HTTPException(status_code=409, detail='Credenciais inválidas')
+
+@router.post('/refresh')
+def refresh(body: RefreshToken):
+    user_id = decode_refresh_token(body.refresh_token)
+    return {
+        'token': create_access_token({'sub': int(user_id)}),
+        'token_type': 'bearer'
+    }
