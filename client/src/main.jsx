@@ -1,12 +1,13 @@
 import { lazy, StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { AuthenticatedProvider } from './context/authContext';
 import './globals.css';
 
 const Home = lazy(() => import('./pages/Home'));
 const Register = lazy(() => import('./pages/unprotected/register'));
 const Login = lazy(() => import('./pages/unprotected/login'));
-const Logout = lazy(() => import('./pages/unprotected/logout'));
+const Logout = lazy(() => import('./components/Logout'));
 
 const router = createBrowserRouter([
     {
@@ -24,11 +25,13 @@ const router = createBrowserRouter([
     {
         path: 'logout',
         element: <Logout />,
-    }
+    },
 ]);
 
 createRoot(document.getElementById('root')).render(
     <StrictMode>
-        <RouterProvider router={router} />
+        <AuthenticatedProvider>
+            <RouterProvider router={router} />
+        </AuthenticatedProvider>
     </StrictMode>,
 );

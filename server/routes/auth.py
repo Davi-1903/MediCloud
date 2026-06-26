@@ -9,7 +9,7 @@ from models.user import User
 from typing import Annotated
 from pwdlib import PasswordHash
 from schemas.patient import PatientCreate
-from utils import get_env, create_access_token, create_refresh_token, decode_refresh_token
+from utils import create_access_token, create_refresh_token, decode_refresh_token
 
 
 router = APIRouter(prefix='/auth', tags=['auth'])
@@ -19,12 +19,14 @@ ph = PasswordHash.recommended()
 
 class UserLogin(BaseModel):
     email: EmailStr
-    senha: str
+    password: str
 
 
 class Token(BaseModel):
     token: str
+    token_refresh: str
     token_type: str
+
 
 class RefreshToken(BaseModel):
     refresh_token: str
@@ -33,7 +35,7 @@ class RefreshToken(BaseModel):
 @router.post('/login', response_model=Token, status_code=200)
 def login(session: SessionDep, user_input: UserLogin):
     user_db = session.scalar(select(User).where(User.email == user_input.email))
-    if not user_db or not ph.verify(user_input.senha, user_db.password):
+    if not user_db or not ph.verify(user_input.password, user_db.password):
         raise HTTPException(status_code=400, detail='Usuário ou senha incorretas')
     
     return {
@@ -64,10 +66,11 @@ def register(session: SessionDep, user_input: PatientCreate):
         session.rollback()
         raise HTTPException(status_code=409, detail='Credenciais inválidas')
 
+
 @router.post('/refresh')
 def refresh(body: RefreshToken):
-    user_id = decode_refresh_token(body.refresh_token)
+    email = decode_refresh_token(body.refresh_token)
     return {
-        'token': create_access_token({'sub': int(user_id)}),
+        'token': create_access_token({'sub': email}),
         'token_type': 'bearer'
     }

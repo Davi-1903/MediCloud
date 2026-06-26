@@ -1,27 +1,24 @@
 import { useState } from 'react';
 import Logo from '../../../../public/assets/images/medicloud-logo.png';
 import Header from '../../../components/Header';
+import { useAuthenticated } from '../../../context/authContext';
+import { POST } from '../../../api/user';
 
 export default function Login() {
+    const { login } = useAuthenticated();
     const [email, setEmail] = useState('');
-    const [senha, setSenha] = useState('');
+    const [password, setPassword] = useState('');
 
     async function handleSubmit(e) {
         e.preventDefault();
 
-        const response = await fetch('http://localhost:8000/auth/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                email,
-                senha,
-            }),
-        });
-
-        const data = await response.json();
-        console.log(data);
+        try {
+            const data = await POST('/api/auth/login', { email, password });
+            if (data.status !== 200) throw new Error(data.detail);
+            login(data.token, data.token_refresh);
+        } catch (err) {
+            alert(err.message);
+        }
     }
 
     return (
@@ -69,7 +66,7 @@ export default function Login() {
                             id='senha'
                             placeholder='Digite sua senha'
                             className='h-12 w-full rounded-lg border border-color2 bg-color3 px-4 outline-none'
-                            onChange={e => setSenha(e.target.value)}
+                            onChange={e => setPassword(e.target.value)}
                             required
                         />
                     </div>

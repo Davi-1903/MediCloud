@@ -47,7 +47,7 @@ def create_access_token(data: dict) -> str:
     return encode(payload, get_env('SECRET_KEY'), algorithm=get_env('ALGORITHM'))
 
 
-def decode_access_token(token: str) -> int:
+def decode_access_token(token: str) -> str:
     try:
         payload = decode(token, get_env('SECRET_KEY'), algorithms=[get_env('ALGORITHM')])
     except ExpiredSignatureError:
@@ -58,10 +58,10 @@ def decode_access_token(token: str) -> int:
     if payload.get('type') != 'access':
         raise HTTPException(status_code=401, detail="Token inválido")
     
-    user_id = payload.get('sub')
-    if user_id is None:
+    email = payload.get('sub')
+    if email is None:
         raise HTTPException(status_code=401, detail='Token inválido')
-    return int(user_id)
+    return email
 
 
 def create_refresh_token(data: dict) -> str:
@@ -73,7 +73,7 @@ def create_refresh_token(data: dict) -> str:
     return encode(payload, get_env('SECRET_KEY'), algorithm=get_env('ALGORITHM'))
 
 
-def decode_refresh_token(token: str) -> int:
+def decode_refresh_token(token: str) -> str:
     try:
         payload = decode(token, get_env('SECRET_KEY'), algorithms=[get_env('ALGORITHM')])
     except ExpiredSignatureError:
@@ -84,7 +84,7 @@ def decode_refresh_token(token: str) -> int:
     if payload.get('type') != 'refresh':
         raise HTTPException(status_code=401, detail='Token inválido')
 
-    user_id = payload.get('sub')
-    if user_id is None:
+    email = payload.get('sub')
+    if email is None:
         raise HTTPException(status_code=401, detail='Refresh token inválido')
-    return int(user_id)
+    return email

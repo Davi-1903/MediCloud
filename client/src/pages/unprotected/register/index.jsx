@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Logo from '../../../../public/assets/images/medicloud-logo.png';
 import Header from '../../../components/Header';
 import { useAuthenticated } from '../../../context/authContext';
+import { POST } from '../../../api/user';
 
 export default function Register() {
     const { login } = useAuthenticated();
@@ -12,16 +13,13 @@ export default function Register() {
     async function handleSubmit(e) {
         e.preventDefault();
 
-        const response = await fetch('http://localhost:8000/auth/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ name, email, password }),
-        });
-
-        const data = await response.json();
-        login(data.token, data.token_refresh);
+        try {
+            const data = await POST('/api/auth/register', { name, email, password });
+            if (data.status !== 201) throw new Error(data.details);
+            login(data.token, data.token_refresh);
+        } catch (err) {
+            alert(err.message);
+        }
     }
 
     return (

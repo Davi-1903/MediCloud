@@ -1,8 +1,11 @@
-import Logo from '../../public/assets/images/medicloud-logo.png';
 import { Link } from 'react-router-dom';
-import Logout from '../../src/pages/unprotected/logout';
+import { useAuthenticated } from '../context/authContext';
+import Logo from '../../public/assets/images/medicloud-logo.png';
+import Logout from './Logout';
 
 export default function Header() {
+    const { isAuthenticated } = useAuthenticated();
+
     return (
         <header className='fixed top-4 left-4 z-50 flex h-19 w-[calc(100%-2rem)] items-center justify-between rounded-2xl border border-[#ED5770] bg-white px-4 sm:px-8 md:px-15'>
             <Link to='/'>
@@ -30,9 +33,11 @@ export default function Header() {
                             Login
                         </Link>
                     </li>
-                    <li>
-                        <Logout />
-                    </li>
+                    {isAuthenticated && (
+                        <li>
+                            <Logout />
+                        </li>
+                    )}
                 </ul>
             </div>
         </header>
