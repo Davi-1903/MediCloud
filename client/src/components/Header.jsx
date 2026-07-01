@@ -34,9 +34,17 @@ export default function Header() {
                         </Link>
                     </li>
                     {isAuthenticated && (
-                        <li>
-                            <Logout />
-                        </li>
+                        <>
+                            <li>
+                                <Logout />
+                            </li>
+                            <li>
+                                <Link 
+                                    to="/scheduling"
+                                    className='hover:border-colortext-color1 border-b-2 border-transparent pb-2 text-color1'
+                                >Agendamento</Link>
+                            </li>
+                        </>
                     )}
                 </ul>
             </div>

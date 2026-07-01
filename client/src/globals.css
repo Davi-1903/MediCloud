@@ -20,3 +20,13 @@
         border: 0;
     }
 }
+@layer components {
+    .horario {
+        color: #e03955;
+        font-size: 1.3rem; 
+        height: 50px;
+        width: 100px;
+        border: 1px solid #ffabb9;
+        border-radius: 0.5rem;
+    }
+}
