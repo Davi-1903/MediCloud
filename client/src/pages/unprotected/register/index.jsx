@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Logo from '../../../../public/assets/images/medicloud-logo.png';
+import Logo from '../../../../public/assets/images/logo.svg';
 import Header from '../../../components/Header';
 import { useAuthenticated } from '../../../context/authContext';
 import { POST } from '../../../api/user';
@@ -28,19 +28,19 @@ export default function Register() {
 
     return (
         <ProtectedRoute isPrivate={false}>
-            <div className='h-svh bg-[url(../../../../public/assets/images/background-register.png)] bg-cover bg-center bg-no-repeat'>
+            <div className='h-full bg-[url(../../../../public/assets/images/background-register.png)] bg-cover bg-center bg-no-repeat'>
                 <Header />
-                <main className='h-full'>
+                <main className='h-full flex justify-end items-center pr-15'>
                     <form
                         onSubmit={handleSubmit}
-                        className='absolute top-1/2 left-3/4 flex w-full max-w-lg -translate-1/2 flex-col gap-4 rounded-2xl bg-white p-12 shadow-2xl'
+                        className='mt-35 flex w-full max-w-lg flex-col gap-4 rounded-2xl bg-white pt-4 pb-4 p-8 shadow-2xl'
                     >
                         <img
                             src={Logo}
                             alt='Logo'
-                            className='mx-auto h-40 w-7/10 object-cover'
+                            className='mx-auto h-20 object-cover'
                         />
-                        <h2 className='text-center text-xl font-semibold'>Crie sua conta</h2>
+                        <h2 className='text-center text-lg font-semibold'>Crie sua conta</h2>
                         <span className='text-center text-gray-500'>
                             Preencha os dados abaixo para criar a sua conta
                         </span>
@@ -56,7 +56,7 @@ export default function Register() {
                                 name='nome'
                                 id='nome'
                                 placeholder='Digite seu nome completo'
-                                className='h-12 w-full rounded-lg border border-color2 bg-color3 px-4 outline-none'
+                                className='h-10 w-full rounded-lg border border-color2 bg-color3 px-4 outline-none'
                                 onChange={e => setName(e.target.value)}
                                 required
                             />
@@ -73,7 +73,7 @@ export default function Register() {
                                 name='email'
                                 id='email'
                                 placeholder='exemplo@gmail.com'
-                                className='h-12 w-full rounded-lg border border-color2 bg-color3 px-4 outline-none'
+                                className='h-10 w-full rounded-lg border border-color2 bg-color3 px-4 outline-none'
                                 onChange={e => setEmail(e.target.value)}
                                 required
                             />
@@ -90,18 +90,18 @@ export default function Register() {
                                 name='senha'
                                 id='senha'
                                 placeholder='Sua senha secreta...'
-                                className='h-12 w-full rounded-lg border border-color2 bg-color3 px-4 outline-none'
+                                className='h-10 w-full rounded-lg border border-color2 bg-color3 px-4 outline-none'
                                 onChange={e => setPassword(e.target.value)}
                                 required
                             />
                         </div>
                         <button
                             type='submit'
-                            className='h-12 cursor-pointer rounded-lg bg-color2 text-xl font-semibold text-white'
+                            className='h-10 cursor-pointer rounded-lg bg-color2 text-lg font-semibold text-white'
                         >
                             Cadastrar
                         </button>
-                        <p className='text-center text-lg text-[#d43953]'>
+                        <p className='text-center text-sm text-[#d43953]'>
                             Já tem uma conta?{' '}
                             <a
                                 href='login'
