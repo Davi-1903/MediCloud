@@ -7,12 +7,12 @@ import './globals.css';
 const Home = lazy(() => import('./pages/Home'));
 const Register = lazy(() => import('./pages/unprotected/register'));
 const Login = lazy(() => import('./pages/unprotected/login'));
-const Scheduling = lazy(() => import('./pages/unprotected/scheduling'));
+const Scheduling = lazy(() => import('./pages/protected/scheduling'));
 
 const router = createBrowserRouter([
     {
         index: true,
-        element: <Home />,
+        element: <Register/>,
     },
     {
         path: 'register',

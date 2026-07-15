@@ -4,11 +4,13 @@ import Header from '../../../components/Header';
 import { useAuthenticated } from '../../../context/authContext';
 import { POST } from '../../../api/user';
 import ProtectedRoute from '../../../components/protectedRoute';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
     const { login } = useAuthenticated();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -17,6 +19,7 @@ export default function Login() {
             const data = await POST('/api/auth/login', { email, password });
             if (data.status !== 200) throw new Error(data.detail);
             login(data.token, data.token_refresh);
+            navigate('/scheduling')
         } catch (err) {
             alert(err.message);
         }

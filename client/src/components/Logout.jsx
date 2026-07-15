@@ -17,7 +17,7 @@ export default function Logout() {
             <img
                 src={logout_icon}
                 alt='Logout'
-                className='h-4 w-4 object-contain sm:h-5 sm:w-5 md:h-6 md:w-6'
+                className='h-3 w-3 object-contain sm:h-4 sm:w-4 md:h-4.5 md:w-4.5 flex '
             />
         </button>
     );
