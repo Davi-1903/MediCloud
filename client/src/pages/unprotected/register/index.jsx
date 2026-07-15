@@ -7,7 +7,7 @@ import ProtectedRoute from '../../../components/protectedRoute';
 import { useNavigate } from 'react-router-dom';
 
 export default function Register() {
-    const { register } = useAuthenticated();
+    const { login } = useAuthenticated();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -19,7 +19,7 @@ export default function Register() {
         try {
             const data = await POST('/api/auth/register', { name, email, password });
             if (data.status !== 201) throw new Error(data.detail);
-            register(data.token, data.token_refresh);
+            login(data.token, data.token_refresh);
             navigate('/scheduling')
         } catch (err) {
             alert(err.message);
@@ -28,7 +28,7 @@ export default function Register() {
 
     return (
         <ProtectedRoute isPrivate={false}>
-            <div className='h-full bg-[url(../../../../public/assets/images/background-register.png)] bg-cover bg-center bg-no-repeat'>
+            <div className='h-svh bg-[url(../../../../public/assets/images/background-register.png)] bg-cover bg-center bg-no-repeat'>
                 <Header />
                 <main className='h-full flex justify-end items-center pr-15'>
                     <form
