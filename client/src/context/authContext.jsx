@@ -24,7 +24,7 @@ export function AuthenticatedProvider({ children }) {
 
     useEffect(() => {
         const checkAuth = () => {
-            GET('/api/user')
+            GET('/api/user/')
                 .then(res => setAuthenticated(res.status === 200))
                 .catch(() => setAuthenticated(false));
         };
