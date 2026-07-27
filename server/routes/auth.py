@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Request, Response
 from pydantic import BaseModel, EmailStr
 from sqlalchemy import select
 from database import get_session
@@ -24,29 +24,38 @@ class UserLogin(BaseModel):
 
 class Token(BaseModel):
     token: str
-    token_refresh: str
     token_type: str
 
 
-class RefreshToken(BaseModel):
-    refresh_token: str
+def set_refresh_cookie(response: Response, token: str):
+    response.set_cookie(
+        key='refresh_token',
+        value=token,
+        httponly=True,
+        secure=True,
+        samesite='strict',
+        max_age=60 * 60 * 24 * 30,
+        path='/api/auth',
+    )
 
 
 @router.post('/login', response_model=Token, status_code=200)
-def login(session: SessionDep, user_input: UserLogin):
+def login(session: SessionDep, user_input: UserLogin, response: Response):
     user_db = session.scalar(select(User).where(User.email == user_input.email))
     if not user_db or not ph.verify(user_input.password, user_db.password):
         raise HTTPException(status_code=400, detail='Usuário ou senha incorretas')
-    
+
+    refresh_token = create_refresh_token({'sub': user_db.id})
+    set_refresh_cookie(response, refresh_token)
+
     return {
         'token': create_access_token({'sub': user_input.email}),
-        'token_refresh': create_refresh_token({'sub': user_input.email}),
         'token_type': 'bearer'
     }
 
 
 @router.post('/register', response_model=Token, status_code=201)
-def register(session: SessionDep, user_input: PatientCreate):
+def register(session: SessionDep, user_input: PatientCreate, response: Response):
     try:
         user = Patient(
             name=user_input.name,
@@ -56,9 +65,11 @@ def register(session: SessionDep, user_input: PatientCreate):
         session.add(user)
         session.commit()
 
+        refresh_token = create_refresh_token({'sub': user.id})
+        set_refresh_cookie(response, refresh_token)
+
         return {
             'token': create_access_token({'sub': user_input.email}),
-            'token_refresh': create_refresh_token({'sub': user_input.email}),
             'token_type': 'bearer'
         }
     
@@ -68,9 +79,19 @@ def register(session: SessionDep, user_input: PatientCreate):
 
 
 @router.post('/refresh')
-def refresh(body: RefreshToken):
-    email = decode_refresh_token(body.refresh_token)
-    return {
-        'token': create_access_token({'sub': email}),
-        'token_type': 'bearer'
-    }
+def refresh(request: Request, response: Response):
+    token = request.cookies.get('refresh_token')
+    if token is None:
+        raise HTTPException(status_code=401, detail='Refresh token ausente')
+
+    user_id = decode_refresh_token(token)
+    new_refresh = create_refresh_token({'sub': int(user_id)})
+    set_refresh_cookie(response, new_refresh)
+
+    return {'token': create_access_token({'sub': int(user_id)}), 'token_type': 'bearer'}
+
+
+@router.post('/logout')
+def logout(response: Response):
+    response.delete_cookie('refresh_token', path='/api/auth', secure=True, samesite='strict', httponly=True)
+    return {'detail': 'Logout realizado'}

@@ -20,7 +20,7 @@ export default function Header() {
                             <li>
                                 <Link
                                     to='/register'
-                                    className='hover:border-color2 text-color1 border-b-2 border-transparent pb-2 '
+                                    className='border-b-2 border-transparent pb-2 text-color1 hover:border-color2'
                                 >
                                     Cadastrar
                                 </Link>
@@ -28,7 +28,7 @@ export default function Header() {
                             <li>
                                 <Link
                                     to='/login'
-                                    className='hover:border-color2 text-color1 border-b-2 border-transparent pb-2'
+                                    className='border-b-2 border-transparent pb-2 text-color1 hover:border-color2'
                                 >
                                     Login
                                 </Link>
@@ -39,14 +39,14 @@ export default function Header() {
                     {isAuthenticated && (
                         <>
                             <li>
-                                <Link 
-                                    to="/scheduling"
-                                    className='hover:border-color2 text-color1 border-b-2 border-transparent pb-2'
-                                >Agendamento</Link>
+                                <Link
+                                    to='/scheduling'
+                                    className='border-b-2 border-transparent pb-2 text-color1 hover:border-color2'
+                                >
+                                    Agendamento
+                                </Link>
                             </li>
-                            <li 
-                                className='flex justify-center items-center'
-                            >
+                            <li className='flex items-center justify-center'>
                                 <Logout />
                             </li>
                         </>

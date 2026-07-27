@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { GET } from '../api/user';
+import { setAccessToken, tryRefresh } from '../api/user';
 
 const AuthenticatedContext = createContext({
     isAuthenticated: false,
@@ -10,26 +10,19 @@ const AuthenticatedContext = createContext({
 export function AuthenticatedProvider({ children }) {
     const [isAuthenticated, setAuthenticated] = useState(false);
 
-    const login = (token, refreshToken) => {
-        localStorage.setItem('access_token', token);
-        localStorage.setItem('refresh_token', refreshToken);
+    const login = token => {
+        setAccessToken(token);
         setAuthenticated(true);
     };
 
-    const logout = () => {
-        localStorage.removeItem('access_token');
-        localStorage.removeItem('refresh_token');
+    const logout = async () => {
+        await fetch('/api/auth/logout', { method: 'POST', credentials: 'include' });
+        setAccessToken(null);
         setAuthenticated(false);
     };
 
     useEffect(() => {
-        const checkAuth = () => {
-            GET('/api/user/')
-                .then(res => setAuthenticated(res.status === 200))
-                .catch(() => setAuthenticated(false));
-        };
-
-        checkAuth();
+        tryRefresh().then(token => setAuthenticated(Boolean(token)));
     }, []);
 
     return (

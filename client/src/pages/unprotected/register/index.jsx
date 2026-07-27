@@ -19,8 +19,8 @@ export default function Register() {
         try {
             const data = await POST('/api/auth/register', { name, email, password });
             if (data.status !== 201) throw new Error(data.detail);
-            login(data.token, data.token_refresh);
-            navigate('/scheduling')
+            login(data.token);
+            navigate('/scheduling');
         } catch (err) {
             alert(err.message);
         }
@@ -30,10 +30,10 @@ export default function Register() {
         <ProtectedRoute isPrivate={false}>
             <div className='h-svh bg-[url(../../../../public/assets/images/background-register.png)] bg-cover bg-center bg-no-repeat'>
                 <Header />
-                <main className='h-full flex justify-end items-center pr-15'>
+                <main className='flex h-full items-center justify-end pr-15'>
                     <form
                         onSubmit={handleSubmit}
-                        className='mt-35 flex w-full max-w-lg flex-col gap-4 rounded-2xl bg-white pt-4 pb-4 p-8 shadow-2xl'
+                        className='mt-35 flex w-full max-w-lg flex-col gap-4 rounded-2xl bg-white p-8 pt-4 pb-4 shadow-2xl'
                     >
                         <img
                             src={Logo}

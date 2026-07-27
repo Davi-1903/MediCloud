@@ -1,26 +1,31 @@
-export async function tryRefresh() {
-    const refreshToken = localStorage.getItem('refresh_token');
-    if (!refreshToken) return;
+let accessToken = null;
 
-    const response = await fetch('api/auth/refresh', {
+export function setAccessToken(token) {
+    accessToken = token;
+}
+
+export function getAccessToken() {
+    return accessToken;
+}
+
+export async function tryRefresh() {
+    const response = await fetch('/api/auth/refresh', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ refresh_token: refreshToken }),
+        credentials: 'include',
     });
 
     if (!response.ok) return;
 
     const data = await response.json();
-    localStorage.setItem('access_token', data.token);
+    setAccessToken(data.token);
     return data.token;
 }
 
 export async function GET(url, headers = {}) {
-    const token = localStorage.getItem('access_token');
     let response = await fetch(url, {
         method: 'GET',
         credentials: 'include',
-        headers: { ...headers, Authorization: `Bearer ${token}` },
+        headers: { ...headers, Authorization: `Bearer ${accessToken}` },
     });
 
     if (response.status === 401) {
@@ -29,7 +34,7 @@ export async function GET(url, headers = {}) {
             response = await fetch(url, {
                 method: 'GET',
                 credentials: 'include',
-                headers: { ...headers, Authorization: `Bearer{newToken}` },
+                headers: { ...headers, Authorization: `Bearer ${newToken}` },
             });
         }
     }
@@ -43,7 +48,7 @@ export async function POST(url, data, headers = {}) {
     const response = await fetch(url, {
         method: 'POST',
         credentials: 'include',
-        headers: { ...headers, 'Content-Type': 'application/json' },
+        headers: { ...headers, 'Content-Type': 'application/json', Authorization: `Bearer ${accessToken}` },
         body: JSON.stringify(data),
     });
     const result = await response.json();
