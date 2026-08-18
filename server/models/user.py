@@ -1,5 +1,5 @@
 import enum
-from sqlalchemy import Enum, String
+from sqlalchemy import Enum, Integer, String
 from sqlalchemy.orm import Mapped, mapped_column
 from database import Base
 
