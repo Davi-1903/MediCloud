@@ -32,18 +32,26 @@ exames.
 documentos.
 
 ## Médico
-- **RF10:** O médico poderá realizar login.
-- **RF11:** O sistema permitirá que o médico realize logout.
-- **RF12:** O sistema deve permitir que o médico cadastre horários disponíveis para consultas.
-- **RF13:** O médico poderá confirmar a consulta com até 1 dia de antecedência.
-- **RF14:** O médico poderá cancelar consultas agendadas com até 1 dia de antecedência.
-- **RF15:** O médico deve poder cadastrar informações no prontuário do paciente.
-RF16: O sistema deve permitir ao médico anexar arquivos (exames, receitas, etc.).
+- **RF10:** Deve ser possível que o médico realize o seu cadastro através do
+nome, e-mail, CRM, Especialidade, senha e UF, porêm seu cadastro só será validado se o administrador permitir esse registro. Caso já exista um médico cadastrado com o mesmo
+e-mail, o sistema deve exibir um pop-up com a mensagem "Credenciais Inválidas".
+- **RF10:** Deve ser possível que o médico realize seu login através do
+e-mail e senha. Ao concluir o login, o médico deve ser direcionado
+para a página inicial (home) para médicos. 
+- **RF11:** Deve ser possível que o médico realize logout do sistema ao clicar
+no botão correspondente. Após o logout, o médico deve ser direcionado para a
+página de login.
+- **RF12:** Deve ser possível o médico cadastrar horários disponíveis para consultas, informando o dia, horário e o formato da consulta (online ou presencial). 
+- **RF13:** Deve ser possível que o médico confirme uma consulta até um dia antes da data do atendimento.
+- **RF14:** Deve ser possível que o médico cancele uma consulta até um dia antes da data do atendimento.
+- **RF15:** Deve ser possível que o médico, durante ou após a consulta, cadastre informações do atendimento no prontuário eletrônico do paciente, informando dados como idade, peso, altura, temperatura, pressão arterial, motivo da consulta e diagnóstico.
+- **RF16:** Deve ser possível que o médico anexe arquivos relacionados à consulta do paciente, como exames, receitas e outros documentos.
 ## Notificações
-- **RF17:** O sistema deve enviar notificações sobre consultas agendadas.
-- **RF18:** O sistema deve informar alterações ou cancelamentos de consultas.
+- **RF17:** Deve ser possível os usuários receberem notificações sobre as informações das consultas agendadas (lembretes, alterações e cancelamento do atendimento).
 ## Administrador
-- **RF19:** O administrador poderá fazer login.
-- **RF20:** O administrador poderá cadastrar os médicos.
-- **RF21:** O administrador poderá editar os médicos.
-- **RF22:** O administrador poderá excluir os médicos.
+- **RF18:** Deve ser possível que o administrador realize seu login através do
+e-mail e senha. Ao concluir o login, o administrador deve ser direcionado
+para a página gerenciamento do sistema.
+- **RF19:** Deve ser possível que o administrador realize a confirmação do cadastro dos médicos.
+- **RF20:** Deve ser possível que o administrador realize o editação das informações das contas médicas.
+- **RF21:** Deve ser possível que o administrador realize exclusão das contas médicas.
