@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Logo from '../../../../public/assets/images/logo.svg';
+import Logo from '/assets/images/logo.svg';
 import Header from '../../../components/Header';
 import { useAuthenticated } from '../../../context/authContext';
 import { POST } from '../../../api/user';
@@ -28,7 +28,7 @@ export default function Register() {
 
     return (
         <ProtectedRoute isPrivate={false}>
-            <div className='h-svh bg-[url(../../../../public/assets/images/background-register.png)] bg-cover bg-center bg-no-repeat'>
+            <div className='h-svh bg-[url(/assets/images/background-register.png)] bg-cover bg-center bg-no-repeat'>
                 <Header />
                 <main className='flex h-full items-center justify-end pr-15'>
                     <form

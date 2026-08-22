@@ -4,7 +4,6 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { AuthenticatedProvider } from './context/authContext';
 import './globals.css';
 
-const Home = lazy(() => import('./pages/Home'));
 const Register = lazy(() => import('./pages/unprotected/register'));
 const Login = lazy(() => import('./pages/unprotected/login'));
 const Scheduling = lazy(() => import('./pages/protected/scheduling'));
@@ -12,7 +11,7 @@ const Scheduling = lazy(() => import('./pages/protected/scheduling'));
 const router = createBrowserRouter([
     {
         index: true,
-        element: <Register/>,
+        element: <Register />,
     },
     {
         path: 'register',
@@ -25,7 +24,7 @@ const router = createBrowserRouter([
     {
         path: 'scheduling',
         element: <Scheduling />,
-    }
+    },
 ]);
 
 createRoot(document.getElementById('root')).render(

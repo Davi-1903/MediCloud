@@ -1,8 +1,7 @@
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import Header from '../../../components/Header';
 import ProtectedRoute from '../../../components/protectedRoute';
-import { useState } from 'react';
-import seta from '../../../../public/assets/icons/seta.png';
+import { IconChevronRight } from '@tabler/icons-react';
 
 export default function Scheduling() {
     const [medicoSelecionado, setMedicoSelecionado] = useState('lucas');
@@ -117,11 +116,12 @@ export default function Scheduling() {
                                     </span>
                                 </div>
                             </div>
-                            <img
-                                src={seta}
-                                alt='seta'
-                                className='h-12 w-12'
-                            />
+                            <button className='cursor-pointer rounded-full bg-color2 p-2'>
+                                <IconChevronRight
+                                    size={24}
+                                    className='stroke-white'
+                                />
+                            </button>
                         </div>
                     </section>
                     <section className='flex gap-20'>

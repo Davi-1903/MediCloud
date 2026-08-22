@@ -1,53 +1,64 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { IconLogout } from '@tabler/icons-react';
 import { useAuthenticated } from '../context/authContext';
-import Logo from '../../public/assets/images/medicloud-logo.png';
-import Logout from './Logout';
+import Logo from '/assets/images/logo.svg';
 
 export default function Header() {
-    const { isAuthenticated } = useAuthenticated();
+    const { isAuthenticated, logout } = useAuthenticated();
+    const navigate = useNavigate();
+
+    function handleLogout() {
+        if (!confirm('Deseja sair da sua conta?')) return;
+
+        logout();
+        navigate('/login');
+    }
 
     return (
-        <header className='fixed top-4 left-4 z-50 flex h-19 w-[calc(100%-2rem)] items-center justify-between rounded-2xl border border-[#ED5770] bg-white px-4 sm:px-8 md:px-15'>
+        <header className='fixed top-4 left-4 flex h-20 w-[calc(100%-2rem)] items-center justify-between rounded-2xl bg-white px-8 py-2 shadow-lg shadow-color2/15'>
             <img
                 src={Logo}
-                alt='Logo'
-                className='h-18 w-18 cursor-pointer object-cover pt-2 sm:h-23 sm:w-23 md:h-28 md:w-28'
+                alt='Logo do MediCloud'
+                className='w-25'
             />
-            <div className='flex gap-20 sm:gap-30 md:gap-40'>
-                <ul className='flex items-center gap-4 text-sm sm:gap-8 sm:text-base md:gap-15'>
-                    {!isAuthenticated && (
+            <div>
+                <ul className='flex items-center gap-12'>
+                    {!isAuthenticated ? (
                         <>
                             <li>
                                 <Link
-                                    to='/register'
-                                    className='border-b-2 border-transparent pb-2 text-color1 hover:border-color2'
-                                >
-                                    Cadastrar
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
                                     to='/login'
-                                    className='border-b-2 border-transparent pb-2 text-color1 hover:border-color2'
+                                    className='text-lg font-medium text-color2 hover:underline'
                                 >
                                     Login
                                 </Link>
                             </li>
+                            <li>
+                                <Link
+                                    to='/register'
+                                    className='rounded-lg bg-color2 px-3 py-2.5 text-lg font-medium text-white'
+                                >
+                                    Cadastrar
+                                </Link>
+                            </li>
                         </>
-                    )}
-
-                    {isAuthenticated && (
+                    ) : (
                         <>
                             <li>
                                 <Link
                                     to='/scheduling'
-                                    className='border-b-2 border-transparent pb-2 text-color1 hover:border-color2'
+                                    className='text-lg font-medium text-color2 hover:underline'
                                 >
                                     Agendamento
                                 </Link>
                             </li>
-                            <li className='flex items-center justify-center'>
-                                <Logout />
+                            <li>
+                                <Link onClick={handleLogout}>
+                                    <IconLogout
+                                        size={28}
+                                        className='stroke-color2'
+                                    />
+                                </Link>
                             </li>
                         </>
                     )}
