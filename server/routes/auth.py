@@ -48,31 +48,21 @@ def login(session: SessionDep, user_input: UserLogin, response: Response):
     refresh_token = create_refresh_token({'sub': user_db.id})
     set_refresh_cookie(response, refresh_token)
 
-    return {
-        'token': create_access_token({'sub': user_input.email}),
-        'token_type': 'bearer'
-    }
+    return {'token': create_access_token({'sub': user_input.email}), 'token_type': 'bearer'}
 
 
 @router.post('/register', response_model=Token, status_code=201)
 def register(session: SessionDep, user_input: PatientCreate, response: Response):
     try:
-        user = Patient(
-            name=user_input.name,
-            email=user_input.email,
-            password=ph.hash(user_input.password)
-        )
+        user = Patient(name=user_input.name, email=user_input.email, password=ph.hash(user_input.password))
         session.add(user)
         session.commit()
 
         refresh_token = create_refresh_token({'sub': user.id})
         set_refresh_cookie(response, refresh_token)
 
-        return {
-            'token': create_access_token({'sub': user_input.email}),
-            'token_type': 'bearer'
-        }
-    
+        return {'token': create_access_token({'sub': user_input.email}), 'token_type': 'bearer'}
+
     except IntegrityError:
         session.rollback()
         raise HTTPException(status_code=409, detail='Credenciais inválidas')

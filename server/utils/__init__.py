@@ -34,7 +34,7 @@ def decode_access_token(token: str) -> str:
 
     if payload.get('type') != 'access':
         raise HTTPException(status_code=401, detail='Token inválido')
-    
+
     email = payload.get('sub')
     if email is None:
         raise HTTPException(status_code=401, detail='Token inválido')
@@ -57,7 +57,7 @@ def decode_refresh_token(token: str) -> str:
         raise HTTPException(status_code=401, detail='Refresh token expirado')
     except InvalidTokenError:
         raise HTTPException(status_code=401, detail='Refresh token inválido')
-    
+
     if payload.get('type') != 'refresh':
         raise HTTPException(status_code=401, detail='Token inválido')
 

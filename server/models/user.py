@@ -1,5 +1,5 @@
 import enum
-from sqlalchemy import Enum, Integer, String
+from sqlalchemy import Enum, String
 from sqlalchemy.orm import Mapped, mapped_column
 from database import Base
 
@@ -19,7 +19,4 @@ class User(Base):
     password: Mapped[str] = mapped_column(String(255), nullable=False)
     type: Mapped[UserType] = mapped_column(Enum(UserType), nullable=False)
 
-    __mapper_args__ = {
-        'polymorphic_on': 'type',
-        'polymorphic_identity': None
-    }
+    __mapper_args__ = {'polymorphic_on': 'type', 'polymorphic_identity': None}

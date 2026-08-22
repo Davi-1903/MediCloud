@@ -25,13 +25,17 @@ dist-ssr
 *.sw?
 
 # Arquivos python
-__pycache__
+__pycache__/
+.ruff_cache/
+*.pyc
 
-# Ambiente virtual
-env
-.env
-venv
-.venv
+# Ambiente virtual e variáveis de ambiente
+.env*
+env/
+.env/
+venv/
+.venv/
+ENV/
 
 # Database
 *.db
