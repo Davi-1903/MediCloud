@@ -5,6 +5,7 @@ import { useAuthenticated } from '../../../context/authContext';
 import { POST } from '../../../api/user';
 import ProtectedRoute from '../../../components/protectedRoute';
 import { useNavigate } from 'react-router-dom';
+import Footer from '../../../components/footer';
 
 export default function Register() {
     const { login } = useAuthenticated();
@@ -112,6 +113,7 @@ export default function Register() {
                         </p>
                     </form>
                 </main>
+                <Footer />
             </div>
         </ProtectedRoute>
     );

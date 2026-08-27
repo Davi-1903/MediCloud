@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Header from '../../../components/Header';
 import ProtectedRoute from '../../../components/protectedRoute';
 import { IconChevronRight } from '@tabler/icons-react';
+import Footer from '../../../components/footer';
 
 export default function Scheduling() {
     const [medicoSelecionado, setMedicoSelecionado] = useState('lucas');
@@ -230,6 +231,7 @@ export default function Scheduling() {
                         </div>
                     </section>
                 </main>
+                <Footer />
             </div>
         </ProtectedRoute>
     );
