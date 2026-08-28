@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { useAuthenticated } from '../../src/context/authContext.jsx';
+import { useAuthenticated } from '../../../src/context/authContext.jsx';
 
 export default function ProtectedRoute({ children, isPrivate }) {
     const { isAuthenticated } = useAuthenticated();

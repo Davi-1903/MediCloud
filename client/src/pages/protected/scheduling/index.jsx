@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Header from '../../../components/Header';
+import Header from '../../../components/header';
 import ProtectedRoute from '../../../components/protectedRoute';
 import { IconChevronRight } from '@tabler/icons-react';
 import Footer from '../../../components/footer';

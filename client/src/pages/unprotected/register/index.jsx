@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Logo from '/assets/images/logo.svg';
-import Header from '../../../components/Header';
+import Header from '../../../components/header';
 import { useAuthenticated } from '../../../context/authContext';
 import { POST } from '../../../api/user';
 import ProtectedRoute from '../../../components/protectedRoute';

@@ -1,10 +1,13 @@
 import { IconArrowUp, IconBrandGithub, IconBrandInstagram, IconBrandX } from '@tabler/icons-react';
 import Logo from '/assets/images/logo.svg';
 import Clouds from './components/clouds';
+import FooterPages from './components/pages';
+import FooterFeatures from './components/features';
+import FooterAbout from './components/about';
 
 export default function Footer() {
     return (
-        <footer className='relative grid min-h-175 grid-cols-[0.5fr_1fr] grid-rows-[1fr_auto] gap-x-6'>
+        <footer className='relative grid min-h-175 grid-cols-[2fr_1fr_1fr_1fr] grid-rows-[1fr_auto] gap-x-6 overflow-x-hidden'>
             <Clouds />
             <article className='flex flex-col gap-6 p-12'>
                 <img
@@ -38,7 +41,7 @@ export default function Footer() {
                     </button>
                 </div>
                 <button
-                    className='group flex cursor-pointer items-center gap-4 self-start rounded-lg border-3 border-color1 px-4 py-2 transition-all duration-250 hover:bg-color1'
+                    className='group flex cursor-pointer items-center gap-4 self-start rounded-lg border-2 border-color1 px-4 py-2 transition-all duration-250 hover:bg-color1'
                     onClick={() => window.scroll({ top: 0, behavior: 'smooth' })}
                 >
                     <span className='text-lg font-semibold text-color1 group-hover:text-white'>Voltar para o topo</span>
@@ -48,52 +51,10 @@ export default function Footer() {
                     />
                 </button>
             </article>
-            <article className='flex flex-col gap-6 p-12'>
-                <h2 className='text-3xl font-semibold text-color2'>Funcionalidades</h2>
-                <ul>
-                    <li>
-                        <a
-                            href='#'
-                            className='text-lg text-color1 hover:underline'
-                        >
-                            Página inicial
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            href='#'
-                            className='text-lg text-color1 hover:underline'
-                        >
-                            Agendar consultas
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            href='#'
-                            className='text-lg text-color1 hover:underline'
-                        >
-                            Consulta virtual
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            href='#'
-                            className='text-lg text-color1 hover:underline'
-                        >
-                            Agendamentos
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            href='#'
-                            className='text-lg text-color1 hover:underline'
-                        >
-                            Meu perfil
-                        </a>
-                    </li>
-                </ul>
-            </article>
-            <article className='col-span-2 py-3'>
+            <FooterPages />
+            <FooterFeatures />
+            <FooterAbout />
+            <article className='col-span-4 py-3'>
                 <p className='text-center text-base text-color1'>
                     Copyright &copy; {new Date().getFullYear()} <strong>MediCloud</strong> | Todos os direitos
                     reservados.
