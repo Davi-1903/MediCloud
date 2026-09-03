@@ -10,7 +10,7 @@ export default function Scheduling() {
 
     return (
         <ProtectedRoute isPrivate={true}>
-            <div className='h-full bg-[#FFF5F6] py-3'>
+            <div className='h-full bg-[#FFF5F6] pt-3'>
                 <Header />
                 <main className='mt-28 flex w-full flex-col items-center gap-5 pb-10'>
                     <section>
