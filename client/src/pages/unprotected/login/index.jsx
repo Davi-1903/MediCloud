@@ -33,7 +33,7 @@ export default function Login() {
                 <main className='flex h-full items-center justify-end pr-15'>
                     <form
                         onSubmit={handleSubmit}
-                        className='mt-28 flex w-full max-w-lg flex-col gap-4 rounded-2xl bg-white p-8 pt-4 pb-4 shadow-2xl'
+                        className='mt-25 flex w-full max-w-lg flex-col gap-4 rounded-2xl bg-white h-160 max-h-lg p-10 pt-12 shadow-2xl'
                     >
                         <img
                             src={Logo}
@@ -54,7 +54,7 @@ export default function Login() {
                                 name='email'
                                 id='email'
                                 placeholder='exemplo@gmail.com'
-                                className='h-10 w-full rounded-lg border border-color2 bg-color3 px-4 outline-none'
+                                className='h-12 w-full rounded-lg border border-color2 bg-color3 px-4 outline-none'
                                 onChange={e => setEmail(e.target.value)}
                                 required
                             />
@@ -71,26 +71,37 @@ export default function Login() {
                                 name='senha'
                                 id='senha'
                                 placeholder='Digite sua senha'
-                                className='h-10 w-full rounded-lg border border-color2 bg-color3 px-4 outline-none'
+                                className='h-12 w-full rounded-lg border border-color2 bg-color3 px-4 outline-none'
                                 onChange={e => setPassword(e.target.value)}
                                 required
                             />
                         </div>
-                        <button
-                            type='submit'
-                            className='h-10 cursor-pointer rounded-lg bg-color2 text-lg font-semibold text-white'
-                        >
-                            Enviar
-                        </button>
-                        <p className='text-center text-sm text-color2'>
-                            Não tem conta?{' '}
-                            <a
-                                href='register'
-                                className='font-medium'
+                        <div className='w-full flex flex-col gap-2 mt-20.5'>
+                            <button
+                                type='submit'
+                                className='h-12 w-full cursor-pointer rounded-lg bg-color2 text-lg font-semibold text-white'
                             >
-                                Cadastre-se
-                            </a>
-                        </p>
+                                Enviar
+                            </button>
+                            <p className='text-center text-sm text-color2'>
+                                Não tem conta?{' '}
+                                <a
+                                    href='register'
+                                    className='font-medium'
+                                >
+                                    Cadastre-se
+                                </a>
+                            </p>
+                            <p className='text-center text-sm text-color2'>
+                                O seu perfil é de médico?{' '}
+                                <a
+                                    href='register'
+                                    className='font-medium'
+                                >
+                                    Cadastre-se
+                                </a>
+                            </p>
+                        </div>
                     </form>
                 </main>
                 <Footer />
