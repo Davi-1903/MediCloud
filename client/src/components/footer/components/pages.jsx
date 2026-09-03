@@ -1,12 +1,12 @@
 export default function FooterPages() {
     return (
         <article className='flex flex-col gap-6 p-12'>
-            <h2 className='text-3xl font-semibold text-color2'>Páginas</h2>
+            <h2 className='text-2xl font-semibold text-color2'>Páginas</h2>
             <ul>
                 <li>
                     <a
                         href='#'
-                        className='text-lg text-color1 hover:underline'
+                        className='text-base text-color1 hover:underline'
                     >
                         Página inicial
                     </a>
@@ -14,7 +14,7 @@ export default function FooterPages() {
                 <li>
                     <a
                         href='#'
-                        className='text-lg text-color1 hover:underline'
+                        className='text-base text-color1 hover:underline'
                     >
                         Agendar consultas
                     </a>
@@ -22,7 +22,7 @@ export default function FooterPages() {
                 <li>
                     <a
                         href='#'
-                        className='text-lg text-color1 hover:underline'
+                        className='text-base text-color1 hover:underline'
                     >
                         Consulta virtual
                     </a>
@@ -30,7 +30,7 @@ export default function FooterPages() {
                 <li>
                     <a
                         href='#'
-                        className='text-lg text-color1 hover:underline'
+                        className='text-base text-color1 hover:underline'
                     >
                         Agendamentos
                     </a>
@@ -38,7 +38,7 @@ export default function FooterPages() {
                 <li>
                     <a
                         href='#'
-                        className='text-lg text-color1 hover:underline'
+                        className='text-base text-color1 hover:underline'
                     >
                         Meu perfil
                     </a>
