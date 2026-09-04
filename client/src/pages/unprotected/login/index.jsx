@@ -33,7 +33,7 @@ export default function Login() {
                 <main className='flex h-full items-center justify-end pr-15'>
                     <form
                         onSubmit={handleSubmit}
-                        className='mt-25 flex w-full max-w-lg flex-col gap-4 rounded-2xl bg-white h-160 max-h-lg p-10 pt-12 shadow-2xl'
+                        className='max-h-lg mt-25 flex h-165 w-full max-w-lg flex-col gap-4 rounded-2xl bg-white p-10 pt-12 shadow-2xl'
                     >
                         <img
                             src={Logo}
@@ -45,7 +45,7 @@ export default function Login() {
                         <div>
                             <label
                                 htmlFor='email'
-                                className='mb-1 block font-medium text-color2'
+                                className='mb-1 block font-medium text-color4'
                             >
                                 Email:
                             </label>
@@ -54,7 +54,7 @@ export default function Login() {
                                 name='email'
                                 id='email'
                                 placeholder='exemplo@gmail.com'
-                                className='h-12 w-full rounded-lg border border-color2 bg-color3 px-4 outline-none'
+                                className='h-12 w-full rounded-lg border border-color4 bg-color3 px-4 outline-none'
                                 onChange={e => setEmail(e.target.value)}
                                 required
                             />
@@ -62,7 +62,7 @@ export default function Login() {
                         <div>
                             <label
                                 htmlFor='senha'
-                                className='mb-1 block font-medium text-color2'
+                                className='mb-1 block font-medium text-color4'
                             >
                                 Senha:
                             </label>
@@ -71,29 +71,20 @@ export default function Login() {
                                 name='senha'
                                 id='senha'
                                 placeholder='Digite sua senha'
-                                className='h-12 w-full rounded-lg border border-color2 bg-color3 px-4 outline-none'
+                                className='h-12 w-full rounded-lg border border-color4 bg-color3 px-4 outline-none'
                                 onChange={e => setPassword(e.target.value)}
                                 required
                             />
                         </div>
-                        <div className='w-full flex flex-col gap-2 mt-20.5'>
+                        <div className='flex flex-col gap-4 mt-31'>
                             <button
                                 type='submit'
-                                className='h-12 w-full cursor-pointer rounded-lg bg-color2 text-lg font-semibold text-white'
+                                className='h-12 w-full cursor-pointer rounded-lg bg-color4 text-lg font-semibold text-white'
                             >
                                 Enviar
                             </button>
-                            <p className='text-center text-sm text-color2'>
+                            <p className='text-center text-sm text-color4'>
                                 Não tem conta?{' '}
-                                <a
-                                    href='register'
-                                    className='font-medium'
-                                >
-                                    Cadastre-se
-                                </a>
-                            </p>
-                            <p className='text-center text-sm text-color2'>
-                                O seu perfil é de médico?{' '}
                                 <a
                                     href='register'
                                     className='font-medium'

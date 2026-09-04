@@ -34,7 +34,7 @@ export default function Register() {
                 <main className='flex h-full items-center justify-end pr-15'>
                     <form
                         onSubmit={handleSubmit}
-                        className='mt-25 flex w-full max-w-lg flex-col gap-4 rounded-2xl bg-white h-160 max-h-lg p-10 pt-12 justify-center shadow-2xl'
+                        className='max-h-lg mt-25 flex h-165 w-full max-w-lg flex-col justify-between rounded-2xl bg-white p-10 pt-12 shadow-2xl'
                     >
                         <img
                             src={Logo}
@@ -47,7 +47,7 @@ export default function Register() {
                         </span>
                         <div>
                             <label
-                                className='mb-1 block font-medium text-color2'
+                                className='mb-1 block font-medium text-color4'
                                 htmlFor='nome'
                             >
                                 Nome completo
@@ -57,14 +57,14 @@ export default function Register() {
                                 name='nome'
                                 id='nome'
                                 placeholder='Digite seu nome completo'
-                                className='h-12 w-full rounded-lg border border-color2 bg-color3 px-4 outline-none'
+                                className='h-12 w-full rounded-lg border border-color4 bg-color3 px-4 outline-none'
                                 onChange={e => setName(e.target.value)}
                                 required
                             />
                         </div>
                         <div>
                             <label
-                                className='mb-1 block font-medium text-color2'
+                                className='mb-1 block font-medium text-color4'
                                 htmlFor='email'
                             >
                                 Email
@@ -74,14 +74,14 @@ export default function Register() {
                                 name='email'
                                 id='email'
                                 placeholder='exemplo@gmail.com'
-                                className='h-12 w-full rounded-lg border border-color2 bg-color3 px-4 outline-none'
+                                className='h-12 w-full rounded-lg border border-color4 bg-color3 px-4 outline-none'
                                 onChange={e => setEmail(e.target.value)}
                                 required
                             />
                         </div>
                         <div>
                             <label
-                                className='mb-1 block font-medium text-color2'
+                                className='mb-1 block font-medium text-color4'
                                 htmlFor='senha'
                             >
                                 Senha
@@ -91,14 +91,14 @@ export default function Register() {
                                 name='senha'
                                 id='senha'
                                 placeholder='Sua senha secreta...'
-                                className='h-12 w-full rounded-lg border border-color2 bg-color3 px-4 outline-none'
+                                className='h-12 w-full rounded-lg border border-color4 bg-color3 px-4 outline-none'
                                 onChange={e => setPassword(e.target.value)}
                                 required
                             />
                         </div>
                         <button
                             type='submit'
-                            className='h-12 cursor-pointer rounded-lg bg-color2 text-lg font-semibold text-white'
+                            className='h-12 cursor-pointer rounded-lg bg-color4 text-lg font-semibold text-white'
                         >
                             Cadastrar
                         </button>
@@ -109,6 +109,15 @@ export default function Register() {
                                 className='font-medium'
                             >
                                 Login
+                            </a>
+                        </p>
+                        <p className='text-center text-sm text-color4'>
+                            O seu perfil é de médico?{' '}
+                            <a
+                                href='register'
+                                className='font-medium'
+                            >
+                                Cadastre-se
                             </a>
                         </p>
                     </form>

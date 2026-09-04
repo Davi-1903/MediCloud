@@ -1,4 +1,5 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import {} from 'react-router-dom';
 import { IconLogout } from '@tabler/icons-react';
 import { useAuthenticated } from '../../context/authContext';
 import Logo from '/assets/images/logo.svg';
@@ -22,43 +23,49 @@ export default function Header() {
                 className='w-25'
             />
             <div>
-                <ul className='flex items-center gap-12'>
+                <ul className='flex items-center gap-4'>
                     {!isAuthenticated ? (
                         <>
                             <li>
-                                <Link
+                                <NavLink
                                     to='/login'
-                                    className='text-lg font-medium text-color2 hover:underline'
+                                    className={({ isActive }) =>
+                                        `rounded-lg px-3 py-2.5 text-lg font-medium text-color4 ${isActive ? 'bg-color4 text-white' : ''}`
+                                    }
                                 >
                                     Login
-                                </Link>
+                                </NavLink>
                             </li>
                             <li>
-                                <Link
+                                <NavLink
                                     to='/register'
-                                    className='rounded-lg bg-color2 px-3 py-2.5 text-lg font-medium text-white'
+                                    className={({ isActive }) =>
+                                        `rounded-lg px-3 py-2.5 text-lg font-medium text-color4 ${isActive ? 'bg-color4 text-white' : ''} `
+                                    }
                                 >
                                     Cadastrar
-                                </Link>
+                                </NavLink>
                             </li>
                         </>
                     ) : (
                         <>
                             <li>
-                                <Link
+                                <NavLink
                                     to='/scheduling'
-                                    className='text-lg font-medium text-color2 hover:underline'
+                                    className={({ isActive }) =>
+                                        `rounded-lg px-3 py-2.5 text-lg font-medium text-color4 ${isActive ? 'bg-color4 text-white' : ''}`
+                                    }
                                 >
                                     Agendamento
-                                </Link>
+                                </NavLink>
                             </li>
                             <li>
-                                <Link onClick={handleLogout}>
+                                <NavLink onClick={handleLogout}>
                                     <IconLogout
                                         size={28}
-                                        className='stroke-color2'
+                                        className='stroke-color4'
                                     />
-                                </Link>
+                                </NavLink>
                             </li>
                         </>
                     )}
