@@ -21,7 +21,7 @@ export default function Register() {
             const data = await POST('/api/auth/register', { name, email, password });
             if (data.status !== 201) throw new Error(data.detail);
             login(data.token);
-            navigate('/scheduling');
+            navigate('/dash');
         } catch (err) {
             alert(err.message);
         }

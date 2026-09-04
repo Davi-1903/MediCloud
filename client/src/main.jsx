@@ -7,6 +7,7 @@ import './globals.css';
 const Register = lazy(() => import('./pages/unprotected/register'));
 const Login = lazy(() => import('./pages/unprotected/login'));
 const Scheduling = lazy(() => import('./pages/protected/scheduling'));
+const DashAdmin = lazy(() => import('./pages/protected/dash'));
 
 const router = createBrowserRouter([
     {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
     {
         path: 'scheduling',
         element: <Scheduling />,
+    },
+    {
+        path: 'dash',
+        element: <DashAdmin />,
     },
 ]);
 

@@ -5,6 +5,6 @@ export default function ProtectedRoute({ children, isPrivate }) {
     const { isAuthenticated } = useAuthenticated();
 
     if (isPrivate && !isAuthenticated) return <Navigate to='/login' />;
-    if (!isPrivate && isAuthenticated) return <Navigate to='/scheduling' />;
+    if (!isPrivate && isAuthenticated) return <Navigate to='/dash' />;
     return children;
 }
