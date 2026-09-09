@@ -4,6 +4,7 @@ import ProtectedRoute from '../../../components/protectedRoute';
 import Appointments from './components/appointments';
 import Cards from './components/cards';
 import Scheduling from './components/scheduling';
+import Reminders from './components/reminders';
 
 export default function HomeMedico() {
     return (
@@ -13,8 +14,9 @@ export default function HomeMedico() {
                 <main className='mt-28 p-5'>
                     <Appointments />
                     <Cards />
-                    <section className='mt-8 flex'>
+                    <section className='mt-8 flex gap-8'>
                         <Scheduling />
+                        <Reminders />
                     </section>
                 </main>
             </div>
