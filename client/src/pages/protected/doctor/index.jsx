@@ -1,0 +1,27 @@
+import { IconCalendarWeek, IconCamera, IconHeartPlus } from '@tabler/icons-react';
+import Header from '../../../components/header';
+import ProtectedRoute from '../../../components/protectedRoute';
+import Appointments from './components/appointments';
+import Cards from './components/cards';
+import Scheduling from './components/scheduling';
+import Reminders from './components/reminders';
+import History from './components/history';
+
+export default function HomeDoctor() {
+    return (
+        <ProtectedRoute isPrivate={true}>
+            <div className='min-h-full bg-[#FFF5F6] pt-3'>
+                <Header />
+                <main className='mx-auto mt-28 max-w-400 p-5'>
+                    <Appointments />
+                    <Cards />
+                    <section className='mt-8 flex gap-8'>
+                        <Scheduling />
+                        <Reminders />
+                        <History />
+                    </section>
+                </main>
+            </div>
+        </ProtectedRoute>
+    );
+}
