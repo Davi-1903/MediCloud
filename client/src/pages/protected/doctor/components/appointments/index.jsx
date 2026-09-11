@@ -60,7 +60,7 @@ export default function Appointments() {
                 {appointments.map(appointment => (
                     <article
                         key={appointment.id}
-                        className='flex flex-1 basis-95 items-center gap-2 rounded-2xl border border-black/30 p-2'
+                        className='flex basis-100 items-center gap-2 rounded-2xl border border-black/30 p-2'
                     >
                         <div className='aspect-square h-full rounded-full bg-gray-200'></div>
                         <div className='flex flex-col gap-2'>
@@ -82,7 +82,7 @@ export default function Appointments() {
                                 </span>
                             </div>
                         </div>
-                        <span className='rounded-full bg-color2 px-3 py-1 text-white'>
+                        <span className='ml-auto block rounded-full bg-color2 px-3 py-1 text-white'>
                             {formatStatus(appointment.status)}
                         </span>
                         <button>

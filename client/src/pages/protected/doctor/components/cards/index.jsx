@@ -7,11 +7,12 @@ export default function Cards() {
             icon: (
                 <IconCalendarWeek
                     size={36}
+                    strokeWidth={1.5}
                     className='stroke-color4'
                 />
             ),
             title: 'Cadastrar consultas',
-            description: 'Encontre horários disponíveis',
+            description: 'Cadastre horários para as consultas',
             link: { name: 'Agendar', url: '#' },
         },
         {
@@ -19,11 +20,12 @@ export default function Cards() {
             icon: (
                 <IconCamera
                     size={36}
+                    strokeWidth={1.5}
                     className='stroke-color4'
                 />
             ),
             title: 'Atendimento online',
-            description: 'Converse com pacientes por vídeo',
+            description: 'Converse com pacientes por vídeo', // A estrutura é mais complexa, Maria sabe :)
             link: { name: 'Iniciar', url: '#' },
         },
         {
@@ -31,6 +33,7 @@ export default function Cards() {
             icon: (
                 <IconHeartPlus
                     size={36}
+                    strokeWidth={1.5}
                     className='stroke-color4'
                 />
             ),

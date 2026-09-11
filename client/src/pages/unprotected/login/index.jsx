@@ -33,7 +33,7 @@ export default function Login() {
                 <main className='flex h-full items-center justify-end pr-15'>
                     <form
                         onSubmit={handleSubmit}
-                        className='mt-25 flex w-full max-w-lg flex-col gap-4 rounded-2xl bg-white h-160 max-h-lg p-10 pt-12 shadow-2xl'
+                        className='max-h-lg mt-25 flex h-160 w-full max-w-lg flex-col gap-4 rounded-2xl bg-white p-10 pt-12 shadow-2xl'
                     >
                         <img
                             src={Logo}
@@ -76,7 +76,7 @@ export default function Login() {
                                 required
                             />
                         </div>
-                        <div className='w-full flex flex-col gap-2 mt-20.5'>
+                        <div className='mt-20.5 flex w-full flex-col gap-2'>
                             <button
                                 type='submit'
                                 className='h-12 w-full cursor-pointer rounded-lg bg-color2 text-lg font-semibold text-white'

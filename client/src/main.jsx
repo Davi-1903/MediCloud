@@ -7,7 +7,7 @@ import './globals.css';
 const Register = lazy(() => import('./pages/unprotected/register'));
 const Login = lazy(() => import('./pages/unprotected/login'));
 const Scheduling = lazy(() => import('./pages/protected/scheduling'));
-const HomeMedico = lazy(() => import('./pages/protected/medico'));
+const HomeDoctor = lazy(() => import('./pages/protected/doctor'));
 
 const router = createBrowserRouter([
     {
@@ -27,8 +27,8 @@ const router = createBrowserRouter([
         element: <Scheduling />,
     },
     {
-        path: 'home',
-        element: <HomeMedico />,
+        path: 'home/doctor',
+        element: <HomeDoctor />,
     },
 ]);
 

@@ -60,6 +60,7 @@ export default function Reminders() {
                         <div className='grid aspect-square w-20 place-items-center rounded-full bg-color3'>
                             <IconBell
                                 size={36}
+                                strokeWidth={1.5}
                                 className='stroke-color4'
                             />
                         </div>
