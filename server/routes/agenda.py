@@ -40,6 +40,52 @@ def create_agenda(session: SessionDep, user: Annotated[User, Depends(get_current
         session.refresh(new_agenda)
         return new_agenda
 
-    except Exception as err:
+    except Exception:
         session.rollback()
-        raise HTTPException(status_code=500, detail=str(err))
+        raise HTTPException(status_code=500, detail='Ocorreu um erro interno')
+
+
+@router.put('/{id}', response_model=AgendaRead)
+def update_agenda(
+    session: SessionDep,
+    id: int,
+    new_agenda: AgendaCreate,
+    user: Annotated[User, Depends(get_current_user)],
+):
+    if user.type != UserType.DOCTOR:
+        raise HTTPException(status_code=401, detail='Esses dados só podem ser acessador por um médico')
+
+    agenda = session.scalar(select(Agenda).where(Agenda.id == id).where(Agenda.doctor_id == user.id))
+    if agenda is None:
+        raise HTTPException(status_code=404, detail='Agenda não encontrada')
+
+    try:
+        agenda.date = new_agenda.date
+        agenda.start_time = new_agenda.start_time
+        agenda.end_time = new_agenda.end_time
+        session.commit()
+        session.refresh(agenda)
+        return agenda
+
+    except Exception:
+        session.rollback()
+        raise HTTPException(status_code=500, detail='Ocorreu um erro interno')
+
+
+@router.delete('/{id}', response_model=AgendaRead)
+def delete_agenda(session: SessionDep, id: int, user: Annotated[User, Depends(get_current_user)]):
+    if user.type != UserType.DOCTOR:
+        raise HTTPException(status_code=401, detail='Esses dados só podem ser acessador por um médico')
+
+    agenda = session.scalar(select(Agenda).where(Agenda.id == id).where(Agenda.doctor_id == user.id))
+    if agenda is None:
+        raise HTTPException(status_code=404, detail='Agenda não encontrada')
+
+    try:
+        session.delete(agenda)
+        session.commit()
+        return agenda
+
+    except Exception:
+        session.rollback()
+        raise HTTPException(status_code=500, detail='Ocorreu um erro interno')
