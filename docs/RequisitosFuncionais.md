@@ -45,7 +45,7 @@ página de login.
 - **RF17:** Deve ser possível o médico cadastrar horários disponíveis para consultas, informando o dia, horário e o formato da consulta (online ou presencial). 
 - **RF18:** Deve ser possível que o médico confirme uma consulta até um dia antes da data do atendimento.
 - **RF19:** Deve ser possível que o médico cancele uma consulta até um dia antes da data do atendimento.
-- **RF20:** Deve ser possível que o médico, durante ou após a consulta, cadastre informações do atendimento no prontuário eletrônico do paciente, informando dados como peso, altura, temperatura, pressão arterial, motivo da consulta, diagnóstico, prescri.
+- **RF20:** Deve ser possível que o médico, durante ou após a consulta, cadastre informações do atendimento no prontuário eletrônico do paciente, informando dados como peso, altura, temperatura, pressão arterial, motivo da consulta, diagnóstico, prescrição, etc.
 - **RF21:** Deve ser possível que o médico anexe arquivos relacionados à consulta do paciente, como exames, receitas, atestados e outros documentos.
 ## Sistema
 - **RF22:** Deve ser possível os usuários receberem notificações sobre as informações das consultas agendadas (lembretes, alterações e cancelamento do atendimento).
