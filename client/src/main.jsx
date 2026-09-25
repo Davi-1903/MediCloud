@@ -8,6 +8,7 @@ const Register = lazy(() => import('./pages/unprotected/register'));
 const Login = lazy(() => import('./pages/unprotected/login'));
 const Scheduling = lazy(() => import('./pages/protected/scheduling'));
 const RegisterDoctor = lazy(() => import('./pages/unprotected/register_doctor'));
+const About = lazy(() => import('./pages/unprotected/about'));
 
 const router = createBrowserRouter([
     {
@@ -29,6 +30,14 @@ const router = createBrowserRouter([
     {
         path: 'scheduling',
         element: <Scheduling />,
+    },
+    {
+        path: 'about',
+        element: <About />,
+    },
+    {
+        path: 'record',
+        element: <Record />,
     },
 ]);
 
