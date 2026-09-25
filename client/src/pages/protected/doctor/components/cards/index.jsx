@@ -11,7 +11,7 @@ export default function Cards() {
                     className='stroke-color4'
                 />
             ),
-            title: 'Cadastrar consultas',
+            title: 'Cadastrar horários',
             description: 'Cadastre horários para as consultas',
             link: { name: 'Agendar', url: '#' },
         },

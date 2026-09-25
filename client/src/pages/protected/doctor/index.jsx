@@ -12,7 +12,7 @@ export default function HomeDoctor() {
         <ProtectedRoute isPrivate={true}>
             <div className='min-h-full bg-[#FFF5F6] pt-3'>
                 <Header />
-                <main className='mx-auto mt-28 max-w-400 p-5'>
+                <main className='mx-auto mt-28 max-w-360 p-5'>
                     <Appointments />
                     <Cards />
                     <section className='mt-8 flex gap-8'>

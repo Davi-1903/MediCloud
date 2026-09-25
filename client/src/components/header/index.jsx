@@ -1,5 +1,4 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import {} from 'react-router-dom';
 import { IconLogout } from '@tabler/icons-react';
 import { useAuthenticated } from '../../context/authContext';
 import Logo from '/assets/images/logo.svg';

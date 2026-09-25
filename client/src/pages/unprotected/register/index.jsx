@@ -114,7 +114,7 @@ export default function Register() {
                         <p className='text-center text-sm text-color4'>
                             O seu perfil é de médico?{' '}
                             <a
-                                href='register'
+                                href='register/doctor'
                                 className='font-medium'
                             >
                                 Cadastre-se
