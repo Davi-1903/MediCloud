@@ -25,6 +25,6 @@ class Doctor(User):
     crm: Mapped[str] = mapped_column(String(50), index=True, nullable=False)
     status: Mapped[Status] = mapped_column(Enum(Status), default=Status.PENDING, nullable=False)
 
-    agenda: Mapped[list['Agenda']] = relationship(back_populates='doctor')
+    agenda: Mapped[list['Agenda']] = relationship(back_populates='doctor', cascade='all, delete-orphan')
 
     __mapper_args__ = {'polymorphic_identity': UserType.DOCTOR}
