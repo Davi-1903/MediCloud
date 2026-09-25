@@ -34,7 +34,7 @@ export default function Register() {
                 <main className='flex h-full items-center justify-end pr-15'>
                     <form
                         onSubmit={handleSubmit}
-                        className='max-h-lg mt-25 flex h-165 w-full max-w-lg flex-col justify-between rounded-2xl bg-white p-10 pt-12 shadow-2xl'
+                        className='max-h-lg mt-25 flex h-160 w-full max-w-lg flex-col justify-center gap-4 rounded-2xl bg-white p-10 pt-12 shadow-2xl'
                     >
                         <img
                             src={Logo}
@@ -114,7 +114,7 @@ export default function Register() {
                         <p className='text-center text-sm text-color4'>
                             O seu perfil é de médico?{' '}
                             <a
-                                href='register'
+                                href='register/doctor'
                                 className='font-medium'
                             >
                                 Cadastre-se
