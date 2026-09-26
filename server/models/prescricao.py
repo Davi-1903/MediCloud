@@ -19,4 +19,4 @@ class Prescricao(Base):
     observacoes: Mapped[str] = mapped_column(Text, nullable=False)
     exames: Mapped[str] = mapped_column(Text, nullable=True)
 
-    user: Mapped['User'] = relationship(back_populates='prescricao')
+    user: Mapped['User'] = relationship(back_populates='prescricoes')

@@ -27,4 +27,4 @@ class Consulta(Base):
     sintomas: Mapped[str] = mapped_column(Text, nullable=True)
     status: Mapped[StatusType] = mapped_column(Enum(StatusType), default=StatusType.PENDENTE, nullable=False) 
 
-    user: Mapped['User'] = relationship(back_populates='consulta')
+    user: Mapped['User'] = relationship(back_populates='consultas')

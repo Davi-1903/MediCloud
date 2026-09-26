@@ -6,7 +6,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from database import Base
 
 if TYPE_CHECKING:
-    from models.pronturario import Prontuario
+    from models.prontuario import Prontuario
     from models.prescricao import Prescricao
     from models.consulta import Consulta
 
@@ -34,7 +34,7 @@ class User(Base):
     cep: Mapped[str] = mapped_column(String(8), nullable=True)
 
     prontuario: Mapped['Prontuario'] = relationship(back_populates='user', cascade='all, delete-orphan', uselist=False)
-    precricoes: Mapped[list['Prescricao']] = relationship(back_populates='user', cascade='all, delete-orphan')
+    prescricoes: Mapped[list['Prescricao']] = relationship(back_populates='user', cascade='all, delete-orphan')
     consultas: Mapped[list['Consulta']] = relationship(back_populates='user', cascade='all, delete-orphan')
 
     __mapper_args__ = {'polymorphic_on': 'type', 'polymorphic_identity': None}
