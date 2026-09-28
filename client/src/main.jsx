@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { AuthenticatedProvider } from './context/authContext';
 import './globals.css';
+import NotFound from './pages/errors/404';
 
 const Register = lazy(() => import('./pages/unprotected/register'));
 const Login = lazy(() => import('./pages/unprotected/login'));
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
     {
         path: 'home/doctor',
         element: <HomeDoctor />,
+    },
+    {
+        path: '*',
+        element: <NotFound />,
     },
 ]);
 
