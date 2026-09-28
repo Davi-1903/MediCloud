@@ -10,6 +10,7 @@ from database import Base
 
 if TYPE_CHECKING:
     from models.doctor import Doctor
+    from models.consulta import Consulta
 
 
 class Days(enum.Enum):
@@ -21,7 +22,7 @@ class Days(enum.Enum):
 
 
 class Agenda(Base):
-    __tablename__ = 'agenda'
+    __tablename__ = 'agendas'
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     doctor_id: Mapped[int] = mapped_column(ForeignKey('doctors.id'), nullable=False)
@@ -30,3 +31,4 @@ class Agenda(Base):
     end_time: Mapped[time] = mapped_column(Time, nullable=False)
 
     doctor: Mapped['Doctor'] = relationship(back_populates='agenda')
+    consultas: Mapped[list['Consulta']] = relationship(back_populates='agenda', cascade='all, delete-orphan')

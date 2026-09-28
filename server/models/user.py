@@ -33,8 +33,5 @@ class User(Base):
     number: Mapped[int] = mapped_column(Integer, nullable=True)
     cep: Mapped[str] = mapped_column(String(8), nullable=True)
 
-    prontuario: Mapped['Prontuario'] = relationship(back_populates='user', cascade='all, delete-orphan', uselist=False)
-    prescricoes: Mapped[list['Prescricao']] = relationship(back_populates='user', cascade='all, delete-orphan')
-    consultas: Mapped[list['Consulta']] = relationship(back_populates='user', cascade='all, delete-orphan')
 
     __mapper_args__ = {'polymorphic_on': 'type', 'polymorphic_identity': None}
