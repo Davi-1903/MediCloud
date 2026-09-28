@@ -1,5 +1,4 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import {} from 'react-router-dom';
 import { IconLogout } from '@tabler/icons-react';
 import { useAuthenticated } from '../../context/authContext';
 import Logo from '/assets/images/logo.svg';
@@ -44,6 +43,16 @@ export default function Header() {
                                     }
                                 >
                                     Cadastrar
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                    to='/about'
+                                    className={({ isActive }) =>
+                                        `rounded-lg px-3 py-2.5 text-lg font-medium text-color4 ${isActive ? 'bg-color4 text-white' : ''} `
+                                    }
+                                >
+                                    Sobre
                                 </NavLink>
                             </li>
                         </>

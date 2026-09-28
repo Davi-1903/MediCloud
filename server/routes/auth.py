@@ -32,7 +32,7 @@ def set_refresh_cookie(response: Response, token: str):
         key='refresh_token',
         value=token,
         httponly=True,
-        secure=True,
+        secure=False,
         samesite='strict',
         max_age=60 * 60 * 24 * 30,
         path='/api/auth',
