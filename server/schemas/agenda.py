@@ -1,6 +1,6 @@
 from datetime import time
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 from models.agenda import Days
 
@@ -17,4 +17,5 @@ class AgendaCreate(AgendaBase):
 
 
 class AgendaRead(AgendaBase):
+    model_config = ConfigDict(from_attributes=True)
     id: int

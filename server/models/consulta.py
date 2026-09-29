@@ -14,8 +14,9 @@ class StatusType(str, enum.Enum):
     ATENDIDO = 'atendido'
     CANCELADO = 'cancelado'
 
+
 class Consulta(Base):
-    __tablename__ ='consultas'
+    __tablename__ = 'consultas'
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     user_id: Mapped[int] = mapped_column(ForeignKey('users.id'))
@@ -25,6 +26,6 @@ class Consulta(Base):
     pressao: Mapped[float] = mapped_column(Float, nullable=True)
     diagnostico: Mapped[str] = mapped_column(String, nullable=True)
     sintomas: Mapped[str] = mapped_column(Text, nullable=True)
-    status: Mapped[StatusType] = mapped_column(Enum(StatusType), default=StatusType.PENDENTE, nullable=False) 
+    status: Mapped[StatusType] = mapped_column(Enum(StatusType), default=StatusType.PENDENTE, nullable=False)
 
     user: Mapped['User'] = relationship(back_populates='consultas')

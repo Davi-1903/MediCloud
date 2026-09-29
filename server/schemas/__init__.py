@@ -1,4 +1,4 @@
-from . import agenda, user, administrator, doctor, patient
+from . import agenda, user, administrator, doctor, patient, prontuario, prescricao, consulta
 
 
-__all__ = ['agenda', 'user', 'patient', 'administrator', 'doctor']
+__all__ = ['agenda', 'user', 'patient', 'administrator', 'doctor', 'prontuario', 'prescricao', 'consulta']

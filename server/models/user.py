@@ -10,6 +10,7 @@ if TYPE_CHECKING:
     from models.prescricao import Prescricao
     from models.consulta import Consulta
 
+
 class UserType(str, enum.Enum):
     ADMIN = 'administrator'
     DOCTOR = 'doctor'

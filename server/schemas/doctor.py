@@ -1,9 +1,11 @@
+from models.doctor import Status
 from schemas.user import UserCreate, UserRead
 
 
 class DoctorRead(UserRead):
     specialty: str
     crm: str
+    status: Status
 
 
 class DoctorCreate(UserCreate):
