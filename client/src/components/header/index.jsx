@@ -15,7 +15,7 @@ export default function Header() {
     }
 
     return (
-        <header className='fixed top-4 left-4 flex h-20 w-[calc(100%-2rem)] items-center justify-between rounded-2xl bg-white px-8 py-2 shadow-lg shadow-color2/15'>
+        <header className='fixed top-4 left-4 z-2 flex h-20 w-[calc(100%-2rem)] items-center justify-between rounded-2xl bg-white px-8 py-2 shadow-lg shadow-color2/15'>
             <img
                 src={Logo}
                 alt='Logo do MediCloud'

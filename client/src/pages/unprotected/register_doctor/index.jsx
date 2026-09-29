@@ -59,11 +59,13 @@ export default function RegisterDoctor() {
                 <main className='flex h-full items-center justify-end pr-15'>
                     <form
                         onSubmit={handleSubmit}
-                        className='mt-32 flex w-full max-w-5xl flex-col gap-6 rounded-lg bg-white p-8  py-10 shadow-2xl'
+                        className='mt-32 flex w-full max-w-5xl flex-col gap-6 rounded-lg bg-white p-8 py-10 shadow-2xl'
                     >
                         <article>
-                            <h1 className='text-4xl font-bold text-gray-900 mb-1'>Cadastro médico</h1>
-                            <p className='text-lg text-gray-700'>Preencha os dados abaixo para adicionar-se como médico.</p>
+                            <h1 className='mb-1 text-4xl font-bold text-gray-900'>Cadastro médico</h1>
+                            <p className='text-lg text-gray-700'>
+                                Preencha os dados abaixo para adicionar-se como médico.
+                            </p>
                         </article>
                         <div className='flex items-center gap-4 border-b border-color2 pb-6'>
                             <label
@@ -92,15 +94,9 @@ export default function RegisterDoctor() {
 
                             <div>
                                 <h3 className='text-lg font-bold'>Adicionar foto</h3>
-                                <p className='text-sm text-gray-700'>
-                                    PNG ou JPG, até 5MB (opcional)
-                                </p>
+                                <p className='text-sm text-gray-700'>PNG ou JPG, até 5MB (opcional)</p>
 
-                                {photo && (
-                                    <p className='mt-1 text-sm text-gray-500'>
-                                        {photo.name}
-                                    </p>
-                                )}
+                                {photo && <p className='mt-1 text-sm text-gray-500'>{photo.name}</p>}
                             </div>
                         </div>
                         <article className='flex flex-col gap-5'>
@@ -182,7 +178,7 @@ export default function RegisterDoctor() {
                                         className='mb-1 font-medium text-color2'
                                         htmlFor='uf'
                                     >
-                                    UF
+                                        UF
                                     </label>
                                     <input
                                         type=''
@@ -215,7 +211,7 @@ export default function RegisterDoctor() {
                         </article>
                         <button
                             type='submit'
-                            className='h-12 cursor-pointer rounded-lg bg-color2 text-xl text-white px-10 self-center '
+                            className='h-12 cursor-pointer self-center rounded-lg bg-color2 px-10 text-xl text-white'
                         >
                             Cadastrar
                         </button>
