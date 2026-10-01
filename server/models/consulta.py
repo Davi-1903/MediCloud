@@ -31,7 +31,7 @@ class Consulta(Base):
     hora: Mapped[time] = mapped_column(Time, nullable=True)
     temperatura: Mapped[float] = mapped_column(Float, nullable=True)
     pressao: Mapped[float] = mapped_column(Float, nullable=True)
-    diagnostico: Mapped[str] = mapped_column(String, nullable=True)
+    diagnostico: Mapped[str] = mapped_column(Text, nullable=True)
     sintomas: Mapped[str] = mapped_column(Text, nullable=True)
     status: Mapped[StatusType] = mapped_column(Enum(StatusType), default=StatusType.PENDENTE, nullable=False)
 

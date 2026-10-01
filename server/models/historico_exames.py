@@ -11,6 +11,6 @@ class HistoricoExames(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     prontuario_id: Mapped[int] = mapped_column(ForeignKey('prontuarios.id'))
-    arquivo: Mapped[str] = mapped_column(String, nullable=False) # provisório
+    arquivo: Mapped[str] = mapped_column(String(50), nullable=False) # provisório
 
     prontuario: Mapped['Prontuario'] = relationship(back_populates='historico_exames')

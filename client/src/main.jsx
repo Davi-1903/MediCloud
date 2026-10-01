@@ -8,13 +8,10 @@ import NotFound from './pages/errors/404';
 const Register = lazy(() => import('./pages/unprotected/register'));
 const Login = lazy(() => import('./pages/unprotected/login'));
 const Scheduling = lazy(() => import('./pages/protected/scheduling'));
-<<<<<<< HEAD
 const DashAdmin = lazy(() => import('./pages/protected/dash'));
-=======
 const RegisterDoctor = lazy(() => import('./pages/unprotected/register_doctor'));
 const About = lazy(() => import('./pages/unprotected/about'));
 const HomeDoctor = lazy(() => import('./pages/protected/doctor'));
->>>>>>> main
 
 const router = createBrowserRouter([
     {
@@ -38,17 +35,12 @@ const router = createBrowserRouter([
         element: <Scheduling />,
     },
     {
-<<<<<<< HEAD
-        path: 'dash',
+        path: 'dash/admin',
         element: <DashAdmin />,
-=======
-        path: 'about',
-        element: <About />,
     },
     {
         path: 'home/doctor',
         element: <HomeDoctor />,
->>>>>>> main
     },
     {
         path: '*',

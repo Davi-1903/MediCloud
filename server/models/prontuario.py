@@ -9,6 +9,7 @@ if TYPE_CHECKING:
     from models.patient import Patient
     from models.consulta import Consulta
     from models.historico_exames import HistoricoExames
+    from models.prescricao import Prescricao
 
 class SexoType(str, enum.Enum):
     FEMININO = 'feminino'
@@ -31,7 +32,6 @@ class Prontuario(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     patient_id: Mapped[int] = mapped_column(ForeignKey('patients.id'))
-    idade: Mapped[int] = mapped_column(Integer, nullable=False)
     peso: Mapped[float] = mapped_column(Float, nullable=False)
     altura: Mapped[float] = mapped_column(Float, nullable=False)
     alergias: Mapped[str] = mapped_column(Text, nullable=True)
@@ -40,4 +40,5 @@ class Prontuario(Base):
 
     patient: Mapped['Patient'] = relationship(back_populates='prontuario', single_parent=True)
     consultas: Mapped[list['Consulta']] = relationship(back_populates='prontuario', cascade='all, delete-orphan')
+    prescricoes: Mapped[list['Prescricao']] = relationship(back_populates='prontuario', cascade='all, delete-orphan')
     historico_exames: Mapped[list['HistoricoExames']] = relationship(back_populates='prontuario', cascade='all, delete-orphan')

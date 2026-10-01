@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from sqlalchemy import String, ForeignKey
+from sqlalchemy import String, ForeignKey, Text
 from typing import TYPE_CHECKING
 from database import Base
 
@@ -11,9 +11,9 @@ class PrescricaoMedicamento(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     prescricao_id: Mapped[int] = mapped_column(ForeignKey('prescricoes.id'))
-    medicamento: Mapped[str] = mapped_column(String, nullable=False)
-    via: Mapped[str] = mapped_column(String, nullable=False)
-    posologia: Mapped[str] = mapped_column(String, nullable=False)
-    duracao: Mapped[str] = mapped_column(String, nullable=False)
+    medicamento: Mapped[str] = mapped_column(Text, nullable=False)
+    via: Mapped[str] = mapped_column(String(100), nullable=False)
+    posologia: Mapped[str] = mapped_column(String(100), nullable=False)
+    duracao: Mapped[str] = mapped_column(String(100), nullable=False)
 
     prescricao: Mapped['Prescricao'] = relationship(back_populates='prescricao_medicamentos')

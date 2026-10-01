@@ -5,7 +5,16 @@ from sqlalchemy.orm import DeclarativeBase, sessionmaker, Session
 from utils import get_env
 
 
-engine = create_engine(get_env('DATABASE_URI'), connect_args={'check_same_thread': False})
+DATABASE_URI = get_env('DATABASE_URI')
+
+if DATABASE_URI.startswith("sqlite"):
+    engine = create_engine(
+        DATABASE_URI,
+        connect_args={"check_same_thread": False}
+    )
+else:
+    engine = create_engine(DATABASE_URI)
+
 SessionLocal = sessionmaker(bind=engine)
 
 
