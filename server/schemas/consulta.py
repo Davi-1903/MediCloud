@@ -10,6 +10,7 @@ class ConsultaBase(BaseModel):
     medico_id: int
     prontuario_id: int
     agenda_id: int
+    prescricao_id: int
     data: date | None = None
     hora: time | None = None
     temperatura: float | None = None

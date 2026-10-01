@@ -2,7 +2,8 @@ from pydantic import BaseModel, ConfigDict
 
 
 class PrescricaoBase(BaseModel):
-    user_id: int
+    prontuario_id: int
+    consulta_id: int
     medicamento: str
     via: str
     posologia: str
