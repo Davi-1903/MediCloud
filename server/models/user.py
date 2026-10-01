@@ -1,14 +1,8 @@
 import enum
 from datetime import date
-from typing import TYPE_CHECKING
 from sqlalchemy import Date, Enum, Integer, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from database import Base
-
-if TYPE_CHECKING:
-    from models.prontuario import Prontuario
-    from models.prescricao import Prescricao
-    from models.consulta import Consulta
 
 
 class UserType(str, enum.Enum):
