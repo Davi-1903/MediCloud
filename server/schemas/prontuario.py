@@ -4,7 +4,7 @@ from models.prontuario import SangueType, SexoType
 
 
 class ProntuarioBase(BaseModel):
-    user_id: int
+    patient_id: int
     idade: int
     peso: float
     altura: float

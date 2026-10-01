@@ -9,6 +9,7 @@ from models.user import User, UserType
 
 if TYPE_CHECKING:
     from models.agenda import Agenda
+    from models.consulta import Consulta
 
 
 class Status(enum.Enum):
@@ -26,5 +27,6 @@ class Doctor(User):
     status: Mapped[Status] = mapped_column(Enum(Status), default=Status.PENDING, nullable=False)
 
     agenda: Mapped[list['Agenda']] = relationship(back_populates='doctor', cascade='all, delete-orphan')
+    consultas: Mapped[list['Consulta']] = relationship(back_populates='doctor', cascade='all, delete-orphan')
 
     __mapper_args__ = {'polymorphic_identity': UserType.DOCTOR}

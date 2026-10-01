@@ -6,6 +6,6 @@ export default function ProtectedRoute({ children, isPrivate }) {
 
     if (isLoading) return <div className='flex min-h-svh items-center justify-center'>Carregando...</div>;
     if (isPrivate && !isAuthenticated) return <Navigate to='/login' />;
-    if (!isPrivate && isAuthenticated) return <Navigate to='/scheduling' />;
+    if (!isPrivate && isAuthenticated) return <Navigate to='/dash' />;
     return children;
 }

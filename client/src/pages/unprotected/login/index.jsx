@@ -20,7 +20,7 @@ export default function Login() {
             const data = await POST('/api/auth/login', { email, password });
             if (data.status !== 200) throw new Error(data.detail);
             login(data.token);
-            navigate('/scheduling');
+            navigate('/dash');
         } catch (err) {
             alert(err.message);
         }

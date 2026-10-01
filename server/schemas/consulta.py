@@ -6,7 +6,10 @@ from models.consulta import StatusType
 
 
 class ConsultaBase(BaseModel):
-    user_id: int
+    patient_id: int
+    medico_id: int
+    prontuario_id: int
+    agenda_id: int
     data: date | None = None
     hora: time | None = None
     temperatura: float | None = None

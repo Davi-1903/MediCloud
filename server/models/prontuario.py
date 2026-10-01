@@ -1,12 +1,14 @@
 import enum
+from turtle import back
 from typing import TYPE_CHECKING
 from sqlalchemy import Integer, Float, Text, Enum, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from database import Base
 
 if TYPE_CHECKING:
-    from models.user import User
-
+    from models.patient import Patient
+    from models.consulta import Consulta
+    from models.historico_exames import HistoricoExames
 
 class SexoType(str, enum.Enum):
     FEMININO = 'feminino'
@@ -28,7 +30,7 @@ class Prontuario(Base):
     __tablename__ = 'prontuarios'
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    user_id: Mapped[int] = mapped_column(ForeignKey('users.id'))
+    patient_id: Mapped[int] = mapped_column(ForeignKey('patients.id'))
     idade: Mapped[int] = mapped_column(Integer, nullable=False)
     peso: Mapped[float] = mapped_column(Float, nullable=False)
     altura: Mapped[float] = mapped_column(Float, nullable=False)
@@ -36,4 +38,6 @@ class Prontuario(Base):
     sexo: Mapped[str] = mapped_column(Enum(SexoType), nullable=True)
     tipo_sanguineo: Mapped[str] = mapped_column(Enum(SangueType), nullable=True)
 
-    user: Mapped['User'] = relationship(back_populates='prontuario', single_parent=True)
+    patient: Mapped['Patient'] = relationship(back_populates='prontuario', single_parent=True)
+    consultas: Mapped[list['Consulta']] = relationship(back_populates='prontuario', cascade='all, delete-orphan')
+    historico_exames: Mapped[list['HistoricoExames']] = relationship(back_populates='prontuario', cascade='all, delete-orphan')
