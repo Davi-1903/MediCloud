@@ -15,7 +15,7 @@ export default function About() {
                         <p className='font-secundary min-w-100 px-10 leading-relaxed font-medium text-black/60 sm:text-lg md:text-xl'>
                             O medicloud é uma plataforma de saúde digital que conecta{' '}
                             <strong className='text-color4'>pacientes e médicos</strong> em um só lugar, tornando o
-                            agendamento de consultas, exames e o acompanhamento clínico 
+                            agendamento de consultas, exames e o acompanhamento clínico
                             <strong className='text-color4'>mais simples, rápido e acessível</strong>.
                         </p>
                         <p className='font-secundary min-w-100 px-10 leading-relaxed font-medium text-black/60 sm:text-lg md:text-xl'>
@@ -42,7 +42,7 @@ export default function About() {
                         </h2>
                         <div>
                             <p className='border-l-[3px] border-slate-200 pl-[25px] leading-relaxed text-black/60 transition-all duration-100 group-hover:border-color4 sm:text-lg md:text-xl'>
-                                Agende <strong className='text-color4'>consultas e exames</strong> em poucos cliques,
+                                Agende <strong className='text-color4'>consultas e exames</strong> em poucos cliques,
                                 acompanhe seu histórico médico, receba lembretes e acesse suas receitas e resultados
                                 sempre que precisar.
                             </p>
@@ -59,7 +59,7 @@ export default function About() {
                         </h2>
                         <div>
                             <p className='border-l-[3px] border-slate-200 pl-[25px] leading-relaxed text-black/60 transition-all duration-100 group-hover:border-color4 sm:text-lg md:text-xl'>
-                                O medicloud quer <strong className='text-color4'>aproximar a saúde das pessoas</strong>.
+                                O medicloud quer <strong className='text-color4'>aproximar a saúde das pessoas</strong>.
                                 Nossa missão é dar a pacientes e profissionais de saúde as ferramentas necessárias para
                                 um cuidado mais ágil, organizado e humano.
                             </p>

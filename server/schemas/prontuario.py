@@ -5,7 +5,6 @@ from models.prontuario import SangueType, SexoType
 
 class ProntuarioBase(BaseModel):
     patient_id: int
-    idade: int
     peso: float
     altura: float
     alergias: str | None = None

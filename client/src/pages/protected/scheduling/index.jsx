@@ -4,8 +4,12 @@ import ProtectedRoute from '../../../components/protectedRoute';
 import { IconChevronRight } from '@tabler/icons-react';
 import Footer from '../../../components/footer';
 
+const mockup = {
+    medicos: { 1: {'name': 'lucas', 'specialty': 'cardiologista'}, 2: {'name': 'anna carla', 'specialty': 'cardiologista'} },
+};
+
 export default function Scheduling() {
-    const [medicoSelecionado, setMedicoSelecionado] = useState('lucas');
+    const [medicoSelecionado, setMedicoSelecionado] = useState(mockup.medicos['lucas']);
     const [diaSelecionado, setDiaSelecionado] = useState('segunda');
 
     return (
@@ -47,9 +51,11 @@ export default function Scheduling() {
                         <h2 className='mb-3 text-lg font-semibold'>Escolha um médico</h2>
                         <div className='flex items-center gap-5'>
                             <div
-                                onClick={() => setMedicoSelecionado('lucas')}
+                                onClick={() => setMedicoSelecionado(mockup.medicos['lucas'])}
                                 className={`flex w-80 cursor-pointer items-center gap-3 rounded-lg border bg-white p-2 ${
-                                    medicoSelecionado === 'lucas' ? 'border-[#EB536D]' : 'border-gray-400'
+                                    medicoSelecionado === mockup.medicos['lucas']
+                                        ? 'border-[#EB536D]'
+                                        : 'border-gray-400'
                                 }`}
                             >
                                 <div className='h-24 w-16 rounded-4xl bg-[#ffd1da] object-cover'></div>
@@ -60,7 +66,7 @@ export default function Scheduling() {
 
                                     <span
                                         className={`mt-1 w-fit rounded-full px-2 py-1 text-xs font-medium ${
-                                            medicoSelecionado === 'lucas'
+                                            medicoSelecionado === mockup.medicos['lucas']
                                                 ? 'bg-[#FFE5EA] text-[#EB536D]'
                                                 : 'bg-gray-300 text-gray-600'
                                         }`}
@@ -71,9 +77,11 @@ export default function Scheduling() {
                             </div>
 
                             <div
-                                onClick={() => setMedicoSelecionado('anna carla')}
+                                onClick={() => setMedicoSelecionado(mockup.medicos['anna carla'])}
                                 className={`flex w-80 cursor-pointer items-center gap-3 rounded-lg border bg-white p-2 ${
-                                    medicoSelecionado === 'anna carla' ? 'border-[#EB536D]' : 'border-gray-400'
+                                    medicoSelecionado === mockup.medicos['anna carla']
+                                        ? 'border-[#EB536D]'
+                                        : 'border-gray-400'
                                 }`}
                             >
                                 <div className='h-24 w-16 rounded-4xl bg-[#ffd1da] object-cover'></div>
@@ -84,7 +92,7 @@ export default function Scheduling() {
 
                                     <span
                                         className={`mt-1 w-fit rounded-full px-2 py-1 text-xs font-medium ${
-                                            medicoSelecionado === 'anna carla'
+                                            medicoSelecionado === mockup.medicos['anna carla']
                                                 ? 'bg-[#FFE5EA] text-[#EB536D]'
                                                 : 'bg-gray-300 text-gray-600'
                                         }`}
@@ -235,4 +243,30 @@ export default function Scheduling() {
             </div>
         </ProtectedRoute>
     );
+}
+
+function CardMedico({ medico, medicoSelecionado, setMedicoSelecionado }) {
+    <div
+        onClick={() => setMedicoSelecionado(medico.id)}
+        className={`flex w-80 cursor-pointer items-center gap-3 rounded-lg border bg-white p-2 ${
+            medicoSelecionado === mockup.medicos['anna carla'] ? 'border-[#EB536D]' : 'border-gray-400'
+        }`}
+    >
+        <div className='h-24 w-16 rounded-4xl bg-[#ffd1da] object-cover'></div>
+
+        <div className='flex flex-col'>
+            <h3 className='text-sm font-semibold text-gray-800'>{medico.name}</h3>
+            <span className='mb-1 text-xs text-[#EB536D]'>{medico.specialty}</span>
+
+            <span
+                className={`mt-1 w-fit rounded-full px-2 py-1 text-xs font-medium ${
+                    medicoSelecionado === mockup.medicos['anna carla']
+                        ? 'bg-[#FFE5EA] text-[#EB536D]'
+                        : 'bg-gray-300 text-gray-600'
+                }`}
+            >
+                Próximos horários amanhã
+            </span>
+        </div>
+    </div>;
 }
