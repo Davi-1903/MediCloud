@@ -1,16 +1,19 @@
 import enum
-from typing import TYPE_CHECKING
 from datetime import date, time
+from typing import TYPE_CHECKING
+
+from sqlalchemy import Date, Enum, Float, ForeignKey, String, Text, Time
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from sqlalchemy import Date, Time, Enum, Float, String, Text, ForeignKey
+
 from database import Base
 
+
 if TYPE_CHECKING:
-    from models.patient import Patient
     from models.agenda import Agenda
     from models.doctor import Doctor
-    from models.prontuario import Prontuario
+    from models.patient import Patient
     from models.prescricao import Prescricao
+    from models.prontuario import Prontuario
 
 
 class StatusType(str, enum.Enum):

@@ -1,16 +1,16 @@
-from datetime import time
 import enum
+from datetime import time
 from typing import TYPE_CHECKING
 
-from sqlalchemy import ForeignKey, Enum, Time
+from sqlalchemy import Enum, ForeignKey, Time
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from database import Base
 
 
 if TYPE_CHECKING:
-    from models.doctor import Doctor
     from models.consulta import Consulta
+    from models.doctor import Doctor
 
 
 class Days(enum.Enum):

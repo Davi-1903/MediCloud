@@ -1,7 +1,9 @@
 from collections.abc import Generator
 from typing import Any
+
 from sqlalchemy import create_engine
-from sqlalchemy.orm import DeclarativeBase, sessionmaker, Session
+from sqlalchemy.orm import DeclarativeBase, Session, sessionmaker
+
 from utils import get_env
 
 

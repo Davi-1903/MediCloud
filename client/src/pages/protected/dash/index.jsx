@@ -6,10 +6,14 @@ export default function DashAdmin() {
         <ProtectedRoute isPrivate={true}>
             <Header />
 
-            <main className='flex flex-col h-svh w-svw bg-color5 pt-40 p-10 items-center'>
-                <div className='flex flex-col shadow-2xl bg-white w-400 h-full rounded-2xl'>
+            <main className='bg-color5 flex h-svh w-svw flex-col items-center p-10 pt-40'>
+                <div className='flex h-full w-400 flex-col rounded-2xl bg-white shadow-2xl'>
                     <div className='w-full p-5'>
-                        <input type="text" name="texto" placeholder='Busca por texto...' />
+                        <input
+                            type='text'
+                            name='texto'
+                            placeholder='Busca por texto...'
+                        />
                     </div>
                 </div>
             </main>
