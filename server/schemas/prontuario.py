@@ -4,12 +4,11 @@ from models.prontuario import SangueType, SexoType
 
 
 class ProntuarioBase(BaseModel):
-    patient_id: int
     peso: float
     altura: float
     alergias: str | None = None
-    sexo: SexoType | None = None
-    tipo_sanguineo: SangueType | None = None
+    sexo: SexoType
+    tipo_sanguineo: SangueType
 
 
 class ProntuarioCreate(ProntuarioBase):
@@ -19,3 +18,11 @@ class ProntuarioCreate(ProntuarioBase):
 class ProntuarioRead(ProntuarioBase):
     model_config = ConfigDict(from_attributes=True)
     id: int
+
+
+class ProntuarioUpdate(BaseModel):
+    peso: float | None = None
+    altura: float | None = None
+    alergias: str | None = None
+    sexo: SexoType | None = None
+    tipo_sanguineo: SangueType | None = None

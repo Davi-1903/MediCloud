@@ -14,6 +14,7 @@ if TYPE_CHECKING:
 class SexoType(str, enum.Enum):
     FEMININO = 'feminino'
     MASCULINO = 'masculino'
+    NULO = 'Não informado'
 
 
 class SangueType(str, enum.Enum):
@@ -25,6 +26,7 @@ class SangueType(str, enum.Enum):
     AB_NEGATIVO = 'AB-'
     O_POSITIVO = 'O+'
     O_NEGATIVO = 'O-'
+    NULO = 'Não informado'
 
 
 class Prontuario(Base):
@@ -34,9 +36,9 @@ class Prontuario(Base):
     patient_id: Mapped[int] = mapped_column(ForeignKey('patients.id'))
     peso: Mapped[float] = mapped_column(Float, nullable=False)
     altura: Mapped[float] = mapped_column(Float, nullable=False)
-    alergias: Mapped[str] = mapped_column(Text, nullable=True)
-    sexo: Mapped[str] = mapped_column(Enum(SexoType), nullable=True)
-    tipo_sanguineo: Mapped[str] = mapped_column(Enum(SangueType), nullable=True)
+    alergias: Mapped[str | None] = mapped_column(Text, nullable=True)
+    sexo: Mapped[SexoType] = mapped_column(Enum(SexoType), nullable=False)
+    tipo_sanguineo: Mapped[SangueType] = mapped_column(Enum(SangueType), nullable=False)
 
     patient: Mapped['Patient'] = relationship(back_populates='prontuario', single_parent=True)
     consultas: Mapped[list['Consulta']] = relationship(back_populates='prontuario', cascade='all, delete-orphan')
