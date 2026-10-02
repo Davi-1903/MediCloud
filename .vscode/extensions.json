@@ -4,6 +4,7 @@
         "charliermarsh.ruff",
         "esbenp.prettier-vscode",
         "dbaeumer.vscode-eslint",
-        "bradlc.vscode-tailwindcss"
+        "bradlc.vscode-tailwindcss",
+        "alefragnani.Bookmarks"
     ]
 }

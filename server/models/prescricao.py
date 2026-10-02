@@ -1,12 +1,15 @@
 from typing import TYPE_CHECKING
-from sqlalchemy import ForeignKey, String, Integer, Text
-from sqlalchemy.orm import mapped_column, Mapped, relationship
+
+from sqlalchemy import ForeignKey, Integer, String, Text
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+
 from database import Base
 
+
 if TYPE_CHECKING:
-    from models.prontuario import Prontuario
     from models.consulta import Consulta
     from models.prescricao_medicamento import PrescricaoMedicamento
+    from models.prontuario import Prontuario
 
 
 class Prescricao(Base):

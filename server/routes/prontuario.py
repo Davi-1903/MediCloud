@@ -1,14 +1,17 @@
-from typing import Annotated
 from collections.abc import Sequence
+from typing import Annotated
+
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import select
 from sqlalchemy.orm import Session
+
 from database import get_session
 from models.consulta import Consulta
 from models.doctor import Doctor
 from models.prontuario import Prontuario
 from models.user import User, UserType
 from schemas.prontuario import ProntuarioCreate, ProntuarioRead
+
 from .user import get_current_user
 
 

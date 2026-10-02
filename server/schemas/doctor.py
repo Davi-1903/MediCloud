@@ -1,6 +1,5 @@
 from models.doctor import Status
 from schemas.user import UserCreate, UserRead
-from models.doctor import Status
 
 
 class DoctorRead(UserRead):

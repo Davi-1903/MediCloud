@@ -9,6 +9,7 @@ from database import get_session
 from models.agenda import Agenda
 from models.user import User, UserType
 from schemas.agenda import AgendaCreate, AgendaRead
+
 from .user import get_current_user
 
 

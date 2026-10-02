@@ -1,5 +1,9 @@
 {
 	"editor.formatOnSave": true,
+	"python.analysis.autoImportCompletions": true,
+	"python.analysis.typeCheckingMode": "standard",
+	"python-envs.defaultEnvManager": "ms-python.python:venv",
+	"bookmarks.saveBookmarksInProject": true,
 	"[javascript]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
@@ -10,8 +14,9 @@
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
 	"[python]": {
-		"editor.defaultFormatter": "charliermarsh.ruff"
-	},
-	"python.analysis.autoImportCompletions": true,
-	"python.analysis.typeCheckingMode": "standard"
+		"editor.defaultFormatter": "charliermarsh.ruff",
+		"editor.codeActionsOnSave": {
+			"source.organizeImports.ruff": "always"
+		}
+	}
 }
