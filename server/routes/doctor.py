@@ -1,12 +1,14 @@
-from fastapi import APIRouter, Depends, HTTPException, Response
-from sqlalchemy.orm import Session
-from sqlalchemy.exc import IntegrityError
-from database import get_session
 from typing import Annotated
+
+from fastapi import APIRouter, Depends, HTTPException, Response
+from sqlalchemy.exc import IntegrityError
+from sqlalchemy.orm import Session
+
+from database import get_session
 from models.doctor import Doctor
+from routes.auth import Token, ph, set_refresh_cookie
 from schemas.doctor import DoctorCreate
 from utils import create_access_token, create_refresh_token
-from routes.auth import Token, ph, set_refresh_cookie
 
 
 router = APIRouter(prefix='/doctors', tags=['doctors'])

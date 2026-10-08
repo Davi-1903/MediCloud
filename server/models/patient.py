@@ -1,7 +1,10 @@
 from typing import TYPE_CHECKING
+
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
+
 from models.user import User, UserType
+
 
 if TYPE_CHECKING:
     from models.consulta import Consulta

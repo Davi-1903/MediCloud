@@ -1,14 +1,17 @@
 import enum
 from turtle import back
 from typing import TYPE_CHECKING
-from sqlalchemy import Integer, Float, Text, Enum, ForeignKey
+
+from sqlalchemy import Enum, Float, ForeignKey, Integer, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
+
 from database import Base
 
+
 if TYPE_CHECKING:
-    from models.patient import Patient
     from models.consulta import Consulta
     from models.historico_exames import HistoricoExames
+    from models.patient import Patient
     from models.prescricao import Prescricao
 
 class SexoType(str, enum.Enum):

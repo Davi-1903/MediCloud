@@ -17,7 +17,7 @@ dependencies = [
 
 [dependency-groups]
 dev = [
-    "ruff==0.15.20",
+    "ruff==0.16.8",
 ]
 
 [tool.ruff]
@@ -26,3 +26,6 @@ line-length = 120
 
 [tool.ruff.format]
 quote-style = "single"
+
+[tool.ruff.lint.isort]
+lines-after-imports = 2

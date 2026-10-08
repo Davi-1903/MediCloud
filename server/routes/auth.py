@@ -1,13 +1,15 @@
+from typing import Annotated
+
 from fastapi import APIRouter, Depends, HTTPException, Request, Response
+from pwdlib import PasswordHash
 from pydantic import BaseModel, EmailStr
 from sqlalchemy import select
-from database import get_session
-from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
+from sqlalchemy.orm import Session
+
+from database import get_session
 from models.patient import Patient
 from models.user import User
-from typing import Annotated
-from pwdlib import PasswordHash
 from schemas.patient import PatientCreate
 from utils import create_access_token, create_refresh_token, decode_refresh_token
 

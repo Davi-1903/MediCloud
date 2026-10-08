@@ -1,4 +1,5 @@
 from . import (
+    administrator,
     agenda,
     consulta,
     doctor,
@@ -8,7 +9,6 @@ from . import (
     prescricao_medicamento,
     prontuario,
     user,
-    administrator,
 )
 
 
