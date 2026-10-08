@@ -12,6 +12,7 @@ const DashAdmin = lazy(() => import('./pages/protected/dash'));
 const RegisterDoctor = lazy(() => import('./pages/unprotected/register_doctor'));
 const About = lazy(() => import('./pages/unprotected/about'));
 const HomeDoctor = lazy(() => import('./pages/protected/doctor'));
+const MedicalRecord = lazy(() => import('./pages/protected/record'));
 
 const router = createBrowserRouter([
     {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
     {
         path: 'home/doctor',
         element: <HomeDoctor />,
+    },
+    {
+        path: 'record',
+        element: <MedicalRecord />
     },
     {
         path: '*',

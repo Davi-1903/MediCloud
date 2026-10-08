@@ -69,6 +69,16 @@ export default function Header() {
                                 </NavLink>
                             </li>
                             <li>
+                                <NavLink
+                                    to='/record'
+                                    className={({ isActive }) =>
+                                        `rounded-lg px-3 py-2.5 text-lg font-medium text-color4 ${isActive ? 'bg-color4 text-white' : ''}`
+                                    }
+                                >
+                                    Prontuário
+                                </NavLink>
+                            </li>
+                            <li>
                                 <NavLink onClick={handleLogout}>
                                     <IconLogout
                                         size={28}
