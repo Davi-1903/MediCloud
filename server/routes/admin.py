@@ -9,6 +9,7 @@ from models.doctor import Doctor, Status
 from models.user import User, UserType
 from routes.user import get_current_user
 from schemas.doctor import DoctorCreate
+from sqlalchemy import select
 
 
 router = APIRouter(prefix='/admin', tags=['admin'])
@@ -55,3 +56,25 @@ def deny_doctor(session: SessionDep, doctor_id: int, user: Annotated[User, Depen
 
     except IntegrityError:
         raise HTTPException(status_code=400, detail='Erro de integridade ocorreu')
+
+@router.get('/doctors')
+def list_doctors(session: SessionDep, user: Annotated[User, Depends(get_current_user)]):
+    if not user or user.type != UserType.ADMIN:
+        raise HTTPException(status_code=403, detail='Acesso negado')
+
+    try:
+        doctors = session.scalars(select(Doctor)).all()
+        return [
+            {
+                'id': d.id,
+                'name': d.name,
+                'email': d.email,
+                'specialty': d.specialty,
+                'crm': d.crm,
+                'status':  d.status.name,
+            }
+            for d in doctors
+        ]
+
+    except OperationalError:
+        raise HTTPException(status_code=500, detail='Erro na conexão com o banco de dados')
