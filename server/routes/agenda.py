@@ -35,6 +35,7 @@ def create_agenda(session: SessionDep, user: Annotated[User, Depends(get_current
             start_time=agenda.start_time,
             end_time=agenda.end_time,
             doctor_id=user.id,
+            type=agenda.type,
         )
         session.add(new_agenda)
         session.commit()

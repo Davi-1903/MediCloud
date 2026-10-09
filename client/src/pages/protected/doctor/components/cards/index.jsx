@@ -13,7 +13,7 @@ export default function Cards() {
             ),
             title: 'Cadastrar horários',
             description: 'Cadastre horários para as consultas',
-            link: { name: 'Agendar', url: '#' },
+            link: { name: 'Agendar', url: '/schedule/doctor' },
         },
         {
             id: 2,

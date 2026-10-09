@@ -1,13 +1,11 @@
 let horarios = [];
-let proximoId = 1;
 const espera = valor => new Promise(ok => setTimeout(() => ok(valor), 200));
 
 export const listarHorarios = () => espera([...horarios]);
 
 export const criarHorario = dados => {
-    const novo = { id: proximoId++, ...dados };
-    horarios.push(novo);
-    return espera(novo);
+    horarios.push(dados);
+    return espera(dados);
 };
 
 export const atualizarHorario = (id, dados) => {
