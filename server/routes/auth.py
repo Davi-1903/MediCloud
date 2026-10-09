@@ -10,6 +10,7 @@ from sqlalchemy.orm import Session
 from database import get_session
 from models.patient import Patient
 from models.user import User
+from models.prontuario import Prontuario
 from schemas.patient import PatientCreate
 from utils import create_access_token, create_refresh_token, decode_refresh_token
 
@@ -64,10 +65,20 @@ def login(session: SessionDep, user_input: UserLogin, response: Response):
 @router.post('/register', response_model=Token, status_code=201)
 def register(session: SessionDep, user_input: PatientCreate, response: Response):
     try:
-        user = Patient(name=user_input.name, email=user_input.email, password=ph.hash(user_input.password))
+        user = Patient(
+            name=user_input.name,
+            email=user_input.email,
+            password=ph.hash(user_input.password),
+        )
         session.add(user)
-        session.commit()
-        session.refresh(user)  # garante id e type carregados
+        session.flush()  
+
+        new_prontuario = Prontuario(patient_id=user.id)
+        session.add(new_prontuario)
+
+        session.commit()  
+        session.refresh(user)
+        session.refresh(new_prontuario)
 
         set_refresh_cookie(response, create_refresh_token({'sub': str(user.id)}))
         return build_token_response(user)
