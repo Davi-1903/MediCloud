@@ -2,7 +2,6 @@ from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer
-from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from database import get_session
@@ -18,11 +17,15 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl='/api/auth/login')
 
 def get_current_user(session: SessionDep, token: Annotated[str, Depends(oauth2_scheme)]) -> User:
     try:
-        email = decode_access_token(token)
+        sub = decode_access_token(token)
     except HTTPException:
         raise HTTPException(status_code=401, detail='Token inválido')
 
-    user = session.scalar(select(User).where(User.email == email))
+    try:
+        user = session.get(User, int(sub))
+    except ValueError:  # token antigo, com email no sub
+        user = None
+
     if not user:
         raise HTTPException(status_code=401, detail='Usuário não encontrado')
     return user

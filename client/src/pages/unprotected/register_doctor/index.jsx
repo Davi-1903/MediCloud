@@ -43,7 +43,7 @@ export default function RegisterDoctor() {
         e.preventDefault();
 
         try {
-            const data = await POST('/api/doctors/register', { name, email, password, crm, specialty });
+            const data = await POST('/api/doctors/register', { name, email, password, crm, specialty, uf });
             if (data.status !== 201) throw new Error(data.detail);
             login(data.token);
             navigate('/scheduling');

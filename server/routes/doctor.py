@@ -24,6 +24,7 @@ def register_doctor(session: SessionDep, doctor_input: DoctorCreate, response: R
             password=ph.hash(doctor_input.password),
             specialty=doctor_input.specialty,
             crm=doctor_input.crm,
+            uf=doctor_input.uf,
         )
         session.add(doctor)
         session.commit()
@@ -31,7 +32,7 @@ def register_doctor(session: SessionDep, doctor_input: DoctorCreate, response: R
         refresh_token = create_refresh_token({'sub': doctor.id})
         set_refresh_cookie(response, refresh_token)
 
-        return {'token': create_access_token({'sub': doctor_input.email}), 'token_type': 'bearer'}
+        return {'token': create_access_token({'sub': doctor_input.email}), 'token_type': 'bearer',  "role": "doctor",}
 
     except IntegrityError:
         session.rollback()

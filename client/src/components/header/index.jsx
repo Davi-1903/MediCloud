@@ -1,16 +1,22 @@
-import { NavLink, useNavigate } from 'react-router-dom';
 import { IconLogout } from '@tabler/icons-react';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuthenticated } from '../../context/authContext';
+import { NAV_BY_ROLE } from '../../utils/roles';
 import Logo from '/assets/images/logo.svg';
 
+const linkClass = ({ isActive }) =>
+    `rounded-lg px-3 py-2.5 text-lg font-medium text-color4 ${isActive ? 'bg-color4 text-white' : ''}`;
+
 export default function Header() {
-    const { isAuthenticated, logout } = useAuthenticated();
+    const { isAuthenticated, role, logout } = useAuthenticated();
     const navigate = useNavigate();
 
-    function handleLogout() {
+    const links = isAuthenticated ? (NAV_BY_ROLE[role] ?? []) : [];
+
+    async function handleLogout() {
         if (!confirm('Deseja sair da sua conta?')) return;
 
-        logout();
+        await logout();
         navigate('/login');
     }
 
@@ -28,9 +34,7 @@ export default function Header() {
                             <li>
                                 <NavLink
                                     to='/login'
-                                    className={({ isActive }) =>
-                                        `rounded-lg px-3 py-2.5 text-lg font-medium text-color4 ${isActive ? 'bg-color4 text-white' : ''}`
-                                    }
+                                    className={linkClass}
                                 >
                                     Login
                                 </NavLink>
@@ -38,9 +42,7 @@ export default function Header() {
                             <li>
                                 <NavLink
                                     to='/register'
-                                    className={({ isActive }) =>
-                                        `rounded-lg px-3 py-2.5 text-lg font-medium text-color4 ${isActive ? 'bg-color4 text-white' : ''} `
-                                    }
+                                    className={linkClass}
                                 >
                                     Cadastrar
                                 </NavLink>
@@ -48,9 +50,7 @@ export default function Header() {
                             <li>
                                 <NavLink
                                     to='/about'
-                                    className={({ isActive }) =>
-                                        `rounded-lg px-3 py-2.5 text-lg font-medium text-color4 ${isActive ? 'bg-color4 text-white' : ''} `
-                                    }
+                                    className={linkClass}
                                 >
                                     Sobre
                                 </NavLink>
@@ -58,23 +58,28 @@ export default function Header() {
                         </>
                     ) : (
                         <>
+                            {links.map(link => (
+                                <li key={link.to}>
+                                    <NavLink
+                                        to={link.to}
+                                        className={linkClass}
+                                    >
+                                        {link.label}
+                                    </NavLink>
+                                </li>
+                            ))}
                             <li>
-                                <NavLink
-                                    to='/scheduling'
-                                    className={({ isActive }) =>
-                                        `rounded-lg px-3 py-2.5 text-lg font-medium text-color4 ${isActive ? 'bg-color4 text-white' : ''}`
-                                    }
+                                <button
+                                    type='button'
+                                    onClick={handleLogout}
+                                    aria-label='Sair da conta'
+                                    className='cursor-pointer'
                                 >
-                                    Agendamento
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink onClick={handleLogout}>
                                     <IconLogout
                                         size={28}
                                         className='stroke-color4'
                                     />
-                                </NavLink>
+                                </button>
                             </li>
                         </>
                     )}

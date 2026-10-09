@@ -25,6 +25,7 @@ class Doctor(User):
     specialty: Mapped[str] = mapped_column(String(100), nullable=False)
     crm: Mapped[str] = mapped_column(String(50), index=True, nullable=False)
     status: Mapped[Status] = mapped_column(Enum(Status), default=Status.PENDING, nullable=False)
+    uf: Mapped[str] = mapped_column(String(2))
 
     agenda: Mapped[list['Agenda']] = relationship(back_populates='doctor', cascade='all, delete-orphan')
     consultas: Mapped[list['Consulta']] = relationship(back_populates='doctor', cascade='all, delete-orphan')

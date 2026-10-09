@@ -4,34 +4,46 @@ import { setAccessToken, tryRefresh } from '../api/user';
 const AuthenticatedContext = createContext({
     isAuthenticated: false,
     isLoading: true,
+    role: null,
     login: () => {},
     logout: () => {},
 });
 
 export function AuthenticatedProvider({ children }) {
     const [isAuthenticated, setAuthenticated] = useState(false);
+    const [role, setRole] = useState(null);
     const [isLoading, setLoading] = useState(true);
 
-    const login = token => {
+    // recebe o objeto da resposta do backend: { token, role }
+    const login = ({ token, role }) => {
         setAccessToken(token);
+        setRole(role);
         setAuthenticated(true);
+    };
+
+    const clearSession = () => {
+        setAccessToken(null);
+        setRole(null);
+        setAuthenticated(false);
     };
 
     const logout = async () => {
         await fetch('/api/auth/logout', { method: 'POST', credentials: 'include' });
-        setAccessToken(null);
-        setAuthenticated(false);
+        clearSession();
     };
 
     useEffect(() => {
         tryRefresh()
-            .then(token => setAuthenticated(Boolean(token)))
-            .catch(() => setAuthenticated(false))
+            .then(data => {
+                if (data?.token) login(data);
+                else clearSession();
+            })
+            .catch(clearSession)
             .finally(() => setLoading(false));
     }, []);
 
     return (
-        <AuthenticatedContext.Provider value={{ isAuthenticated, isLoading, login, logout }}>
+        <AuthenticatedContext.Provider value={{ isAuthenticated, isLoading, role, login, logout }}>
             {children}
         </AuthenticatedContext.Provider>
     );

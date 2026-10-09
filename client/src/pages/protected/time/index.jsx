@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState } from 'react';
-import Header from '../../../../../components/header';
-import ProtectedRoute from '../../../../../components/protectedRoute';
-import Footer from '../../../../../components/footer';
+import Header from '../../../components/header';
+import ProtectedRoute from '../../../components/protectedRoute';
+import Footer from '../../../components/footer';
 import {IconCalendar,IconChevronDown,IconClock,IconPencil,IconTrash,IconUser} from '@tabler/icons-react';
-import { listarHorarios, criarHorario, atualizarHorario, excluirHorario } from '../../../../../api/horarios';
+import { listarHorarios, criarHorario, atualizarHorario, excluirHorario } from '../../../api/horarios';
 
 const DIAS = ['Domingo', 'Segunda-Feira', 'Terça-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sábado'];
 const TIPOS = ['Consulta Presencial', 'Consulta Online'];
@@ -14,10 +14,10 @@ const HORAS = Array.from({ length: 25 }, (_, i) => {
 const VAZIO = { data: '', inicio: '', fim: '', tipo: '' };
 
 const campo =
-    'w-full cursor-pointer appearance-none rounded-lg border border-gray-400 bg-white py-1.5 pl-9 pr-8 text-xs text-gray-700 focus:border-[#EB536D] focus:outline-none';
+    'w-full cursor-pointer appearance-none rounded-lg border border-gray-400 bg-white py-1.5 pl-9 pr-8 text-md text-gray-700 focus:border-[#EB536D] focus:outline-none';
 const iconeEsquerda = 'pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[#EB536D]';
 const iconeDireita = 'pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-600';
-const rotulo = 'mb-1 block text-xs font-medium';
+const rotulo = 'mb-1 block text-md font-medium';
 const botaoRedondo =
     'flex h-7 w-7 cursor-pointer items-center justify-center rounded-full bg-[#FFE5EA] text-gray-800 hover:bg-[#f7c6ce]';
 
@@ -101,25 +101,31 @@ export default function Horarios() {
                 <Header />
                 <main className='mx-auto mt-24 flex w-full max-w-6xl flex-col gap-3 px-4 pb-6'>
                     <section className='rounded-2xl bg-white p-3 shadow-md'>
-                        <div className='grid gap-3 rounded-xl border border-gray-400 px-5 py-2.5 md:grid-cols-2'>
-                            <div className='flex items-center gap-3'>
-                                <div className='flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-gray-800 bg-[#FFE5EA]'>
-                                    <IconUser size={22} />
+                        <div className='flex gap-6 rounded-xl border justify-between border-gray-400 px-7 py-3.5  flex-wrap w-full'>
+                            <div className='flex items-center gap-3 flex-wrap'>
+                                <div className='flex h-18 w-18  items-center justify-center rounded-full border border-gray-800 bg-[#FFE5EA]'>
+                                    <IconUser size={38} />
                                 </div>
-                                <div className='text-xs leading-relaxed text-gray-800'>
-                                    <b className='block text-sm font-semibold'>Nome: {medico.nome}</b>
-                                    <strong>Email:</strong> {medico.email}
-                                    <br />
-                                    <strong>{medico.especialidade} &nbsp; CRM:</strong> {medico.crm}
+                                <div className=' leading-relaxed text-gray-800'>
+                                    
+                                    <p className='text-lg font-semibold'>Nome: {medico.nome}</p>
+                                    <div className='flex text-md gap-1'>
+                                        <p className='text-md font-bold'>Email: </p>
+                                        <p>{medico.email}</p>
+                                    </div>
+                                    <div className='flex text-md gap-10'>
+                                        <p className='text-md font-bold'>{medico.especialidade}</p>
+                                        <p><strong>CRM: </strong>{medico.crm}</p>
+                                    </div>
                                 </div>
                             </div>
-                            <div className='flex items-center gap-3'>
-                                <div className='flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#FFE5EA] text-[#EB536D]'>
-                                    <IconCalendar size={22} />
+                            <div className='flex items-center gap-3 flex-wrap'>
+                                <div className='flex h-16 w-16 items-center justify-center rounded-full bg-[#FFE5EA] text-[#EB536D]'>
+                                    <IconCalendar size={25} />
                                 </div>
                                 <div>
-                                    <h1 className='text-sm font-semibold'>Cadastro de Horários</h1>
-                                    <p className='text-xs text-gray-600'>
+                                    <h1 className='text-lg font-semibold'>Cadastro de Horários</h1>
+                                    <p className='text-md text-gray-600'>
                                         Defina os dias e horários disponíveis para seus atendimentos
                                     </p>
                                 </div>
@@ -128,7 +134,7 @@ export default function Horarios() {
                     </section>
 
                     <section className='bg-white/60 px-4 pb-5'>
-                        <h2 className='mb-4 inline-block rounded-b-lg bg-white px-5 py-1 text-xs font-semibold shadow'>
+                        <h2 className='mb-4 inline-block rounded-b-lg bg-white px-5 py-1 text-md font-semibold shadow'>
                             {editandoId ? 'Editar Horário de Atendimento' : 'Novo Horário de Atendimento'}
                         </h2>
 
@@ -136,7 +142,7 @@ export default function Horarios() {
                             id='form-horario'
                             onSubmit={salvar}
                             noValidate
-                            className='grid grid-cols-1 items-end gap-3 min-[560px]:grid-cols-2 lg:grid-cols-[repeat(4,1fr)_auto]'
+                            className='grid grid-cols-1 items-end gap-3 min-[560px]:grid-cols-2 lg:grid-cols-[repeat(4,1fr)_auto] '
                         >
                             <div>
                                 <label htmlFor='data' className={rotulo}>Data</label>
@@ -152,7 +158,7 @@ export default function Horarios() {
                                         }`}
                                     />
                                     {!form.data && (
-                                        <span className='pointer-events-none absolute left-9 top-1/2 -translate-y-1/2 text-xs text-gray-700'>
+                                        <span className='pointer-events-none absolute left-9 top-1/2 -translate-y-1/2 text-md text-gray-700'>
                                             Selecione a data
                                         </span>
                                     )}
@@ -162,10 +168,10 @@ export default function Horarios() {
 
                             <div>
                                 <label htmlFor='inicio' className={rotulo}>Horário de início</label>
-                                <div className='relative max-w-56'>
+                                <div className='relative max-w-56 text-md'>
                                     <IconClock size={16} className={iconeEsquerda} />
                                     <select id='inicio' value={form.inicio} onChange={mudar('inicio')} className={campo}>
-                                        <option value=''>Selecione o horário</option>
+                                        <option value='' className='text-md'>Selecione o horário</option>
                                         {HORAS.map((h) => <option key={h}>{h}</option>)}
                                     </select>
                                     <IconChevronDown size={14} className={iconeDireita} />
@@ -201,21 +207,21 @@ export default function Horarios() {
                                     <button
                                         type='button'
                                         onClick={limpar}
-                                        className='cursor-pointer rounded-lg border border-[#EB536D] bg-white px-4 py-1.5 text-xs font-medium text-[#EB536D]'
+                                        className='cursor-pointer rounded-lg border border-[#EB536D] bg-white px-4 py-1.5 text-md font-medium text-[#EB536D]'
                                     >
                                         Cancelar
                                     </button>
                                 )}
                                 <button
                                     type='submit'
-                                    className='cursor-pointer whitespace-nowrap rounded-lg bg-[#EB536D] px-4 py-1.5 text-xs font-medium text-white hover:opacity-90'
+                                    className='cursor-pointer whitespace-nowrap rounded-lg bg-[#EB536D] px-4 py-1.5 text-md font-medium text-white hover:opacity-90'
                                 >
                                     {editandoId ? 'Salvar alterações' : 'Adicionar horário'}
                                 </button>
                             </div>
 
                             {erro && (
-                                <span role='alert' className='col-span-full text-xs text-red-600'>
+                                <span role='alert' className='col-span-full text-md text-red-600'>
                                     {erro}
                                 </span>
                             )}
@@ -225,13 +231,13 @@ export default function Horarios() {
                     <section className='rounded-2xl bg-white p-4 pb-8 shadow-md'>
                         <div className='mb-3 flex items-center justify-between'>
                             <h2 className='text-base font-semibold'>Horários Cadastrados</h2>
-                            <a href='/doctor/horarios' className='text-xs font-semibold text-[#EB536D]'>Ver tudo</a>
+                            <a href='/doctor/horarios' className='text-md font-semibold text-[#EB536D]'>Ver tudo</a>
                         </div>
 
-                        {carregando && <p className='py-6 text-center text-xs text-gray-600'>Carregando horários…</p>}
+                        {carregando && <p className='py-6 text-center text-md text-gray-600'>Carregando horários…</p>}
 
                         {!carregando && !ordenados.length && (
-                            <p className='py-6 text-center text-xs text-gray-600'>
+                            <p className='py-6 text-center text-md text-gray-600'>
                                 Nenhum horário cadastrado. Preencha o formulário acima para adicionar o primeiro.
                             </p>
                         )}
@@ -247,12 +253,12 @@ export default function Horarios() {
                                             <IconCalendar size={18} />
                                         </div>
                                         <div>
-                                            <b className='block text-sm font-semibold'>{diaDaSemana(h.data)}</b>
-                                            <small className='text-xs text-gray-600'>{formatarData(h.data)}</small>
+                                            <p className='block text-md font-semibold'>{diaDaSemana(h.data)}</p>
+                                            <p className='text-md text-gray-600'>{formatarData(h.data)}</p>
                                         </div>
                                     </div>
 
-                                    <div className='grid flex-1 gap-0.5 text-xs font-medium'>
+                                    <div className='grid flex-1 gap-0.5 text-md font-medium'>
                                         <span className='flex items-center gap-1.5'>
                                             <IconClock size={14} className='text-[#EB536D]' />
                                             {h.inicio}-{h.fim}
