@@ -49,32 +49,22 @@ def create_prontuario(session: SessionDep, user: Annotated[User, Depends(get_cur
 
 
 @router.put('/{id}', response_model=ProntuarioRead)
-def update_prontuario(
-    session: SessionDep,
-    id: int,
-    new_prontuario: ProntuarioCreate,
-    user: Annotated[User, Depends(get_current_user)],
-):
-    if user.type != UserType.DOCTOR:
-        raise HTTPException(status_code=401, detail='Esses dados só podem ser acessados por um médico')
+def update_prontuario(session: SessionDep,id: int, new_prontuario: ProntuarioCreate, user: Annotated[User, Depends(get_current_user)]):
+    prontuario = session.get(Prontuario, id)
+    if not prontuario:
+        raise HTTPException(status_code=404, detail='Prontuário não encontrado')
 
-    stmt = (
-        select(Prontuario)
-        .join(Prontuario.consultas)
-        .where(Prontuario.id == Consulta.prontuario_id, Consulta.medico_id == user.id)
-    )
+    if user.type != UserType.DOCTOR or user.status != DoctorStatus.ACTIVE or (user.type != UserType.PACIENT and user.id != Prontuario.patient_id):
+        raise HTTPException(status_code=401, detail='Esses dados só podem ser acessados por um médico ou o paciente pertencente do prontuário')
 
-    prontuario = session.scalar(stmt)
-
-    if prontuario is None:
-        raise HTTPException(status_code=401, detail='Prontuário não encontrado')
+    prontuario_exist = (select(Prontuario).where(Prontuario.patient_id == user.id))
 
     try:
         prontuario.peso = new_prontuario.peso
         prontuario.altura = new_prontuario.altura
-        prontuario.alergias = new_prontuario.alergias or ''
-        prontuario.sexo = new_prontuario.sexo or ''
-        prontuario.tipo_sanguineo = new_prontuario.tipo_sanguineo or ''
+        prontuario.alergias = new_prontuario.alergias
+        prontuario.sexo = new_prontuario.sexo 
+        prontuario.tipo_sanguineo = new_prontuario.tipo_sanguineo
         session.commit()
         session.refresh(prontuario)
         return prontuario

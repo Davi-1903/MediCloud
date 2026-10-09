@@ -35,8 +35,8 @@ class Prontuario(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     patient_id: Mapped[int] = mapped_column(ForeignKey('patients.id'))
-    peso: Mapped[float] = mapped_column(Float, nullable=False)
-    altura: Mapped[float] = mapped_column(Float, nullable=False)
+    peso: Mapped[float] = mapped_column(Float, nullable=True)
+    altura: Mapped[float] = mapped_column(Float, nullable=True)
     alergias: Mapped[str] = mapped_column(Text, nullable=True)
     sexo: Mapped[str] = mapped_column(Enum(SexoType), nullable=True)
     tipo_sanguineo: Mapped[str] = mapped_column(Enum(SangueType), nullable=True)
