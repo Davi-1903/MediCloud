@@ -4,11 +4,11 @@ from models.prontuario import SangueType, SexoType
 
 
 class ProntuarioBase(BaseModel):
-    peso: float
-    altura: float
+    peso: float | None = None
+    altura: float | None = None
     alergias: str | None = None
-    sexo: SexoType
-    tipo_sanguineo: SangueType
+    sexo: SexoType | None = None
+    tipo_sanguineo: SangueType | None = None
 
 
 class ProntuarioCreate(ProntuarioBase):

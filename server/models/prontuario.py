@@ -37,11 +37,11 @@ class Prontuario(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     patient_id: Mapped[int] = mapped_column(ForeignKey('patients.id'))
-    peso: Mapped[float] = mapped_column(Float, nullable=False)
-    altura: Mapped[float] = mapped_column(Float, nullable=False)
+    peso: Mapped[float] = mapped_column(Float, nullable=True)
+    altura: Mapped[float] = mapped_column(Float, nullable=True)
     alergias: Mapped[str | None] = mapped_column(Text, nullable=True)
-    sexo: Mapped[SexoType] = mapped_column(Enum(SexoType), nullable=False)
-    tipo_sanguineo: Mapped[SangueType] = mapped_column(Enum(SangueType), nullable=False)
+    sexo: Mapped[SexoType | None] = mapped_column(Enum(SexoType), nullable=True)
+    tipo_sanguineo: Mapped[SangueType | None] = mapped_column(Enum(SangueType), nullable=True)
 
     patient: Mapped['Patient'] = relationship(back_populates='prontuario', single_parent=True)
     consultas: Mapped[list['Consulta']] = relationship(back_populates='prontuario', cascade='all, delete-orphan')
