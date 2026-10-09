@@ -1,8 +1,9 @@
 import enum
 from datetime import date
 
-from sqlalchemy import Date, Enum, Integer, String
+from sqlalchemy import Date, Enum, Index, Integer, String
 from sqlalchemy.orm import Mapped, mapped_column
+
 from database import Base
 
 
@@ -29,5 +30,5 @@ class User(Base):
     number: Mapped[int] = mapped_column(Integer, nullable=True)
     cep: Mapped[str] = mapped_column(String(8), nullable=True)
 
-
     __mapper_args__ = {'polymorphic_on': 'type', 'polymorphic_identity': None}
+    __table_args__ = (Index('ix_user_fulltext', 'name', 'email', mysql_prefix='FULLTEXT'),)
