@@ -5,11 +5,16 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from database import init_database
 from routes import admin, agenda, auth, doctor, prontuario, user
-
+from database.seed_admin import seed_admin
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     init_database()
+    yield
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    seed_admin()  
     yield
 
 
