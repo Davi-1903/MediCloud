@@ -1,0 +1,74 @@
+{
+	"files": [
+		{
+			"path": "client/src/pages/protected/medico/components/reminders/index.jsx",
+			"bookmarks": [
+				{
+					"line": 3,
+					"column": 0,
+					"label": "Adicionar urgência nos lembretes"
+				}
+			]
+		},
+		{
+			"path": "client/src/components/protectedRoute/index.jsx",
+			"bookmarks": [
+				{
+					"line": 8,
+					"column": 0,
+					"label": "Remover o redirecionamento"
+				}
+			]
+		},
+		{
+			"path": "client/src/main.jsx",
+			"bookmarks": [
+				{
+					"line": 15,
+					"column": 0,
+					"label": "Fazer uma landing page"
+				},
+				{
+					"line": 5,
+					"column": 1,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "server/routes/agenda.py",
+			"bookmarks": [
+				{
+					"line": 21,
+					"column": 0,
+					"label": "Criar decorador para rotas protegidas"
+				},
+				{
+					"line": 31,
+					"column": 0,
+					"label": "Adicionar aviso quando for adicionado dias repetidos"
+				}
+			]
+		},
+		{
+			"path": "client/src/pages/protected/time/index.jsx",
+			"bookmarks": [
+				{
+					"line": 63,
+					"column": 0,
+					"label": "Quando o horário é apagado o getSchedule não atualiza. É preciso recarregar mais de uma vez"
+				}
+			]
+		},
+		{
+			"path": "client/src/pages/protected/time/components/scheduleView.jsx",
+			"bookmarks": [
+				{
+					"line": 7,
+					"column": 0,
+					"label": "Botão para expandir"
+				}
+			]
+		}
+	]
+}

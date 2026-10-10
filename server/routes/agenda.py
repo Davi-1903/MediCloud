@@ -21,7 +21,7 @@ SessionDep = Annotated[Session, Depends(get_session)]
 def get_agendas(session: SessionDep, user: Annotated[User, Depends(get_current_user)]):
     if user.type != UserType.DOCTOR:
         raise HTTPException(status_code=401, detail='Esses dados só podem ser acessador por um médico')
-    return session.scalars(select(Agenda).where(Agenda.doctor_id == user.id)).all()
+    return session.scalars(select(Agenda).where(Agenda.doctor_id == user.id).order_by(Agenda.start_time)).all()
 
 
 @router.post('', response_model=AgendaRead, status_code=201)

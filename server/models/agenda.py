@@ -33,7 +33,7 @@ class Agenda(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     doctor_id: Mapped[int] = mapped_column(ForeignKey('doctors.id'), nullable=False)
-    date: Mapped[Days] = mapped_column(Enum(Days), nullable=False, unique=True)
+    date: Mapped[Days] = mapped_column(Enum(Days), nullable=False)
     start_time: Mapped[datetime.time] = mapped_column(Time, nullable=False)
     end_time: Mapped[datetime.time] = mapped_column(Time, nullable=False)
     type: Mapped[HorarioType] = mapped_column(Enum(HorarioType), nullable=False)
