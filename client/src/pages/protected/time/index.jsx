@@ -3,10 +3,17 @@ import Header from '../../../components/header';
 import ProtectedRoute from '../../../components/protectedRoute';
 import Footer from '../../../components/footer';
 import { IconCalendar, IconChevronDown, IconClock, IconPencil, IconTrash, IconUser } from '@tabler/icons-react';
-import { listarHorarios, criarHorario, atualizarHorario, excluirHorario } from '../../../api/horarios';
-import { POST } from '../../../api/user';
+import { GET, POST } from '../../../api/user';
 
-const DIAS = ['Domingo', 'Segunda-Feira', 'Terça-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sábado'];
+const DIAS = [
+    { value: 'domingo', label: 'Domingo' },
+    { value: 'segunda', label: 'Segunda-Feira' },
+    { value: 'terça', label: 'Terça-Feira' },
+    { value: 'quarta', label: 'Quarta-Feira' },
+    { value: 'quinta', label: 'Quinta-Feira' },
+    { value: 'sexta', label: 'Sexta-Feira' },
+    { value: 'sábado', label: 'Sábado' },
+];
 const TIPOS = [
     { value: 'presencial', label: 'Consulta Presencial' },
     { value: 'online', label: 'Consulta Online' },
@@ -15,76 +22,70 @@ const HORAS = Array.from({ length: 25 }, (_, i) => {
     const h = 7 + Math.floor(i / 2);
     return `${String(h).padStart(2, '0')}:${i % 2 ? '30' : '00'}`;
 });
-const VAZIO = { date: '', start_time: '', end_time: '', type: '' };
 
 const campo =
     'w-full cursor-pointer appearance-none rounded-lg border border-gray-400 bg-white py-1.5 pl-9 pr-8 text-md text-gray-700 focus:border-[#EB536D] focus:outline-none';
 const iconeEsquerda = 'pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[#EB536D]';
 const iconeDireita = 'pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-600';
 const rotulo = 'mb-1 block text-md font-medium';
-const botaoRedondo =
-    'flex h-7 w-7 cursor-pointer items-center justify-center rounded-full bg-[#FFE5EA] text-gray-800 hover:bg-[#f7c6ce]';
 
-const formatarData = iso => iso.split('-').reverse().join('/');
-const diaDaSemana = iso => {
-    const [a, m, d] = iso.split('-').map(Number);
-    return DIAS[new Date(a, m - 1, d).getDay()];
-};
+const diaDaSemana = day => day[0].toUpperCase() + day.slice(1).toLowerCase();
 
 export default function Horarios() {
-    const medico = { nome: 'Dr. Uchoa', email: 'uchoa@gmail.com', especialidade: 'Endocrinologista', crm: '56789234' };
-
     const [horarios, setHorarios] = useState([]);
-    const [form, setForm] = useState(VAZIO);
+    const [form, setForm] = useState({ date: '', start_time: '', end_time: '', type: '' });
     const [editandoId, setEditandoId] = useState(null);
     const [erro, setErro] = useState('');
     const [carregando, setCarregando] = useState(true);
+    const medico = { nome: 'Dr. Uchoa', email: 'uchoa@gmail.com', especialidade: 'Endocrinologista', crm: '56789234' };
 
-    useEffect(() => {
-        listarHorarios()
-            .then(setHorarios)
-            .catch(e => setErro(e.message))
-            .finally(() => setCarregando(false));
-    }, []);
+    async function listarHorarios() {
+        const horarios = await GET('/api/doctor/schedule');
+        if (horarios.status !== 200) throw new Error(horarios.detail);
+        return horarios;
+    }
 
     const ordenados = useMemo(
-        () => [...horarios].sort((a, b) => (a.data + a.inicio).localeCompare(b.data + b.inicio)),
+        () => [...horarios].sort((a, b) => (a.date + a.start_time).localeCompare(b.data + b.inicio)),
         [horarios],
     );
 
-    const mudar = nome => e => setForm(f => ({ ...f, [nome]: e.target.value }));
-
     const limpar = () => {
-        setForm(VAZIO);
+        setForm({ date: '', start_time: '', end_time: '', type: '' });
         setEditandoId(null);
         setErro('');
     };
 
-    async function handleCreate(novo) {
-        let data = await POST('/api/doctor/schedule', novo);
-        if (data.status !== 200) throw new Error(data.detail);
-    }
-
     async function salvar(e) {
         e.preventDefault();
 
-        const { date: data, start_time: inicio, end_time: fim, type: tipo } = form;
-        if (!data || !inicio || !fim || !tipo) return setErro('Preencha todos os campos.');
-        if (fim <= inicio) return setErro('O horário de fim deve ser depois do início.');
-        const conflito = horarios.some(h => h.id !== editandoId && h.data === data && inicio < h.fim && fim > h.inicio);
-        if (conflito) return setErro('Esse horário conflita com outro já cadastrado.');
+        const { date, start_time, end_time, type } = form;
+        if (!date || !start_time || !end_time || !type) return setErro('Preencha todos os campos.');
+        if (end_time <= start_time) return setErro('O horário de fim deve ser depois do início.');
+        if (
+            horarios.some(
+                h => h.id !== editandoId && h.date === date && start_time < h.end_time && end_time > h.start_time,
+            )
+        )
+            return setErro('Esse horário conflita com outro já cadastrado.');
 
         try {
             if (editandoId) {
-                const atualizado = await atualizarHorario(editandoId, form);
-                setHorarios(hs => hs.map(h => (h.id === editandoId ? atualizado : h)));
+                // const atualizado = await atualizarHorario(editandoId, form);
+                // setHorarios(hs => hs.map(h => (h.id === editandoId ? atualizado : h)));
             } else {
-                const novo = await criarHorario(form);
-                setHorarios(hs => [...hs, novo]);
-                console.log(novo);
-                await handleCreate();
+                // const novo = await criarHorario(form);
+                let data = await POST('/api/doctor/schedule', form);
+                if (data.status !== 200) throw new Error(data.detail);
+                setHorarios(hs => [...hs, form]);
             }
+
             limpar();
+            setCarregando(true);
+            listarHorarios()
+                .then(setHorarios)
+                .catch(err => setErro(err.message))
+                .finally(() => setCarregando(false));
         } catch (err) {
             setErro(err.message);
         }
@@ -92,7 +93,7 @@ export default function Horarios() {
 
     async function remover(id) {
         try {
-            await excluirHorario(id);
+            // await excluirHorario(id);
             setHorarios(hs => hs.filter(h => h.id !== id));
             if (editandoId === id) limpar();
         } catch (err) {
@@ -106,6 +107,13 @@ export default function Horarios() {
         setErro('');
         document.getElementById('form-horario')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
+
+    useEffect(() => {
+        listarHorarios()
+            .then(setHorarios)
+            .catch(err => setErro(err.message))
+            .finally(() => setCarregando(false));
+    }, []);
 
     return (
         <ProtectedRoute isPrivate={true}>
@@ -160,30 +168,31 @@ export default function Horarios() {
                         >
                             <div>
                                 <label
-                                    htmlFor='data'
+                                    htmlFor='day'
                                     className={rotulo}
                                 >
-                                    Data
+                                    Dia da semana
                                 </label>
                                 <div className='relative max-w-56'>
                                     <IconCalendar
                                         size={16}
                                         className={iconeEsquerda}
                                     />
-                                    <input
-                                        id='data'
-                                        type='date'
-                                        value={form.date}
-                                        onChange={mudar('data')}
-                                        className={`${campo} [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:inset-0 [&::-webkit-calendar-picker-indicator]:h-full [&::-webkit-calendar-picker-indicator]:w-full [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-0 ${
-                                            form.date ? '' : 'text-transparent'
-                                        }`}
-                                    />
-                                    {!form.date && (
-                                        <span className='text-md pointer-events-none absolute top-1/2 left-9 -translate-y-1/2 text-gray-700'>
-                                            Selecione a data
-                                        </span>
-                                    )}
+                                    <select
+                                        id='day'
+                                        className={campo}
+                                        onChange={e => setForm(form => ({ ...form, date: e.target.value }))}
+                                    >
+                                        <option value=''>Selecione o dia</option>
+                                        {DIAS.map((day, idx) => (
+                                            <option
+                                                key={idx}
+                                                value={day.value}
+                                            >
+                                                {day.label}
+                                            </option>
+                                        ))}
+                                    </select>
                                     <IconChevronDown
                                         size={14}
                                         className={iconeDireita}
@@ -206,7 +215,7 @@ export default function Horarios() {
                                     <select
                                         id='inicio'
                                         value={form.start_time}
-                                        onChange={mudar('inicio')}
+                                        onChange={e => setForm(form => ({ ...form, start_time: e.target.value }))}
                                         className={campo}
                                     >
                                         <option
@@ -241,7 +250,7 @@ export default function Horarios() {
                                     <select
                                         id='fim'
                                         value={form.end_time}
-                                        onChange={mudar('fim')}
+                                        onChange={e => setForm(form => ({ ...form, end_time: e.target.value }))}
                                         className={campo}
                                     >
                                         <option value=''>Selecione o horário</option>
@@ -271,7 +280,7 @@ export default function Horarios() {
                                     <select
                                         id='tipo'
                                         value={form.type}
-                                        onChange={mudar('tipo')}
+                                        onChange={e => setForm(form => ({ ...form, type: e.target.value }))}
                                         className={campo}
                                     >
                                         <option value=''>Tipo de consulta</option>
@@ -350,8 +359,7 @@ export default function Horarios() {
                                             <IconCalendar size={18} />
                                         </div>
                                         <div>
-                                            <p className='text-md block font-semibold'>{diaDaSemana(h.data)}</p>
-                                            <p className='text-md text-gray-600'>{formatarData(h.data)}</p>
+                                            <p className='block text-lg font-semibold'>{diaDaSemana(h.date)}</p>
                                         </div>
                                     </div>
 
@@ -361,14 +369,15 @@ export default function Horarios() {
                                                 size={14}
                                                 className='text-[#EB536D]'
                                             />
-                                            {h.inicio}-{h.fim}
+                                            {h.start_time.split(':').slice(0, 2).join(':')}-
+                                            {h.end_time.split(':').slice(0, 2).join(':')}
                                         </span>
                                         <span className='flex items-center gap-1.5'>
                                             <IconUser
                                                 size={14}
                                                 className='text-[#EB536D]'
                                             />
-                                            {h.tipo}
+                                            {h.type[0].toUpperCase() + h.type.slice(1).toLowerCase()}
                                         </span>
                                     </div>
 
@@ -376,17 +385,17 @@ export default function Horarios() {
                                         type='button'
                                         onClick={() => remover(h.id)}
                                         aria-label='Excluir horário'
-                                        className={botaoRedondo}
+                                        className='flex cursor-pointer items-center justify-center rounded-lg bg-[#FFE5EA] p-3 text-gray-800 hover:bg-[#f7c6ce]'
                                     >
-                                        <IconTrash size={14} />
+                                        <IconTrash size={20} />
                                     </button>
                                     <button
                                         type='button'
                                         onClick={() => editar(h)}
                                         aria-label='Editar horário'
-                                        className={botaoRedondo}
+                                        className='flex cursor-pointer items-center justify-center rounded-lg bg-[#FFE5EA] p-3 text-gray-800 hover:bg-[#f7c6ce]'
                                     >
-                                        <IconPencil size={14} />
+                                        <IconPencil size={20} />
                                     </button>
                                 </article>
                             ))}

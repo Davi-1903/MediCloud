@@ -2,12 +2,11 @@ import datetime
 
 from pydantic import BaseModel, ConfigDict
 
-from models.agenda import HorarioType
+from models.agenda import Days, HorarioType
 
 
 class AgendaBase(BaseModel):
-    doctor_id: int
-    date: datetime.date
+    date: Days
     start_time: datetime.time
     end_time: datetime.time
     type: HorarioType
