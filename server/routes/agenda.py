@@ -8,9 +8,8 @@ from sqlalchemy.orm import Session
 from database import get_session
 from models.agenda import Agenda
 from models.user import User, UserType
+from routes.doctor import get_current_doctor
 from schemas.agenda import AgendaCreate, AgendaRead
-
-from .user import get_current_user
 
 
 router = APIRouter(prefix='/doctor/schedule', tags=['Agenda'])
@@ -18,17 +17,12 @@ SessionDep = Annotated[Session, Depends(get_session)]
 
 
 @router.get('', response_model=Sequence[AgendaRead])
-def get_agendas(session: SessionDep, user: Annotated[User, Depends(get_current_user)]):
-    if user.type != UserType.DOCTOR:
-        raise HTTPException(status_code=401, detail='Esses dados só podem ser acessador por um médico')
-    return session.scalars(select(Agenda).where(Agenda.doctor_id == user.id).order_by(Agenda.start_time)).all()
+def get_agendas(session: SessionDep, doctor: Annotated[User, Depends(get_current_doctor)]):
+    return session.scalars(select(Agenda).where(Agenda.doctor_id == doctor.id).order_by(Agenda.start_time)).all()
 
 
 @router.post('', response_model=AgendaRead, status_code=201)
-def create_agenda(session: SessionDep, user: Annotated[User, Depends(get_current_user)], agenda: AgendaCreate):
-    if user.type != UserType.DOCTOR:
-        raise HTTPException(status_code=401, detail='Esses dados só podem ser acessador por um médico')
-
+def create_agenda(session: SessionDep, user: Annotated[User, Depends(get_current_doctor)], agenda: AgendaCreate):
     try:
         new_agenda = Agenda(
             date=agenda.date,
@@ -49,14 +43,8 @@ def create_agenda(session: SessionDep, user: Annotated[User, Depends(get_current
 
 @router.put('/{id}', response_model=AgendaRead)
 def update_agenda(
-    session: SessionDep,
-    id: int,
-    new_agenda: AgendaCreate,
-    user: Annotated[User, Depends(get_current_user)],
+    session: SessionDep, id: int, new_agenda: AgendaCreate, user: Annotated[User, Depends(get_current_doctor)]
 ):
-    if user.type != UserType.DOCTOR:
-        raise HTTPException(status_code=401, detail='Esses dados só podem ser acessador por um médico')
-
     agenda = session.scalar(select(Agenda).where(Agenda.id == id).where(Agenda.doctor_id == user.id))
     if agenda is None:
         raise HTTPException(status_code=404, detail='Agenda não encontrada')
@@ -75,10 +63,7 @@ def update_agenda(
 
 
 @router.delete('/{id}', response_model=AgendaRead)
-def delete_agenda(session: SessionDep, id: int, user: Annotated[User, Depends(get_current_user)]):
-    if user.type != UserType.DOCTOR:
-        raise HTTPException(status_code=401, detail='Esses dados só podem ser acessador por um médico')
-
+def delete_agenda(session: SessionDep, id: int, user: Annotated[User, Depends(get_current_doctor)]):
     agenda = session.scalar(select(Agenda).where(Agenda.id == id).where(Agenda.doctor_id == user.id))
     if agenda is None:
         raise HTTPException(status_code=404, detail='Agenda não encontrada')

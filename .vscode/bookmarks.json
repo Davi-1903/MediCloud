@@ -36,22 +36,22 @@
 			]
 		},
 		{
-			"path": "server/routes/agenda.py",
-			"bookmarks": [
-				{
-					"line": 21,
-					"column": 0,
-					"label": "Criar decorador para rotas protegidas"
-				}
-			]
-		},
-		{
 			"path": "client/src/pages/protected/time/components/scheduleView.jsx",
 			"bookmarks": [
 				{
 					"line": 7,
 					"column": 0,
 					"label": "Botão para expandir"
+				}
+			]
+		},
+		{
+			"path": "server/routes/prontuario.py",
+			"bookmarks": [
+				{
+					"line": 21,
+					"column": 0,
+					"label": "O prontuário pode ser acessado pelo médico e pelo paciente?"
 				}
 			]
 		}

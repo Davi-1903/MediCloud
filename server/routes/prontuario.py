@@ -9,10 +9,9 @@ from database import get_session
 from models.consulta import Consulta
 from models.doctor import Doctor
 from models.prontuario import Prontuario
-from models.user import User, UserType
+from models.user import UserType
+from routes.doctor import get_current_doctor
 from schemas.prontuario import ProntuarioCreate, ProntuarioRead
-
-from .user import get_current_user
 
 
 router = APIRouter(prefix='/prontuario', tags=['Prontuario'])
@@ -20,15 +19,12 @@ SessionDep = Annotated[Session, Depends(get_session)]
 
 
 @router.get('', response_model=Sequence[ProntuarioRead])
-def get_prontuario(session: SessionDep, user: Annotated[User, Depends(get_current_user)]):
-    return session.scalars(select(Prontuario).where(Prontuario.id == user.id)).all()
+def get_prontuario(session: SessionDep, user: Annotated[Doctor, Depends(get_current_doctor)]):
+    return session.scalars(select(Prontuario).where(Prontuario.patient_id == user.id)).all()
 
 
 @router.post('', response_model=ProntuarioRead, status_code=201)
-def create_prontuario(session: SessionDep, user: Annotated[User, Depends(get_current_user)]):
-    if user.type != UserType.DOCTOR:
-        raise HTTPException(status_code=401, detail='Esses dados só podem ser acessados por um médico')
-
+def create_prontuario(session: SessionDep, doctor: Annotated[Doctor, Depends(get_current_doctor)]):
     try:
         new_prontuario = Prontuario(
             peso=Prontuario.peso,
@@ -53,15 +49,12 @@ def update_prontuario(
     session: SessionDep,
     id: int,
     new_prontuario: ProntuarioCreate,
-    user: Annotated[User, Depends(get_current_user)],
+    doctor: Annotated[Doctor, Depends(get_current_doctor)],
 ):
-    if user.type != UserType.DOCTOR:
-        raise HTTPException(status_code=401, detail='Esses dados só podem ser acessados por um médico')
-
     stmt = (
         select(Prontuario)
         .join(Prontuario.consultas)
-        .where(Prontuario.id == Consulta.prontuario_id, Consulta.medico_id == user.id)
+        .where(Prontuario.id == Consulta.prontuario_id, Consulta.medico_id == doctor.id)
     )
 
     prontuario = session.scalar(stmt)
@@ -78,7 +71,7 @@ def update_prontuario(
         session.commit()
         session.refresh(prontuario)
         return prontuario
-    
+
     except Exception:
         session.rollback()
         raise HTTPException(status_code=500, detail='Ocorreu um erro interno')

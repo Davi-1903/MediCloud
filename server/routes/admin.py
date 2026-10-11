@@ -57,6 +57,7 @@ def deny_doctor(session: SessionDep, doctor_id: int, user: Annotated[User, Depen
     except IntegrityError:
         raise HTTPException(status_code=400, detail='Erro de integridade ocorreu')
 
+
 @router.get('/doctors')
 def list_doctors(session: SessionDep, user: Annotated[User, Depends(get_current_user)]):
     if not user or user.type != UserType.ADMIN:
@@ -71,7 +72,7 @@ def list_doctors(session: SessionDep, user: Annotated[User, Depends(get_current_
                 'email': d.email,
                 'specialty': d.specialty,
                 'crm': d.crm,
-                'status':  d.status.name,
+                'status': d.status.name,
             }
             for d in doctors
         ]
