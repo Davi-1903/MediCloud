@@ -1,11 +1,11 @@
 import { lazy, StrictMode, Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import ProtectedRoute from './components/ProtectedRoute'; // ajuste o caminho
 import { AuthenticatedProvider } from './context/authContext';
-import './globals.css';
-import NotFound from './pages/errors/404';
 import { ROLES } from './utils/roles';
+import ProtectedRoute from './components/ProtectedRoute'; // ajuste o caminho
+import NotFound from './pages/errors/404';
+import './globals.css';
 
 const Register = lazy(() => import('./pages/unprotected/register'));
 const Login = lazy(() => import('./pages/unprotected/login'));
@@ -50,12 +50,10 @@ const router = createBrowserRouter([
             </ProtectedRoute>
         ),
     },
-
     { 
         path: 'about', 
         element: <About /> 
     },
-
     {
         path: 'scheduling',
         element: (
@@ -80,7 +78,6 @@ const router = createBrowserRouter([
             </ProtectedRoute>
         ),
     },
-
     {
         path: 'time/doctor',
         element: (
@@ -89,7 +86,6 @@ const router = createBrowserRouter([
             </ProtectedRoute>
         ),
     },
-
     {
         path: 'schedule/doctor',
         element: (
@@ -98,12 +94,10 @@ const router = createBrowserRouter([
             </ProtectedRoute>
         ),
     },
-
     {
         path: 'profile',
         element: <Profile />,
     },
-
     { path: '*', element: <NotFound /> },
 ]);
 

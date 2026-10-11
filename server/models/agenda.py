@@ -1,5 +1,5 @@
+import datetime
 import enum
-from datetime import time
 from typing import TYPE_CHECKING
 
 from sqlalchemy import Enum, ForeignKey, Time
@@ -14,11 +14,18 @@ if TYPE_CHECKING:
 
 
 class Days(enum.Enum):
+    DOMINGO = 'domingo'
     SEGUNDA = 'segunda'
     TERCA = 'terça'
     QUARTA = 'quarta'
     QUINTA = 'quinta'
     SEXTA = 'sexta'
+    SABADO = 'sábado'
+
+
+class HorarioType(str, enum.Enum):
+    ONLINE = 'online'
+    PRESENCIAL = 'presencial'
 
 
 class Agenda(Base):
@@ -27,8 +34,9 @@ class Agenda(Base):
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     doctor_id: Mapped[int] = mapped_column(ForeignKey('doctors.id'), nullable=False)
     date: Mapped[Days] = mapped_column(Enum(Days), nullable=False)
-    start_time: Mapped[time] = mapped_column(Time, nullable=False)
-    end_time: Mapped[time] = mapped_column(Time, nullable=False)
+    start_time: Mapped[datetime.time] = mapped_column(Time, nullable=False)
+    end_time: Mapped[datetime.time] = mapped_column(Time, nullable=False)
+    type: Mapped[HorarioType] = mapped_column(Enum(HorarioType), nullable=False)
 
     doctor: Mapped['Doctor'] = relationship(back_populates='agenda')
     consultas: Mapped[list['Consulta']] = relationship(back_populates='agenda', cascade='all, delete-orphan')
