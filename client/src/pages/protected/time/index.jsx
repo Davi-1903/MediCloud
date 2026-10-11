@@ -5,7 +5,7 @@ import Footer from '../../../components/footer';
 import ScheduleView from './components/scheduleView';
 import CardDoctor from './components/cardDoctor';
 import NewSchedule from './components/newSchedule';
-import { GET, POST, DELETE } from '../../../api/schedule';
+import { GET, POST, DELETE, PUT } from '../../../api/schedule';
 
 export default function Horarios() {
     const [horarios, setHorarios] = useState([]);
@@ -42,10 +42,9 @@ export default function Horarios() {
 
         try {
             if (editandoId) {
-                // const atualizado = await atualizarHorario(editandoId, form);
-                // setHorarios(hs => hs.map(h => (h.id === editandoId ? atualizado : h)));
+                let data = await PUT(`/api/doctor/schedule/${editandoId}`, form);
+                if (data.status !== 200) throw new Error(data.detail);
             } else {
-                // const novo = await criarHorario(form);
                 let data = await POST('/api/doctor/schedule', form);
                 if (data.status !== 200) throw new Error(data.detail);
             }
@@ -81,13 +80,6 @@ export default function Horarios() {
         }
     }
 
-    function handleEdit(h) {
-        setEditandoId(h.id);
-        setForm({ date: h.data, start_time: h.inicio, end_time: h.fim, type: h.tipo });
-        setErro('');
-        document.getElementById('form-horario')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-
     useEffect(() => {
         getSchedule()
             .then(data => {
@@ -117,7 +109,7 @@ export default function Horarios() {
                         horarios={horarios}
                         loading={loading}
                         handleRemove={handleRemove}
-                        handleEdit={handleEdit}
+                        handleEdit={id => setEditandoId(id)}
                     />
                 </main>
             </div>
