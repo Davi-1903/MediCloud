@@ -6,13 +6,20 @@ from sqlalchemy.orm import Session
 
 from database import get_session
 from models.doctor import Doctor
+from models.user import User
 from routes.auth import Token, ph, set_refresh_cookie
-from schemas.doctor import DoctorCreate
+from routes.user import get_current_user
+from schemas.doctor import DoctorCreate, DoctorRead
 from utils import create_access_token, create_refresh_token
 
 
 router = APIRouter(prefix='/doctors', tags=['doctors'])
 SessionDep = Annotated[Session, Depends(get_session)]
+
+
+@router.get('/user', response_model=DoctorRead)
+def get_user_doctor(user: Annotated[User, Depends(get_current_user)]):
+    return user
 
 
 @router.post('/register', response_model=Token, status_code=201)
@@ -32,7 +39,7 @@ def register_doctor(session: SessionDep, doctor_input: DoctorCreate, response: R
         refresh_token = create_refresh_token({'sub': doctor.id})
         set_refresh_cookie(response, refresh_token)
 
-        return {'token': create_access_token({'sub': doctor_input.email}), 'token_type': 'bearer',  "role": "doctor",}
+        return {'token': create_access_token({'sub': doctor_input.email}), 'token_type': 'bearer', 'role': 'doctor'}
 
     except IntegrityError:
         session.rollback()

@@ -1,7 +1,18 @@
+import { useEffect, useState } from 'react';
 import { IconCalendar, IconUser } from '@tabler/icons-react';
+import { GET } from '../../../../api/user';
 
 export default function CardDoctor() {
-    const medico = { nome: 'Dr. Uchoa', email: 'uchoa@gmail.com', especialidade: 'Endocrinologista', crm: '56789234' };
+    const [medico, setMedico] = useState(null);
+
+    useEffect(() => {
+        GET('/api/doctors/user')
+            .then(data => {
+                if (data.status != 200) throw new Error(data.detail);
+                setMedico(data);
+            })
+            .catch(err => alert(err.message));
+    }, []);
 
     return (
         <section className='rounded-2xl bg-white p-3 shadow-md'>
@@ -11,16 +22,16 @@ export default function CardDoctor() {
                         <IconUser size={38} />
                     </div>
                     <div className='leading-relaxed text-gray-800'>
-                        <p className='text-lg font-semibold'>Nome: {medico.nome}</p>
+                        <p className='text-lg font-semibold'>Nome: {medico?.name}</p>
                         <div className='text-md flex gap-1'>
                             <p className='text-md font-bold'>Email: </p>
-                            <p>{medico.email}</p>
+                            <p>{medico?.email}</p>
                         </div>
                         <div className='text-md flex gap-10'>
-                            <p className='text-md font-bold'>{medico.especialidade}</p>
+                            <p className='text-md font-bold'>{medico?.specialty}</p>
                             <p>
                                 <strong>CRM: </strong>
-                                {medico.crm}
+                                {medico?.crm}
                             </p>
                         </div>
                     </div>
