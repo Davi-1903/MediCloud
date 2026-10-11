@@ -63,14 +63,14 @@ export default function Horarios() {
 
     async function handleRemove(id) {
         if (!confirm('Você tem certeza?')) return;
+        setLoading(true);
 
         try {
-            const data = DELETE(`/api/doctor/schedule/${id}`);
+            const data = await DELETE(`/api/doctor/schedule/${id}`);
             if (data.status !== 200) throw new Error(data.detail);
         } catch (err) {
             setErro(err.message);
         } finally {
-            setLoading(true);
             getSchedule()
                 .then(data => {
                     if (data.status != 200) throw new Error(data.detail);

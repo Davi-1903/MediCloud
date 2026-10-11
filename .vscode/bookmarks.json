@@ -42,21 +42,6 @@
 					"line": 21,
 					"column": 0,
 					"label": "Criar decorador para rotas protegidas"
-				},
-				{
-					"line": 31,
-					"column": 0,
-					"label": "Adicionar aviso quando for adicionado dias repetidos"
-				}
-			]
-		},
-		{
-			"path": "client/src/pages/protected/time/index.jsx",
-			"bookmarks": [
-				{
-					"line": 63,
-					"column": 0,
-					"label": "Quando o horário é apagado o getSchedule não atualiza. É preciso recarregar mais de uma vez"
 				}
 			]
 		},
