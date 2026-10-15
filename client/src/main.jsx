@@ -9,13 +9,13 @@ import './globals.css';
 
 const Register = lazy(() => import('./pages/unprotected/register'));
 const Login = lazy(() => import('./pages/unprotected/login'));
-const Scheduling = lazy(() => import('./pages/protected/scheduling'));
 const DashAdmin = lazy(() => import('./pages/protected/dash'));
 const RegisterDoctor = lazy(() => import('./pages/unprotected/register_doctor'));
 const About = lazy(() => import('./pages/unprotected/about'));
 const HomeDoctor = lazy(() => import('./pages/protected/doctor'));
 const Horarios = lazy(() => import('./pages/protected/time'));
 const Profile = lazy(() => import('./pages/protected/profile'));
+const Appointements = lazy(() => import('./pages/protected/appointments'));
 
 const router = createBrowserRouter([
     {
@@ -50,22 +50,28 @@ const router = createBrowserRouter([
             </ProtectedRoute>
         ),
     },
-    { 
-        path: 'about', 
-        element: <About /> 
+    {
+        path: 'about',
+        element: <About />,
     },
     {
-        path: 'scheduling',
+        path: 'appoitments',
         element: (
-            <ProtectedRoute isPrivate allowedRoles={[ROLES.PATIENT]}>
-                <Scheduling />
+            <ProtectedRoute
+                isPrivate
+                allowedRoles={[ROLES.PATIENT]}
+            >
+                <Appointements />
             </ProtectedRoute>
         ),
     },
     {
         path: 'dash/admin',
         element: (
-            <ProtectedRoute isPrivate allowedRoles={[ROLES.ADMIN]}>
+            <ProtectedRoute
+                isPrivate
+                allowedRoles={[ROLES.ADMIN]}
+            >
                 <DashAdmin />
             </ProtectedRoute>
         ),
@@ -73,7 +79,10 @@ const router = createBrowserRouter([
     {
         path: 'home/doctor',
         element: (
-            <ProtectedRoute isPrivate allowedRoles={[ROLES.DOCTOR]}>
+            <ProtectedRoute
+                isPrivate
+                allowedRoles={[ROLES.DOCTOR]}
+            >
                 <HomeDoctor />
             </ProtectedRoute>
         ),
@@ -81,7 +90,10 @@ const router = createBrowserRouter([
     {
         path: 'time/doctor',
         element: (
-            <ProtectedRoute isPrivate allowedRoles={[ROLES.DOCTOR]}>
+            <ProtectedRoute
+                isPrivate
+                allowedRoles={[ROLES.DOCTOR]}
+            >
                 <Horarios />
             </ProtectedRoute>
         ),
@@ -89,7 +101,10 @@ const router = createBrowserRouter([
     {
         path: 'schedule/doctor',
         element: (
-            <ProtectedRoute isPrivate allowedRoles={[ROLES.DOCTOR]}>
+            <ProtectedRoute
+                isPrivate
+                allowedRoles={[ROLES.DOCTOR]}
+            >
                 <Horarios />
             </ProtectedRoute>
         ),

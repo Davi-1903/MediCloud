@@ -6,7 +6,6 @@
     --color3: #fff5f6;
     --color4: #c44a57;
     --color5: #fffafa;
-    --color4: #c44a57;
 }
 
 @theme inline {
@@ -14,6 +13,7 @@
     --color-color2: var(--color2);
     --color-color3: var(--color3);
     --color-color4: var(--color4);
+    --color-color5: var(--color5);
 }
 
 @layer base {

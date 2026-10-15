@@ -3,7 +3,7 @@ export const ROLES = { ADMIN: 'administrator', DOCTOR: 'doctor', PATIENT: 'patie
 export const HOME_BY_ROLE = {
     administrator: '/dash/admin',
     doctor: '/home/doctor',
-    patient: '/scheduling',
+    patient: '/appointments',
 };
 
 export const NAV_BY_ROLE = {
@@ -12,5 +12,5 @@ export const NAV_BY_ROLE = {
         { label: 'Home', to: '/home/doctor' },
         { label: 'Horários', to: '/schedule/doctor' },
     ],
-    patient: [{ label: 'Agendamento', to: '/scheduling' }],
+    patient: [{ label: 'Agendamento', to: '/appointments' }],
 };
