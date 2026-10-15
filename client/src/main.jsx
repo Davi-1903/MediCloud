@@ -16,6 +16,8 @@ const About = lazy(() => import('./pages/unprotected/about'));
 const HomeDoctor = lazy(() => import('./pages/protected/doctor'));
 const Horarios = lazy(() => import('./pages/protected/time'));
 const Profile = lazy(() => import('./pages/protected/profile'));
+const HomePatient = lazy(() => import('./pages/protected/home_usuario'));
+
 
 const router = createBrowserRouter([
     {
@@ -98,6 +100,10 @@ const router = createBrowserRouter([
         path: 'profile',
         element: <Profile />,
     },
+    {
+        path: 'home/patient',
+        element: <HomePatient />,
+},
     { path: '*', element: <NotFound /> },
 ]);
 
