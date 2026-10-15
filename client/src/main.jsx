@@ -55,7 +55,7 @@ const router = createBrowserRouter([
         element: <About />,
     },
     {
-        path: 'appoitments',
+        path: 'appointments',
         element: (
             <ProtectedRoute
                 isPrivate

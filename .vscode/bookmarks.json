@@ -1,16 +1,6 @@
 {
 	"files": [
 		{
-			"path": "client/src/pages/protected/medico/components/reminders/index.jsx",
-			"bookmarks": [
-				{
-					"line": 3,
-					"column": 0,
-					"label": "Adicionar urgência nos lembretes"
-				}
-			]
-		},
-		{
 			"path": "client/src/components/protectedRoute/index.jsx",
 			"bookmarks": [
 				{
@@ -24,12 +14,12 @@
 			"path": "client/src/main.jsx",
 			"bookmarks": [
 				{
-					"line": 5,
-					"column": 1,
-					"label": ""
+					"line": 15,
+					"column": 0,
+					"label": "Fazer uma landing page"
 				},
 				{
-					"line": 14,
+					"line": 5,
 					"column": 1,
 					"label": ""
 				}
@@ -57,6 +47,16 @@
 					"line": 56,
 					"column": 0,
 					"label": "Um usuário não tem o atributo status, só médicos tem"
+				}
+			]
+		},
+		{
+			"path": "server/routes/consultas.py",
+			"bookmarks": [
+				{
+					"line": 15,
+					"column": 0,
+					"label": "Rapaz... deve estar meio errado. Mas ok"
 				}
 			]
 		}
