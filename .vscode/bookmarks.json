@@ -1,0 +1,64 @@
+{
+	"files": [
+		{
+			"path": "client/src/pages/protected/medico/components/reminders/index.jsx",
+			"bookmarks": [
+				{
+					"line": 3,
+					"column": 0,
+					"label": "Adicionar urgência nos lembretes"
+				}
+			]
+		},
+		{
+			"path": "client/src/components/protectedRoute/index.jsx",
+			"bookmarks": [
+				{
+					"line": 8,
+					"column": 0,
+					"label": "Remover o redirecionamento"
+				}
+			]
+		},
+		{
+			"path": "client/src/main.jsx",
+			"bookmarks": [
+				{
+					"line": 15,
+					"column": 0,
+					"label": "Fazer uma landing page"
+				},
+				{
+					"line": 5,
+					"column": 1,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "client/src/pages/protected/time/components/scheduleView.jsx",
+			"bookmarks": [
+				{
+					"line": 7,
+					"column": 0,
+					"label": "Botão para expandir"
+				}
+			]
+		},
+		{
+			"path": "server/routes/prontuario.py",
+			"bookmarks": [
+				{
+					"line": 21,
+					"column": 0,
+					"label": "O prontuário pode ser acessado pelo médico e pelo paciente?"
+				},
+				{
+					"line": 56,
+					"column": 0,
+					"label": "Um usuário não tem o atributo status, só médicos tem"
+				}
+			]
+		}
+	]
+}

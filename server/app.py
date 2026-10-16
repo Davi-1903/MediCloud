@@ -4,6 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from database import init_database
+from database.seed_admin import seed_admin
 from routes import admin, agenda, auth, doctor, prontuario, user
 from seed import create_admin
 
@@ -11,7 +12,6 @@ from seed import create_admin
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     init_database()
-    create_admin()
     yield
 
 

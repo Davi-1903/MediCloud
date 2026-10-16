@@ -24,11 +24,15 @@ def to_boolean_prefix_search(term: str) -> str:
 
 def get_current_user(session: SessionDep, token: Annotated[str, Depends(oauth2_scheme)]) -> User:
     try:
-        email = decode_access_token(token)
+        sub = decode_access_token(token)
     except HTTPException:
         raise HTTPException(status_code=401, detail='Token inválido')
 
-    user = session.scalar(select(User).where(User.email == email))
+    try:
+        user = session.get(User, int(sub))
+    except ValueError:  # token antigo, com email no sub
+        user = None
+
     if not user:
         raise HTTPException(status_code=401, detail='Usuário não encontrado')
     return user

@@ -2,9 +2,9 @@
     "recommendations": [
         "ms-python.python",
         "charliermarsh.ruff",
+        "alefragnani.Bookmarks",
         "esbenp.prettier-vscode",
         "dbaeumer.vscode-eslint",
         "bradlc.vscode-tailwindcss",
-        "alefragnani.Bookmarks"
     ]
 }
