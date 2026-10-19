@@ -18,6 +18,7 @@ const Horarios = lazy(() => import('./pages/protected/time'));
 const Profile = lazy(() => import('./pages/protected/profile'));
 const HomePatient = lazy(() => import('./pages/protected/home_usuario'));
 const MedicalRecord = lazy(() => import('./pages/protected/record'))
+const Data = lazy(() => import('./pages/protected/record/componentes/data'))
 
 const router = createBrowserRouter([
     {
@@ -122,6 +123,10 @@ const router = createBrowserRouter([
     {
         path: 'prontuario',
         element: <MedicalRecord />
+    },
+    {
+        path: 'prontuario/dados',
+        element: <Data />
     },
     { path: '*', element: <NotFound /> },
 ]);
