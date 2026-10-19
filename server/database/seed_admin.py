@@ -1,10 +1,15 @@
-from database import init_database, SessionLocal
+from database import SessionLocal
 from models.user import User
 from models.administrator import Administrator
+from utils import get_env
+from pwdlib import PasswordHash
+
+ph = PasswordHash.recommended()
+
+PASSWORD_ADMIN = get_env('PASSWORD_ADMIN')
 
 def seed_admin():
-    init_database()
-
+    password = ph.hash(PASSWORD_ADMIN)
     session = SessionLocal()
     try:
         existente = session.query(User).filter(User.email == "admin@medicloud.com").first()
@@ -12,7 +17,7 @@ def seed_admin():
             admin = Administrator(
                 name="Administrador",
                 email="admin@medicloud.com",
-                password='$argon2id$v=19$m=65536,t=3,p=4$4E9g0h5OG2bJPfOJ5WTyDg$UKKW2wboElIl5C2OEJA+E5+mqa1fV9CjhGEgF1siM9k',
+                password=password,
             )
             session.add(admin)
             session.commit()

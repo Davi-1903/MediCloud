@@ -1,7 +1,7 @@
 import enum
 from datetime import date
 
-from sqlalchemy import Date, Enum, Integer, String
+from sqlalchemy import Date, Enum, Integer, String, Index
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from database import Base
@@ -32,3 +32,5 @@ class User(Base):
 
 
     __mapper_args__ = {'polymorphic_on': 'type', 'polymorphic_identity': None}
+    
+    __table_args__ = (Index('ix_materials_fulltext', 'name', 'email', mysql_prefix='FULLTEXT'),)
