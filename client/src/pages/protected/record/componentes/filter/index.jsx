@@ -1,12 +1,30 @@
 import { useState } from 'react';
+import { GET } from '../../../../../api/user';
 
-export default function Filter({ onSearch }) {
+export default function Filter() {
     const [user, setUser] = useState('');
+    const [results, setResults] = useState([]);
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
-        onSearch(user.trim());
+
+        try {
+            const params = new URLSearchParams({ user: user.trim() });
+            const res = await GET(`/api/user/filter?${params}`);
+
+            if (res.status === 404) {
+                setResults([]);
+                return;
+            }
+            if (!res.ok) throw new Error('Não foi possível carregar os usuários');
+
+            const data = await res.json();
+            setResults(data);
+        } catch (err) {
+            alert(err.message);
+        }
     }
+
     return (
         <form
             onSubmit={handleSubmit}
@@ -31,6 +49,31 @@ export default function Filter({ onSearch }) {
                     Buscar
                 </button>
             </div>
+            {results.length > 0 ? (
+                <>
+                    <ul className='flex gap-2'>
+                        {results.map(user => (
+                            <li
+                                key={user.id}
+                                className='flex w-full items-center gap-4 rounded-xl bg-white px-3 py-6 shadow-md'
+                            >
+                                <div className='flex h-32 w-32 items-center justify-center rounded-full bg-red-100 p-3'>
+                                    <span className='text-5xl font-bold text-white'>
+                                        {user.name.charAt(0).toUpperCase()}
+                                    </span>
+                                </div>
+
+                                <div className='flex flex-1 flex-col gap-1'>
+                                    <h1 className='text-xl font-medium'>{user.name}</h1>
+                                    <p>{user.email}</p>
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                </>
+            ) : (
+                <h1>Busque por um usuário</h1>
+            )}
         </form>
     );
 }
