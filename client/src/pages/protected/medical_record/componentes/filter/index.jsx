@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { GET } from '../../../../../api/user';
 
-export default function Filter() {
+export default function Filter({ onSelect }) {
     const [user, setUser] = useState('');
     const [results, setResults] = useState([]);
 
@@ -16,10 +16,9 @@ export default function Filter() {
                 setResults([]);
                 return;
             }
-            if (!res.ok) throw new Error('Não foi possível carregar os usuários');
+            if (res.status !== 200) throw new Error('Não foi possível carregar os usuários');
 
-            const data = await res.json();
-            setResults(data);
+            setResults(res); // o próprio array
         } catch (err) {
             alert(err.message);
         }
@@ -28,7 +27,7 @@ export default function Filter() {
     return (
         <form
             onSubmit={handleSubmit}
-            className='flex flex-col gap-3'
+            className='flex flex-col gap-3 w-2/3 px-3 py-5'
         >
             <h1 className='text-3xl font-medium'>Prontuários</h1>
 
@@ -56,6 +55,7 @@ export default function Filter() {
                             <li
                                 key={user.id}
                                 className='flex w-full items-center gap-4 rounded-xl bg-white px-3 py-6 shadow-md'
+                                onClick={() => onSelect(user)}
                             >
                                 <div className='flex h-32 w-32 items-center justify-center rounded-full bg-red-100 p-3'>
                                     <span className='text-5xl font-bold text-white'>
@@ -72,7 +72,7 @@ export default function Filter() {
                     </ul>
                 </>
             ) : (
-                <h1>Busque por um usuário</h1>
+                <h1 className='text-2xl text-center text-gray-500 font-semibold'>Busque por um usuário...</h1>
             )}
         </form>
     );
