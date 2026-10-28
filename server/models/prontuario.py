@@ -1,5 +1,4 @@
 import enum
-from turtle import back
 from typing import TYPE_CHECKING
 
 from sqlalchemy import Enum, Float, ForeignKey, Integer, Text
@@ -34,14 +33,14 @@ class Prontuario(Base):
     __tablename__ = 'prontuarios'
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    patient_id: Mapped[int] = mapped_column(ForeignKey('patients.id'))
-    peso: Mapped[float] = mapped_column(Float, nullable=True)
-    altura: Mapped[float] = mapped_column(Float, nullable=True)
-    alergias: Mapped[str] = mapped_column(Text, nullable=True)
-    sexo: Mapped[str] = mapped_column(Enum(SexoType), nullable=True)
-    tipo_sanguineo: Mapped[str] = mapped_column(Enum(SangueType), nullable=True)
+    patient_id: Mapped[int] = mapped_column(ForeignKey('patients.id'), unique=True)
+    peso: Mapped[float | None] = mapped_column(Float)
+    altura: Mapped[float | None] = mapped_column(Float)
+    alergias: Mapped[str | None] = mapped_column(Text)
+    sexo: Mapped[SexoType | None] = mapped_column(Enum(SexoType))
+    tipo_sanguineo: Mapped[SangueType | None] = mapped_column(Enum(SangueType))
 
-    patient: Mapped['Patient'] = relationship(back_populates='prontuario', single_parent=True)
+    patient: Mapped['Patient'] = relationship(back_populates='prontuario')
     consultas: Mapped[list['Consulta']] = relationship(back_populates='prontuario', cascade='all, delete-orphan')
     prescricoes: Mapped[list['Prescricao']] = relationship(back_populates='prontuario', cascade='all, delete-orphan')
     historico_exames: Mapped[list['HistoricoExames']] = relationship(back_populates='prontuario', cascade='all, delete-orphan')

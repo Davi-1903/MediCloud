@@ -90,3 +90,4 @@ export async function PATCH(url, data, headers = {}) {
     result.status = response.status;
     return result;
 }
+

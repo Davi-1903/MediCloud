@@ -1,9 +1,8 @@
-from collections.abc import Sequence
 from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import select
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 
 from database import get_session
 from models.doctor import Doctor, Status
@@ -18,32 +17,28 @@ router = APIRouter(prefix='/prontuario', tags=['Prontuario'])
 SessionDep = Annotated[Session, Depends(get_session)]
 
 
-@router.get('', response_model=Sequence[ProntuarioRead])
-def get_prontuario(session: SessionDep, user: Annotated[User, Depends(get_current_user)]):
-    return session.scalars(select(Prontuario).where(Prontuario.patient_id == user.id)).all()
+@router.get('/{patient_id}', response_model=ProntuarioRead)
+def get_prontuario(session: SessionDep, patient_id: int, doctor: Annotated[User, Depends(get_current_doctor)]):
+    prontuario = session.scalars(select(Prontuario).where(Prontuario.patient_id == patient_id)).first()
+    
+    if prontuario is None:
+        raise HTTPException(status_code=404, detail='Prontuário ou paciente não existentes')
+    
+    return prontuario
 
+@router.get('', response_model=ProntuarioRead)
+def get_prontuario_me(session: SessionDep, user: Annotated[User, Depends(get_current_user)]):
+    prontuario = session.scalars(
+        select(Prontuario)
+        .where(Prontuario.patient_id == user.id)
+    ).first()
+    
+    if prontuario is None:
+        raise HTTPException(status_code=404, detail='Prontuário não encontrado')
+    
+    return prontuario
 
-@router.post('', response_model=ProntuarioRead, status_code=201)
-def create_prontuario(session: SessionDep, doctor: Annotated[Doctor, Depends(get_current_doctor)]):
-    try:
-        new_prontuario = Prontuario(
-            peso=Prontuario.peso,
-            altura=Prontuario.altura,
-            alergias=Prontuario.alergias,
-            sexo=Prontuario.sexo,
-            tipo_sanguineo=Prontuario.tipo_sanguineo,
-            patient_id=Prontuario.patient_id,
-        )
-        session.add(new_prontuario)
-        session.commit()
-        session.refresh(new_prontuario)
-        return new_prontuario
-
-    except Exception:
-        session.rollback()
-        raise HTTPException(status_code=500, detail='Ocorreu um erro interno')
-
-
+# revisar
 @router.put('/{id}', response_model=ProntuarioRead)
 def update_prontuario(
     session: SessionDep, id: int, new_prontuario: ProntuarioCreate, user: Annotated[User, Depends(get_current_user)]
@@ -75,3 +70,4 @@ def update_prontuario(
     except Exception:
         session.rollback()
         raise HTTPException(status_code=500, detail='Ocorreu um erro interno')
+

@@ -1,3 +1,3 @@
-export defaunt function DadosPessoais() {
-    return 
+export default function DataPersonal() {
+    return;
 }

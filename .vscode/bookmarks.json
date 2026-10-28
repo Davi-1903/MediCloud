@@ -49,12 +49,12 @@
 			"path": "server/routes/prontuario.py",
 			"bookmarks": [
 				{
-					"line": 21,
+					"line": 20,
 					"column": 0,
 					"label": "O prontuário pode ser acessado pelo médico e pelo paciente?"
 				},
 				{
-					"line": 56,
+					"line": 51,
 					"column": 0,
 					"label": "Um usuário não tem o atributo status, só médicos tem"
 				}
