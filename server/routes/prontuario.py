@@ -30,6 +30,7 @@ def get_prontuario(session: SessionDep, patient_id: int, doctor: Annotated[User,
 def get_prontuario_me(session: SessionDep, user: Annotated[User, Depends(get_current_user)]):
     prontuario = session.scalars(
         select(Prontuario)
+        .options(joinedload(Prontuario.patient))
         .where(Prontuario.patient_id == user.id)
     ).first()
     

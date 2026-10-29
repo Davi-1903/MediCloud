@@ -14,9 +14,9 @@ export default function MedicalRecord() {
 
     return (
         <ProtectedRoute isPrivate={true}>
-            <div className='h-svh bg-color5 mt-25 py-3 flex '>
+            <div className='bg-color5 py-37 flex min-h-svh'>
                 <Header />
-                <main className='flex justify-center w-full'>
+                <main className='flex h-full w-full justify-center'>
                     {isDoctor ? (
                         patient ? (
                             <Record patientId={patient.id} />
@@ -24,7 +24,7 @@ export default function MedicalRecord() {
                             <Filter onSelect={setPatient} />
                         )
                     ) : (
-                        <Record patientId={patient.id}/>
+                        <Record />
                     )}
                 </main>
             </div>

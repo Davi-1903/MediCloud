@@ -54,7 +54,7 @@
 					"label": "O prontuário pode ser acessado pelo médico e pelo paciente?"
 				},
 				{
-					"line": 51,
+					"line": 52,
 					"column": 0,
 					"label": "Um usuário não tem o atributo status, só médicos tem"
 				}
