@@ -10,16 +10,16 @@ function Field({ label, value }) {
     );
 }
 
-export default function DataPersonal() {
+export default function DataPersonal({ patientId }) {
     const [prontuario, setProntuario] = useState(null);
 
     useEffect(() => {
         let ignore = false;
 
-        
         async function load() {
             try {
-                const res = await GET('/api/prontuario');
+                const url = patientId ? `/api/prontuario/${patientId}` : `/api/prontuario`;
+                const res = await GET(url);
                 if (ignore) return;
                 if (res.status !== 200) throw new Error(res.detail ?? `Erro ${res.status}`);
                 setProntuario(res);
@@ -33,7 +33,7 @@ export default function DataPersonal() {
         return () => {
             ignore = true;
         };
-    }, []);
+    }, [patientId]);
 
     if (!prontuario) return;
 

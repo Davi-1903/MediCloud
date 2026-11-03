@@ -2,7 +2,7 @@ import { useState } from 'react';
 import DataPersonal from '../data';
 import Consultas from '../consultas';
 
-export default function Record() {
+export default function Record({ patientId }) {
     const tabs = ['Dados pessoais', 'Consultas', 'Prescrição', 'Atestados'];
     const [selected, setSelected] = useState('Dados pessoais');
     return (
@@ -20,9 +20,9 @@ export default function Record() {
                 ))}
             </ul>
             {selected === 'Dados pessoais' ? (
-                <DataPersonal />
+                <DataPersonal patientId={patientId} />
             ) : selected === 'Consultas' ? (
-                <Consultas />
+                <Consultas patientId={patientId} />
             ) : (
                 <span>eita</span>
             )}
