@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import DataPersonal from '../data';
+import Consultas from '../consultas';
 
 export default function Record() {
-    const tabs = ['Dados pessoais', 'Atendimentos', 'Prescrição', 'Atestados'];
+    const tabs = ['Dados pessoais', 'Consultas', 'Prescrição', 'Atestados'];
     const [selected, setSelected] = useState('Dados pessoais');
     return (
         <div className='flex h-full w-2/3 flex-col items-center rounded-2xl bg-white shadow-md lg:w-5xl'>
@@ -18,7 +19,13 @@ export default function Record() {
                     </li>
                 ))}
             </ul>
-            {selected === 'Dados pessoais' ? <DataPersonal /> : <h1>Nada</h1>}
+            {selected === 'Dados pessoais' ? (
+                <DataPersonal />
+            ) : selected === 'Consultas' ? (
+                <Consultas />
+            ) : (
+                <span>eita</span>
+            )}
         </div>
     );
 }

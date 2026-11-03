@@ -20,7 +20,6 @@ export default function DataPersonal() {
         async function load() {
             try {
                 const res = await GET('/api/prontuario');
-                console.log(`Resposta: ${res}`)
                 if (ignore) return;
                 if (res.status !== 200) throw new Error(res.detail ?? `Erro ${res.status}`);
                 setProntuario(res);
