@@ -42,7 +42,7 @@ export default function DataPersonal() {
         <div className='flex h-full w-full flex-col justify-center gap-5 px-5 py-10 md:grid md:grid-cols-2 md:gap-10 md:px-15'>
             <Field
                 label='NOME'
-                value={prontuario.name}
+                value={prontuario.patient.name}
             />
             <Field
                 label='PESO'
@@ -50,11 +50,11 @@ export default function DataPersonal() {
             />
             <Field
                 label='ENDEREÇO'
-                value={prontuario.city}
+                value={prontuario.patient.city}
             />
             <Field
                 label='CPF'
-                value={prontuario.cpf}
+                value={prontuario.patient.cpf}
             />
             <Field
                 label='ALERGIAS'
@@ -62,7 +62,7 @@ export default function DataPersonal() {
             />
             <Field
                 label='DATA DE NASCIMENTO'
-                value={prontuario.birth_date}
+                value={prontuario.patient.birth_date}
             />
             <Field
                 label='ALTURA'
@@ -70,7 +70,7 @@ export default function DataPersonal() {
             />
             <Field
                 label='TELEFONE'
-                value={prontuario.tel}
+                value={prontuario.patient.tel}
             />
             <Field
                 label='SEXO'
