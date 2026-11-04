@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from database import init_database
 from database.seed_admin import seed_admin
-from routes import admin, agenda, auth, consulta, doctor, prontuario, user
+from routes import admin, agenda, auth, consulta, doctor, prescricao, prontuario, user
 
 
 @asynccontextmanager
@@ -31,3 +31,4 @@ app.include_router(doctor.router, prefix='/api')
 app.include_router(agenda.router, prefix='/api')
 app.include_router(prontuario.router, prefix='/api')
 app.include_router(consulta.router, prefix='/api')
+app.include_router(prescricao.router, prefix='/api')

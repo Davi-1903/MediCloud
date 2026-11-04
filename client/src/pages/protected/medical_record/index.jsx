@@ -4,13 +4,12 @@ import { useAuthenticated } from '../../../context/authContext';
 import Record from './componentes/record';
 import Header from '../../../components/header';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { IconArrowLeft } from '@tabler/icons-react';
 
 export default function MedicalRecord() {
     const { role, isLoading } = useAuthenticated();
     const [patient, setPatient] = useState(null);
     const isDoctor = role === 'doctor';
-    const navigate = useNavigate();
 
     if (isLoading) return null;
 
@@ -19,10 +18,15 @@ export default function MedicalRecord() {
             <div className='bg-color5 flex min-h-svh py-37'>
                 <Header />
                 <main className='flex h-full w-full flex-col items-center'>
-                    <button onClick={() => navigate(-1)}>Voltar</button>
                     {isDoctor ? (
                         patient ? (
                             <>
+                                <button
+                                    className='flex gap-2 text-gray-500'
+                                    onClick={() => setPatient(null)}
+                                >
+                                    <IconArrowLeft /> Voltar para prontuários
+                                </button>
                                 <Record patientId={patient.id} />
                             </>
                         ) : (

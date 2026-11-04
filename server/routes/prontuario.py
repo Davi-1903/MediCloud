@@ -13,7 +13,7 @@ from routes.user import get_current_user
 from schemas.prontuario import ProntuarioCreate, ProntuarioRead
 
 
-router = APIRouter(prefix='/prontuario', tags=['Prontuario'])
+router = APIRouter(prefix='/prontuario', tags=['prontuario'])
 SessionDep = Annotated[Session, Depends(get_session)]
 
 
