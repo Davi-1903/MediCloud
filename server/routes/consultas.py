@@ -67,14 +67,14 @@ def update_consulta(
 
 @router.delete('/{id}', response_model=ConsultaRead)
 def delete_consulta(session: SessionDep, id: int, user: Annotated[User, Depends(get_current_user)]):
-    agenda = session.scalar(select(Consulta).where(Consulta.id == id).where(Consulta.medico_id == user.id))
-    if agenda is None:
+    consulta = session.scalar(select(Consulta).where(Consulta.id == id).where(Consulta.medico_id == user.id))
+    if consulta is None:
         raise HTTPException(status_code=404, detail='Agenda não encontrada')
 
     try:
-        session.delete(agenda)
+        session.delete(consulta)
         session.commit()
-        return agenda
+        return consulta
 
     except Exception:
         session.rollback()

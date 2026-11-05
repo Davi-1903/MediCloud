@@ -64,9 +64,19 @@
 			"path": "client/src/pages/protected/appointments/components/appointmentsList/index.jsx",
 			"bookmarks": [
 				{
-					"line": 37,
+					"line": 8,
 					"column": 0,
 					"label": "Não autorizado"
+				}
+			]
+		},
+		{
+			"path": "client/src/pages/protected/appointments/components/appoitmentCard/index.jsx",
+			"bookmarks": [
+				{
+					"line": 14,
+					"column": 0,
+					"label": "Verificar formatação dependendo do retorno do backend"
 				}
 			]
 		}
