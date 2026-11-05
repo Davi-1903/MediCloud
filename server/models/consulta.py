@@ -2,7 +2,7 @@ import enum
 from datetime import date, time
 from typing import TYPE_CHECKING
 
-from sqlalchemy import Date, Enum, Float, ForeignKey, String, Text, Time
+from sqlalchemy import Date, Enum, Float, ForeignKey, Text, Time
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from database import Base

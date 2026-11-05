@@ -3,6 +3,7 @@ from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import select
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from database import get_session
@@ -20,6 +21,28 @@ SessionDep = Annotated[Session, Depends(get_session)]
 @router.get('', response_model=Sequence[ConsultaRead])
 def get_consultas(session: SessionDep, user: Annotated[User, Depends(get_current_user)]):
     return session.scalars(select(Consulta).where(Consulta.medico_id == user.id).order_by(Consulta.hora)).all()
+
+
+@router.post('', response_model=ConsultaRead)
+def create_consulta(
+    session: SessionDep, user: Annotated[User, Depends(get_current_user)], new_consulta: ConsultaCreate
+):
+    try:
+        consulta = Consulta(
+            patient_id=new_consulta.patient_id,
+            medico_id=new_consulta.medico_id,
+            prontuario_id=new_consulta.prontuario_id,
+            agenda_id=new_consulta.agenda_id,
+            prescricao_id=new_consulta.prescricao_id,
+        )
+        session.add(consulta)
+        session.commit()
+        session.refresh(consulta)
+        return consulta
+
+    except IntegrityError:
+        session.rollback()
+        raise HTTPException(status_code=409, detail='A consulta já está marcada')
 
 
 @router.put('/{id}', response_model=ConsultaRead)

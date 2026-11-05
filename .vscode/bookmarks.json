@@ -1,16 +1,6 @@
 {
 	"files": [
 		{
-			"path": "client/src/pages/protected/medico/components/reminders/index.jsx",
-			"bookmarks": [
-				{
-					"line": 3,
-					"column": 0,
-					"label": "Adicionar urgência nos lembretes"
-				}
-			]
-		},
-		{
 			"path": "client/src/components/protectedRoute/index.jsx",
 			"bookmarks": [
 				{
@@ -24,7 +14,7 @@
 			"path": "client/src/main.jsx",
 			"bookmarks": [
 				{
-					"line": 25,
+					"line": 15,
 					"column": 0,
 					"label": "Fazer uma landing page"
 				},
@@ -61,22 +51,22 @@
 			]
 		},
 		{
-			"path": "client/src/pages/protected/appointments/components/appoitmentCard/index.jsx",
+			"path": "server/routes/consultas.py",
 			"bookmarks": [
 				{
-					"line": 13,
+					"line": 16,
 					"column": 0,
-					"label": "Adicionar responsividade"
+					"label": "Rapaz... deve estar meio errado. Mas ok"
 				}
 			]
 		},
 		{
-			"path": "client/src/pages/protected/appointments/components/introduction/index.jsx",
+			"path": "client/src/pages/protected/appointments/components/appointmentsList/index.jsx",
 			"bookmarks": [
 				{
-					"line": 9,
+					"line": 37,
 					"column": 0,
-					"label": "Cor esquitista..."
+					"label": "Não autorizado"
 				}
 			]
 		}

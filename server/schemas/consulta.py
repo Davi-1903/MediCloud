@@ -3,6 +3,7 @@ from datetime import date, time
 from pydantic import BaseModel, ConfigDict
 
 from models.consulta import StatusType
+from schemas.agenda import AgendaRead
 
 
 class ConsultaBase(BaseModel):
@@ -27,3 +28,4 @@ class ConsultaCreate(ConsultaBase):
 class ConsultaRead(ConsultaBase):
     model_config = ConfigDict(from_attributes=True)
     id: int
+    agenda: AgendaRead
