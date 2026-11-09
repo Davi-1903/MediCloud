@@ -7,10 +7,6 @@ from schemas.prescricao_medicamento import PrescricaoMedicamentoRead
 class PrescricaoBase(BaseModel):
     prontuario_id: int
     consulta_id: int
-    # medicamento: str
-    # via: str
-    # posologia: str
-    # duracao: int
     observacoes: str | None = None
     exames: str | None = None
     atestado: str | None = None

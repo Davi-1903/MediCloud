@@ -3,10 +3,10 @@ from pydantic import BaseModel, ConfigDict
 
 class PrescricaoMedicamentoBase(BaseModel):
     prescricao_id: int
-    medicamento: str
-    via: str
-    posologia: str
-    duracao: str
+    medicamento: str | None = None
+    via: str | None = None
+    posologia: str | None = None
+    duracao: str | None = None
 
 
 class PrescricaoMedicamentoCreate(PrescricaoMedicamentoBase):

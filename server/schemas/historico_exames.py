@@ -3,7 +3,7 @@ from pydantic import BaseModel, ConfigDict
 
 class HistoricoExamesBase(BaseModel):
     prontuario_id: int
-    arquivo: str
+    arquivo: str | None = None
 
 
 class HistoricoExamesCreate(HistoricoExamesBase):
