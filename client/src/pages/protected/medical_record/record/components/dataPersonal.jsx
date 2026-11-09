@@ -38,7 +38,7 @@ export default function DataPersonal({ patientId }) {
     if (!prontuario) return;
 
     return (
-        <div className='flex h-full w-full flex-col justify-center gap-5 px-5 py-10 md:grid md:grid-cols-2 md:gap-10 md:px-15'>
+        <div className='flex w-full flex-col justify-center gap-5 px-5 py-10 md:grid md:grid-cols-2 md:gap-10 md:px-15'>
             <Field
                 label='NOME'
                 value={prontuario.patient.name}

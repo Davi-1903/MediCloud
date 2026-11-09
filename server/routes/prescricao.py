@@ -5,6 +5,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from database import get_session
+from models.consulta import Consulta
 from models.doctor import Doctor
 from models.prescricao import Prescricao
 from models.prontuario import Prontuario
@@ -21,7 +22,10 @@ SessionDep = Annotated[Session, Depends(get_session)]
 @router.get('/{patient_id}', response_model=list[PrescricaoRead])
 def get_prescricoes(session: SessionDep, patient_id: int, doctor: Annotated[Doctor, Depends(get_current_doctor)]):
     prescricoes = session.scalars(
-        select(Prescricao).join(Prescricao.prontuario).where(Prontuario.patient_id == patient_id)
+        select(Prescricao)
+        .join(Prescricao.prontuario)
+        .join(Prescricao.consulta)
+        .where(Prontuario.patient_id == patient_id and Consulta.patient_id == patient_id)
     ).all()
 
     if not prescricoes:

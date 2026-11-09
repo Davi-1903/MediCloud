@@ -1,5 +1,6 @@
 from pydantic import BaseModel, ConfigDict
 
+from schemas.consulta import ConsultaRead
 from schemas.prescricao_medicamento import PrescricaoMedicamentoRead
 
 
@@ -10,8 +11,9 @@ class PrescricaoBase(BaseModel):
     # via: str
     # posologia: str
     # duracao: int
-    observacoes: str
+    observacoes: str | None = None
     exames: str | None = None
+    atestado: str | None = None
 
 
 class PrescricaoCreate(PrescricaoBase):
@@ -22,3 +24,4 @@ class PrescricaoRead(PrescricaoBase):
     model_config = ConfigDict(from_attributes=True)
     id: int
     prescricao_medicamentos: list[PrescricaoMedicamentoRead]
+    consulta: ConsultaRead

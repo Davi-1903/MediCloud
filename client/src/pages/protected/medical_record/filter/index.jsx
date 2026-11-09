@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { GET } from '../../../../../api/user';
+import { GET } from '../../../../api/user';
 
 export default function Filter({ onSelect }) {
     const [user, setUser] = useState('');

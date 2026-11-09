@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { GET } from '../../../../../api/user';
 
-export default function Prescricoes({ patient_id }) {
+export default function Prescricoes({ patientId }) {
     const [prescricoes, setPrescricoes] = useState([]);
 
     useEffect(() => {
@@ -9,7 +9,7 @@ export default function Prescricoes({ patient_id }) {
 
         async function load() {
             try {
-                const url = patient_id ? `/api/prescricoes/${patient_id}` : `/api/prescricoes/`;
+                const url = patientId ? `/api/prescricoes/${patientId}` : `/api/prescricoes/`;
                 const res = await GET(url);
                 if (ignore) return;
                 if (res.status !== 200) throw new Error(res.detail ?? `Erro: ${res.status}`);
@@ -24,20 +24,22 @@ export default function Prescricoes({ patient_id }) {
         return () => {
             ignore = true;
         };
-    }, [patient_id]);
+    }, [patientId]);
 
     if (!prescricoes) return;
 
     return (
-        <div className='flex h-full w-full flex-col justify-center gap-5 px-5 py-10 md:gap-10 md:px-15'>
+        <div className='flex h-full w-full flex-col gap-5 px-5 py-10 md:gap-5 md:px-15'>
             {prescricoes.map(p => (
                 <div
                     key={p.id}
-                    className='flex flex-1 flex-col gap-2 rounded-2xl border border-gray-300 p-5'
+                    className='flex flex-col gap-2 rounded-2xl border border-gray-300 p-5'
                 >
                     {p.prescricao_medicamentos.map(m => (
                         <>
-                            <h1 className='text-xl font-medium'>{m.medicamento}</h1>
+                            <span className='flex items-center justify-between'>
+                                <h1 className='text-xl font-medium'>{m.medicamento}</h1>
+                            </span>
                             <div className='flex justify-between px-3'>
                                 <p className='text-center text-gray-400'>
                                     Via: <br />
@@ -54,6 +56,13 @@ export default function Prescricoes({ patient_id }) {
                             </div>
                         </>
                     ))}
+                    <p className='text-md font-medium'>
+                        Observações: <span className='font-normal'>{p.observacoes}</span>
+                    </p>
+                    <p className='text-md font-medium'>
+                        Exames solicitados: <span className='font-normal'>{p.exames}</span>
+                    </p>
+                    <p className='text-right text-sm text-gray-400'>Emissão: {p.consulta.data}</p>
                 </div>
             ))}
         </div>

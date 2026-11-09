@@ -18,8 +18,9 @@ class Prescricao(Base):
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     prontuario_id: Mapped[int] = mapped_column(ForeignKey('prontuarios.id'))
     consulta_id: Mapped[int] = mapped_column(ForeignKey('consultas.id'))
-    observacoes: Mapped[str] = mapped_column(Text, nullable=False)
+    observacoes: Mapped[str] = mapped_column(Text, nullable=True)
     exames: Mapped[str] = mapped_column(Text, nullable=True)
+    atestado: Mapped[str] = mapped_column(Text, nullable=True)
 
     prontuario: Mapped['Prontuario'] = relationship(back_populates='prescricoes')
     consulta: Mapped['Consulta'] = relationship(back_populates='prescricao')

@@ -26,9 +26,9 @@ export default function Consultas({ patientId }) {
         };
     }, [patientId]);
     return (
-        <div className='flex h-full w-full flex-col gap-3 px-5 py-10'>
+        <div className='flex h-full w-full flex-col gap-5 px-5 py-10 md:gap-5 md:px-15'>
             {consultas.map(c => (
-                <div className='flex flex-1 flex-col gap-1 rounded-xl border border-gray-300 px-3 py-5'>
+                <div className='flex flex-col gap-1 rounded-xl border border-gray-300 px-3 py-5'>
                     <div className='align-items flex flex-1 justify-between'>
                         <p className='rounded-lg bg-gray-200 p-2 text-sm'>{c.data}</p>
                         <p className='font-medium text-gray-500'>Dr(a).{c.doctor.name}</p>
