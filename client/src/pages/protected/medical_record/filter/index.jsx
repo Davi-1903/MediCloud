@@ -18,7 +18,7 @@ export default function Filter({ onSelect }) {
             }
             if (res.status !== 200) throw new Error('Não foi possível carregar os usuários');
 
-            setResults(res); // o próprio array
+            setResults(res); 
         } catch (err) {
             alert(err.message);
         }
@@ -36,14 +36,14 @@ export default function Filter({ onSelect }) {
                 <input
                     type='text'
                     placeholder='Busque o paciente...'
-                    className='flex w-full rounded-tl-xl rounded-bl-xl bg-white px-5 py-2 shadow-md outline-0'
+                    className='flex w-full rounded-tl-lg rounded-bl-lg bg-white px-5 py-2 border-2 border-gray-50 shadow-sm outline-0'
                     required
                     value={user}
                     onChange={e => setUser(e.target.value)}
                 />
                 <button
                     type='submit'
-                    className='text-mediam bg-color5 rounded-tr-xl rounded-br-xl border-2 px-5 py-2 text-color4 shadow-md'
+                    className='text-mediam bg-color5 rounded-tr-lg rounded-br-lg border-2 px-5 py-2 text-color4 shadow-sm'
                 >
                     Buscar
                 </button>

@@ -21,12 +21,22 @@ export default function MedicalRecord() {
                     {isDoctor ? (
                         patient ? (
                             <>
-                                <button
-                                    className='flex gap-2 text-gray-500'
-                                    onClick={() => setPatient(null)}
-                                >
-                                    <IconArrowLeft /> Voltar para prontuários
-                                </button>
+                                <div className='items-centr flex w-full justify-between px-15 py-5'>
+                                    <h1 className='text-3xl font-medium'>
+                                        Prontuário de{' '}
+                                        {patient.name
+                                            .toLowerCase()
+                                            .split(' ')
+                                            .map(palavra => palavra.charAt(0).toUpperCase() + palavra.slice(1))
+                                            .join(' ')}
+                                    </h1>
+                                    <button
+                                        className='flex gap-2 text-gray-500'
+                                        onClick={() => setPatient(null)}
+                                    >
+                                        <IconArrowLeft /> Voltar para prontuários
+                                    </button>
+                                </div>
                                 <Record patientId={patient.id} />
                             </>
                         ) : (

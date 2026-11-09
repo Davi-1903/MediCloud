@@ -11,6 +11,10 @@ export const NAV_BY_ROLE = {
     doctor: [
         { label: 'Home', to: '/home/doctor' },
         { label: 'Horários', to: '/schedule/doctor' },
+        {label: 'Prontuários', to: '/prontuario'}
     ],
-    patient: [{ label: 'Agendamento', to: '/scheduling' }],
+    patient: [
+        { label: 'Agendamento', to: '/scheduling' },
+        {label: 'Prontuário', to: '/prontuario'}
+    ],
 };
