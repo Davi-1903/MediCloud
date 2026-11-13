@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { GET } from '../../../../../api/user';
 
 export default function Atestados({ patientId }) {
-    const [prescricoes, setPrescricoes] = useState([]);
+    const [prescricoes, setPrescricoes] = useState(null);
 
     useEffect(() => {
         let ignore = false;
@@ -15,7 +15,7 @@ export default function Atestados({ patientId }) {
                 if (res.status !== 200) throw new Error(res.detail ?? `Erro: ${res.status}`);
                 setPrescricoes(res);
             } catch (err) {
-                alert(err.message);
+                console.log(`Erro: ${err.message}`);
                 return;
             }
         }
@@ -26,12 +26,12 @@ export default function Atestados({ patientId }) {
         };
     }, [patientId]);
 
-    if (!prescricoes) return;
-
     return (
         <div className='flex h-full w-full flex-col gap-5 px-5 py-10 md:gap-5 md:px-15'>
-            {prescricoes.map(p => (
-                <>
+            {prescricoes === null ? (
+                <h1 className='text-center font-medium text-gray-400'>Não existem atestados cadastrados</h1>
+            ) : (
+                prescricoes.map(p => {
                     <div className='flex h-fit w-full flex-col items-center rounded-xl border border-gray-200 shadow-sm md:flex-row'>
                         <span className='flex w-full items-center justify-center bg-color3 py-3 md:h-23 md:w-23 md:rounded-tl-xl md:rounded-bl-xl'>
                             <p className='text-medium text-center text-xl'>
@@ -44,9 +44,9 @@ export default function Atestados({ patientId }) {
                             <p className='text-md text-gray-400'>Emitido por Dr(a) {p.consulta.doctor.name}</p>
                             <p className='text-md text-gray-400'>Data da emissão: {p.consulta.data}</p>
                         </span>
-                    </div>
-                </>
-            ))}
+                    </div>;
+                })
+            )}
         </div>
     );
 }
