@@ -27,7 +27,7 @@ export default function Filter({ onSelect }) {
     return (
         <form
             onSubmit={handleSubmit}
-            className='flex flex-col gap-3 w-2/3 px-3 py-5'
+            className='flex flex-col gap-3 w-full px-3 py-5'
         >
             <h1 className='text-3xl font-medium'>Prontuários</h1>
 

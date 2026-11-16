@@ -16,12 +16,18 @@ export default function MedicalRecord() {
     return (
         <ProtectedRoute isPrivate={true}>
             <Header />
-            <div className='bg-color5 flex h-full py-37'>
-                <main className='flex h-full w-full flex-col items-center'>
+            <div className='bg-color5 flex h-full pt-25 pb-10'>
+                <main className='flex h-full w-full flex-col items-center px-5 lg:px-60'>
                     {isDoctor ? (
                         patient ? (
                             <>
-                                <div className='items-centr flex w-full justify-between px-15 py-5'>
+                                <div className='w-full flex-col items-center pt-5'>
+                                    <button
+                                        className='flex gap-2 text-gray-500'
+                                        onClick={() => setPatient(null)}
+                                    >
+                                        <IconArrowLeft /> Voltar para prontuários
+                                    </button>
                                     <h1 className='text-3xl font-medium'>
                                         Prontuário de{' '}
                                         {patient.name
@@ -30,12 +36,6 @@ export default function MedicalRecord() {
                                             .map(palavra => palavra.charAt(0).toUpperCase() + palavra.slice(1))
                                             .join(' ')}
                                     </h1>
-                                    <button
-                                        className='flex gap-2 text-gray-500'
-                                        onClick={() => setPatient(null)}
-                                    >
-                                        <IconArrowLeft /> Voltar para prontuários
-                                    </button>
                                 </div>
                                 <Record patientId={patient.id} />
                             </>

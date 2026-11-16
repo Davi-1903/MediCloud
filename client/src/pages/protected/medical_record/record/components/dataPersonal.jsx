@@ -3,9 +3,9 @@ import { GET } from '../../../../../api/user';
 
 function Field({ label, value }) {
     return (
-        <div className='h-fit border-b border-gray-300 py-2'>
+        <div className='w-full border-b border-gray-300 py-2'>
             <h3 className='text-gray-400'>{label}</h3>
-            <p className='text-lg'>{value ?? '—'}</p>
+            <p className='text-lg'>{value ?? <span className='text-sm text-gray-400'>NÃO INFORMADO</span>}</p>
         </div>
     );
 }
@@ -36,9 +36,11 @@ export default function DataPersonal({ patientId }) {
     }, [patientId]);
 
     return (
-        <div className='flex w-full flex-col justify-center gap-5 px-5 py-10 md:grid md:grid-cols-2 md:gap-10 md:px-15'>
+        <div className='flex h-full w-full flex-col items-center justify-around gap-5 px-10 py-5 md:grid md:grid-cols-2'>
             {prontuario === null ? (
-                <h1 className='absolute left-1/2 -ml-1/2 text-center font-medium text-gray-400'>Não existe um prontuário cadastrado</h1>
+                <h1 className='-ml-1/2 absolute left-1/2 text-center font-medium text-gray-400'>
+                    Não existe um prontuário cadastrado
+                </h1>
             ) : (
                 <>
                     <Field
