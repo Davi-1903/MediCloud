@@ -31,7 +31,7 @@ export default function Atestados({ patientId }) {
             {prescricoes === null ? (
                 <h1 className='text-center font-medium text-gray-400'>Não existem atestados cadastrados</h1>
             ) : (
-                prescricoes.map(p => {
+                prescricoes.map(p => (
                     <div className='flex h-fit w-full flex-col items-center rounded-xl border border-gray-200 shadow-sm md:flex-row'>
                         <span className='flex w-full items-center justify-center bg-color3 py-3 md:h-23 md:w-23 md:rounded-tl-xl md:rounded-bl-xl'>
                             <p className='text-medium text-center text-xl'>
@@ -44,8 +44,8 @@ export default function Atestados({ patientId }) {
                             <p className='text-md text-gray-400'>Emitido por Dr(a) {p.consulta.doctor.name}</p>
                             <p className='text-md text-gray-400'>Data da emissão: {p.consulta.data}</p>
                         </span>
-                    </div>;
-                })
+                    </div>
+                ))
             )}
         </div>
     );

@@ -30,7 +30,7 @@ export default function Consultas({ patientId }) {
             {consultas === null ? (
                 <h1 className='text-center font-medium text-gray-400'>Não existem consultas cadastradas</h1>
             ) : (
-                consultas.map(c => {
+                consultas.map(c => (
                     <div className='flex flex-col gap-1 rounded-xl border border-gray-300 px-3 py-5'>
                         <div className='align-items flex flex-1 justify-between'>
                             <p className='rounded-lg bg-gray-200 p-2 text-sm'>{c.data}</p>
@@ -41,8 +41,8 @@ export default function Consultas({ patientId }) {
                             <span className='text-gray-500'>Diagnóstico:</span>{' '}
                             <span className='text-gray-600'>{c.diagnostico}</span>
                         </p>
-                    </div>;
-                })
+                    </div>
+                ))
             )}
         </div>
     );

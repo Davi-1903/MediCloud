@@ -31,7 +31,7 @@ export default function Prescricoes({ patientId }) {
             {prescricoes === null ? (
                 <h1 className='text-center font-medium text-gray-400'>Não existem prescrições cadastradas</h1>
             ) : (
-                prescricoes.map(p => {
+                prescricoes.map(p => (
                     <div
                         key={p.id}
                         className='flex flex-col gap-2 rounded-2xl border border-gray-300 p-5'
@@ -64,8 +64,8 @@ export default function Prescricoes({ patientId }) {
                             Exames solicitados: <span className='font-normal'>{p.exames}</span>
                         </p>
                         <p className='text-right text-sm text-gray-400'>Emissão: {p.consulta.data}</p>
-                    </div>;
-                })
+                    </div>
+                ))
             )}
         </div>
     );

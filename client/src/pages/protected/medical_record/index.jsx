@@ -21,26 +21,30 @@ export default function MedicalRecord() {
                     {isDoctor ? (
                         patient ? (
                             <>
-                                <div className='w-full flex-col items-center pt-5'>
-                                    <button
-                                        className='flex gap-2 text-gray-500'
-                                        onClick={() => setPatient(null)}
-                                    >
-                                        <IconArrowLeft /> Voltar para prontuários
-                                    </button>
-                                    <h1 className='text-3xl font-medium'>
-                                        Prontuário de{' '}
-                                        {patient.name
-                                            .toLowerCase()
-                                            .split(' ')
-                                            .map(palavra => palavra.charAt(0).toUpperCase() + palavra.slice(1))
-                                            .join(' ')}
-                                    </h1>
+                                <div className='flex w-full items-center justify-between pt-5'>
+                                    <div className='flex flex-col'>
+                                        <button
+                                            className='flex gap-2 text-gray-500'
+                                            onClick={() => setPatient(null)}
+                                        >
+                                            <IconArrowLeft /> Voltar para prontuários
+                                        </button>
+                                        <h1 className='text-3xl font-medium'>
+                                            Prontuário de{' '}
+                                            {patient.name
+                                                .toLowerCase()
+                                                .split(' ')
+                                                .map(palavra => palavra.charAt(0).toUpperCase() + palavra.slice(1))
+                                                .join(' ')}
+                                        </h1>
+                                    </div>
                                 </div>
                                 <Record patientId={patient.id} />
                             </>
                         ) : (
-                            <Filter onSelect={setPatient} />
+                            <>
+                                <Filter onSelect={setPatient} />
+                            </>
                         )
                     ) : (
                         <Record />
